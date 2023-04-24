@@ -11,7 +11,7 @@ Apple::Apple()
 	CheckSpawn[10] = { 0 };
 
 	//りんご画像の読み込み
-	if ((g_AppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
 	{
 		throw "Resource/Images/apple.png";
 	}
@@ -49,9 +49,15 @@ void Apple::Draw() const
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
-			if(g_Apple[i].type == )
-			DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
-			DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
+			if (g_Apple[i].type != 0)
+			{
+				DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
+				DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
+			}
+			else
+			{
+				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
+			}
 		}
 	}
 }
@@ -76,6 +82,7 @@ void Apple::Spawn()
 				{
 				case 0:
 					g_Apple[i] = g_AppleRd;
+					g_Apple[i].img = gAppleImg[0];
 					g_Apple[i].x = Spawn;
 					Count++;	//一度にスポーンさせたりんごを計測する
 					break;

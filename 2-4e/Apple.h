@@ -1,5 +1,6 @@
 #pragma once
 #include "BoxCollider.h"
+#include "Score.h"
 
 #define MAX_APPLE	 10	//リンゴスポーン上限
 #define APPLE_SIZE	100//リンゴの大きさ
@@ -13,9 +14,9 @@ private:
 	int frame;	//フレーム
 	int Count;	//一度にスポーンしたリンゴの計測
 
-	int CheckSpawn[10];	//りんごが重ならないかチェックする
+	int gAppleImg[4];
 
-	int g_AppleImg[4];	//りんごの画像用
+	int CheckSpawn[10];	//りんごが重ならないかチェックする
 
 	struct AppleData {
 		int flg;			//使用フラグ
@@ -31,7 +32,7 @@ private:
 	struct AppleData	g_Apple[MAX_APPLE] = { FALSE };
 
 	//imgに仮で色データをいれている
-	struct AppleData	g_AppleRd = { TRUE,0,g_AppleImg[0],0	 ,0, 1.0,  100,0};
+	struct AppleData	g_AppleRd = { TRUE,0,0,0 ,0, 1.0,  100,0};
 	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,0	 ,0, 2.0,  200,0 };
 	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,0  ,0, 3.5,  500,0 };
 	struct AppleData	g_AppleTx = { TRUE,3,0xff00ff,0  ,0, 0.5, -750,0 };
