@@ -153,6 +153,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="PadInput.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="FpsController.h" />
+    <ClInclude Include="Title.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
