@@ -151,14 +151,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Apple.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Credit.cpp" />
+    <ClCompile Include="DrawRanking.cpp" />
+    <ClCompile Include="End.cpp" />
+    <ClCompile Include="FpsController.cpp" />
+    <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="PadInput.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Ranking.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="Apple.h" />
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Credit.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DrawRanking.h" />
+    <ClInclude Include="End.h" />
+    <ClInclude Include="GameMain.h" />
     <ClInclude Include="PadInput.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Ranking.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="FpsController.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
