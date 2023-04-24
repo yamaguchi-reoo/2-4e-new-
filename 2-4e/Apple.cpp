@@ -9,6 +9,12 @@ Apple::Apple()
 	a_Count = 0;
 	frame = 0;
 	CheckSpawn[10] = { 0 };
+
+	//ÇËÇÒÇ≤âÊëúÇÃì«Ç›çûÇ›
+	if ((g_AppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	{
+		throw "Resource/Images/apple.png";
+	}
 }
 Apple::~Apple()
 {
@@ -43,6 +49,7 @@ void Apple::Draw() const
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
+			if(g_Apple[i].type == )
 			DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
 			DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
 		}
