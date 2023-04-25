@@ -25,7 +25,7 @@ protected:
 public:
 
 	//“–‚½‚è”»’è
-	bool HitBox(BoxCollider* bCollider);
+	int HitBox(BoxCollider* bCollider);
 
 	//’†SÀ•W‚Ìæ“¾
 	Location GetLocation()const;

@@ -10,6 +10,7 @@ class Apple :public BoxCollider
 private:
 
 	int a_Count;	//同時にスポーンしているりんごの数
+	int AppleScore;	//得点数
 
 	int frame;	//フレーム
 	int Count;	//一度にスポーンしたリンゴの計測
@@ -27,10 +28,9 @@ private:
 		int point;			//スコア加算ポイント
 		int span;			//画像被りをなくす用
 	};
-
+private:
 	//ランキングデータの変数宣言
 	struct AppleData	g_Apple[MAX_APPLE] = { FALSE };
-
 	//imgに仮で色データをいれている
 	struct AppleData	g_AppleRd = { TRUE,0,0,0 ,0, 1.0,  100,0};
 	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,0	 ,0, 2.0,  200,0 };
@@ -62,6 +62,9 @@ public:
 
 	//りんご削除
 	void AppleDelete(int i);
+
+	//りんご入手
+	int AppleGet(int i);
 };
 
 

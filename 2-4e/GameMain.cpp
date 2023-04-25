@@ -10,6 +10,11 @@ GameMain::GameMain()
 	//初期化
 	TotalScore = 0;
 
+	for (int i = 0; i < MAX_APPLE; i++)
+	{
+		GetApple[i] = 0;
+	}
+
 	//オブジェクト化
 	player = new Player();
 	apple = new Apple();
@@ -44,6 +49,7 @@ AbstractScene* GameMain::Update()
 	player->UpDate();
 	apple->UpDate();
 	fps->All();
+
 	return this;
 }
 
@@ -55,15 +61,12 @@ void GameMain::Draw()const
 	//プレイヤーの描画
 	player->Draw();
 
-	//リンゴの描画
-	apple->Draw();
-
 	fps->Disp();
 
 	//スコアの描画
 	score->Draw();
 
-	DrawFormatString(SCREEN_WIDTH - SCORE_UI_SIZE, 100, 0x000000, "%d", TotalScore);
-
+	//リンゴの描画
+	apple->Draw();
 }
 

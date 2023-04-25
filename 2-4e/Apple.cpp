@@ -3,10 +3,12 @@
 #include<math.h>
 #include "Apple.h"
 #include "define.h"
+#include "GameMain.h"
 
 Apple::Apple()
 {
 	a_Count = 0;
+	AppleScore = 0;
 	frame = 0;
 	CheckSpawn[10] = { 0 };
 
@@ -33,7 +35,7 @@ void Apple::UpDate()
 		}
 		if (g_Apple[i].y >= 500)
 		{
-			AppleDelete(i);
+			AppleScore += AppleGet(i);
 		}
 	}	
 
@@ -60,6 +62,8 @@ void Apple::Draw() const
 			}
 		}
 	}
+	//ì_êîï\é¶
+	DrawFormatString(1125, 100, 0x000000, "%d", AppleScore);
 }
 
 void Apple::Spawn()
@@ -190,4 +194,12 @@ int Apple::AppleSpawn()
 void Apple::AppleDelete(int i) {
 	g_Apple[i] = g_AppleNl;
 	a_Count--;
+}
+
+int Apple::AppleGet(int i)
+{
+	int p = g_Apple[i].point;
+	g_Apple[i] = g_AppleNl;
+	a_Count--;
+	return p;
 }

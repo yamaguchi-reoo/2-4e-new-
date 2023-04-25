@@ -10,8 +10,9 @@ class GameMain :
     public AbstractScene
 {
 private:
-
     int TotalScore;
+    int GetApple[10];
+
     Player* player; //ƒvƒŒƒCƒ„[
     Apple* apple;   //ƒŠƒ“ƒS 
     FpsController* fps;
