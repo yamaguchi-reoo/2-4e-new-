@@ -15,6 +15,7 @@ GameMain::GameMain()
 	apple = new Apple();
 	fps = new FpsController();
 	score = new Score();
+
 	//画像の読み込み
 	if ((mori_img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
@@ -31,6 +32,9 @@ GameMain::~GameMain()
 {
 	//オブジェクトの削除
 	delete player;
+	delete apple;
+	delete fps;
+	delete score;
 
 }
 
@@ -40,7 +44,6 @@ AbstractScene* GameMain::Update()
 	player->UpDate();
 	apple->UpDate();
 	fps->All();
-
 	return this;
 }
 

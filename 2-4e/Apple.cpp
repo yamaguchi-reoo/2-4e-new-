@@ -33,10 +33,10 @@ void Apple::UpDate()
 		}
 		if (g_Apple[i].y >= 500)
 		{
-			g_Apple[i] = g_AppleNl;
-			a_Count--;
+			AppleDelete(i);
 		}
-	}
+	}	
+
 	if (++frame >= 25)
 	{
 		Spawn();
@@ -185,4 +185,9 @@ int Apple::AppleSpawn()
 			return -1;	//ÉXÉ|Å[Éìé∏îs
 		}
 	}
+}
+
+void Apple::AppleDelete(int i) {
+	g_Apple[i] = g_AppleNl;
+	a_Count--;
 }

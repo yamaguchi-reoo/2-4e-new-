@@ -12,6 +12,11 @@ Player::Player()
 	location.x = 100;
 	location.y = 550;
 
+	erea.width = 50;
+	erea.height = 100;
+	erea.width_rate = 1;
+	erea.height_rate = 1;
+
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
 
@@ -43,6 +48,7 @@ void Player::UpDate()
 		}
 		location.x = location.x - Speed - (AccelerationLeft / 5);
 	}
+
 	else if (PAD_INPUT::GetLStick().ThumbX > 10000)
 	{
 		PlayerState = PLAYER_STATE::WALK_RIGTH;
@@ -59,6 +65,7 @@ void Player::UpDate()
 		}
 		location.x = location.x + Speed + (AccelerationRight / 5);
 	}
+	//‰Á‘¬“x‚É‰ž‚¶‚ÄŠµ«‚ª“­‚­
 	else
 	{
 		if (AccelerationRight > 0)
@@ -78,7 +85,7 @@ void Player::UpDate()
 			PlayerState = PLAYER_STATE::IDOL;
 		}
 	}
-
+	//•Ç‚É‚Ô‚Â‚©‚é
 	if (location.x > 900)
 	{
 		location.x = 900;

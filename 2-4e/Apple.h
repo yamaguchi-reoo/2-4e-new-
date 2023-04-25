@@ -59,6 +59,9 @@ public:
 
 	//りんごがスポーン可能か判断
 	int AppleSpawn();
+
+	//りんご削除
+	void AppleDelete(int i);
 };
 
 
