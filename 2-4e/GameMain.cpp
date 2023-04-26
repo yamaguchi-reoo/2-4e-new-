@@ -55,6 +55,11 @@ AbstractScene* GameMain::Update()
 		if (apple->HitBox(player) == true)
 		{
 			TotalScore += apple->AppleGet(i);
+			//“¾“_‚Ì‰ºŒÀ‚ð‚O‚É‚·‚é
+			if (TotalScore < 0)
+			{
+				TotalScore = 0;
+			}
 		}
 	}
 	return this;

@@ -10,14 +10,13 @@ class Apple :public BoxCollider
 private:
 
 	int a_Count;	//同時にスポーンしているりんごの数
-	int AppleScore;	//得点数
 
 	int frame;	//フレーム
 	int Count;	//一度にスポーンしたリンゴの計測
 
-	int gAppleImg[4];
+	int gAppleImg[4];	//画像用変数
 
-	int CheckSpawn[10];	//りんごが重ならないかチェックする
+	int CheckSpawn[10];	//りんごが重ならないかチェックする用
 
 	struct AppleData {
 		int flg;			//使用フラグ

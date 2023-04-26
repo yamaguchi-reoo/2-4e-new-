@@ -7,9 +7,8 @@
 
 Apple::Apple()
 {
-	a_Count = 0;
-	AppleScore = 0;
-	frame = 0;
+	a_Count = 0;		
+	frame = 0;			
 	CheckSpawn[10] = { 0 };
 
 	//ÇËÇÒÇ≤âÊëúÇÃì«Ç›çûÇ›
@@ -63,8 +62,6 @@ void Apple::Draw() const
 			}
 		}
 	}
-	//ì_êîï\é¶
-	DrawFormatString(1125, 100, 0x000000, "%d", AppleScore);
 }
 
 void Apple::Spawn()

@@ -12,8 +12,8 @@ Player::Player()
 	location.x = 100;
 	location.y = 550;
 
-	erea.width = 50;
-	erea.height = 100;
+	erea.width = PLAYER_WIDTH;
+	erea.height = PLAYER_HEIGHT;
 	erea.rate = 1;
 
 	AccelerationRight = 0;
@@ -104,5 +104,5 @@ void Player::UpDate()
 
 void Player::Draw() const
 {
-	DrawBox(location.x, location.y, location.x + PLAYER_SIZE, location.y + PLAYER_SIZE, 0x00ff00, TRUE);
+	DrawBox(location.x, location.y, location.x + PLAYER_WIDTH, location.y + PLAYER_HEIGHT, 0x00ff00, TRUE);
 }
