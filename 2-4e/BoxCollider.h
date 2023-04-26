@@ -13,8 +13,7 @@ struct Erea
 {
 	float height;	//‚‚³
 	float width;	//•
-	float height_rate;	//‚‚³‚Ì”{—¦
-	float width_rate;	//•‚Ì”{—¦ 
+	float rate;		//‘å‚«‚³‚Ì”{—¦
 };
 
 class BoxCollider
@@ -34,4 +33,7 @@ public:
 
 	//’†SÀ•W‚Ìİ’è
 	void SetLocation(Location location);
+
+	//“–‚½‚è”»’è•`‰æ
+	void Draw()const;
 };

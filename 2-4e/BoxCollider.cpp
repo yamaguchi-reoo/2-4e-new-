@@ -7,14 +7,14 @@ int BoxCollider::HitBox(BoxCollider* bCollider)
 	int ret = false; //•Ô‚è’l
 
 		//Ž©•ª‚Ì“–‚½‚è”»’è‚Ì”ÍˆÍ
-		float mx1 = location.x - (erea.width * erea.width_rate);
-		float my1 = location.y - (erea.height * erea.height_rate);
-		float mx2 = mx1 + erea.width;
-		float my2 = my1 + erea.height;
+		float mx1 = location.x - (APPLE_SIZE * erea.rate);
+		float my1 = location.y - (APPLE_SIZE * erea.rate);
+		float mx2 = mx1 + APPLE_SIZE;
+		float my2 = my1 + APPLE_SIZE;
 
 		//‘ŠŽè‚Ì“–‚½‚è”»’è‚Ì”ÍˆÍ
-		float px1 = bCollider->GetLocation().x - (bCollider->GetErea().width * bCollider->GetErea().width_rate);
-		float py1 = bCollider->GetLocation().y - (bCollider->GetErea().height * bCollider->GetErea().height_rate);
+		float px1 = bCollider->GetLocation().x - (bCollider->GetErea().width * bCollider->GetErea().rate);
+		float py1 = bCollider->GetLocation().y - (bCollider->GetErea().height * bCollider->GetErea().rate);
 		float px2 = px1 + bCollider->GetErea().width;
 		float py2 = py1 + bCollider->GetErea().height;
 
@@ -41,4 +41,9 @@ Erea BoxCollider::GetErea()const
 void BoxCollider::SetLocation(Location location)
 {
 	this->location = location;
+}
+
+void BoxCollider::Draw() const
+{
+	
 }

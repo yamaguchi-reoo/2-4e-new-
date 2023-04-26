@@ -14,8 +14,7 @@ Player::Player()
 
 	erea.width = 50;
 	erea.height = 100;
-	erea.width_rate = 1;
-	erea.height_rate = 1;
+	erea.rate = 1;
 
 	AccelerationRight = 0;
 	AccelerationLeft = 0;

@@ -18,24 +18,25 @@ Apple::Apple()
 		throw "Resource/Images/apple.png";
 	}
 }
+
 Apple::~Apple()
 {
 
 }
+
 void Apple::UpDate()
 {
-	Count = 0;
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
 			g_Apple[i].y += g_Apple[i].speed;
 			g_Apple[i].span += 1;
-			Count++;
-		}
-		if (g_Apple[i].y >= 500)
-		{
-			AppleScore += AppleGet(i);
+			//YÇ™500à»è„Ç»ÇÁçÌèúèàóù
+			if (g_Apple[i].y >= 1000)
+			{
+				AppleDelete(i);
+			}
 		}
 	}	
 
@@ -202,4 +203,12 @@ int Apple::AppleGet(int i)
 	g_Apple[i] = g_AppleNl;
 	a_Count--;
 	return p;
+}
+
+void Apple::SetLocation(int i)
+{
+	//BoxColliderÇ…ìnÇ∑ílÇÃê›íË
+	location.x = g_Apple[i].x;
+	location.y = g_Apple[i].y;
+	erea.rate = g_Apple[i].rate;
 }

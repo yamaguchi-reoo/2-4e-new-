@@ -49,7 +49,14 @@ AbstractScene* GameMain::Update()
 	player->UpDate();
 	apple->UpDate();
 	fps->All();
-
+	for (int i = 0; i < MAX_APPLE; i++) 
+	{
+		apple->SetLocation(i);
+		if (apple->HitBox(player) == true)
+		{
+			TotalScore += apple->AppleGet(i);
+		}
+	}
 	return this;
 }
 
@@ -65,6 +72,7 @@ void GameMain::Draw()const
 
 	//ƒXƒRƒA‚Ì•`‰æ
 	score->Draw();
+	DrawFormatString(100, 100, 0x000000, "%d",TotalScore);
 
 	//ƒŠƒ“ƒS‚Ì•`‰æ
 	apple->Draw();
