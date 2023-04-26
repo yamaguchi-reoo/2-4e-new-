@@ -14,6 +14,9 @@ private:
 	int Count;	//一度にスポーンしたリンゴの計測
 
 	int CheckSpawn[10];	//りんごが重ならないかチェックする
+	int images[1];
+	int colorimage[3];
+
 
 	struct AppleData {
 		int flg;			//使用フラグ

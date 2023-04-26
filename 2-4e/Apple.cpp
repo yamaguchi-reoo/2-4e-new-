@@ -6,6 +6,9 @@
 
 Apple::Apple()
 {
+	images[1] = LoadGraph("Images/Apple.red.png");
+	colorimage[1] = LoadGraph("Images/apple.gold");
+	colorimage[2] = LoadGraph("Images/apple.poson");
 	a_Count = 0;
 	frame = 0;
 	CheckSpawn[10] = { 0 };
