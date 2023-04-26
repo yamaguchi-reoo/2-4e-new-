@@ -63,7 +63,7 @@ void Apple::Draw() const
 		}
 	}
 	//ì_êîï\é¶
-	DrawFormatString(1125, 100, 0x000000, "%d", AppleScore);
+	//DrawFormatString(1125, 100, 0x000000, "%d", AppleScore);
 }
 
 void Apple::Spawn()

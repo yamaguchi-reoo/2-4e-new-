@@ -117,7 +117,7 @@ AbstractScene* Title::Update()
 		}
 
 	}
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
+	if (PAD_INPUT_A)//(PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		switch (static_cast<TITLE_MENU>(Select))
