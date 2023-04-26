@@ -154,6 +154,10 @@ void Title::Draw()const
 	SetFontSize(64);                             //サイズを64に変更
 	SetFontThickness(8);                         //太さを8に変更
 
+
+	//タイトルの描画
+	DrawStringToHandle(150, 100, "りんごおとし", 0xffffff, MenuFont);
+
 	//メニューの描画
 	DrawStringToHandle(730, 240, "すたーと", 0xffffff, MenuFont);
 	DrawStringToHandle(730, 320, "らんきんぐ", 0xffffff, MenuFont);
@@ -161,6 +165,6 @@ void Title::Draw()const
 	DrawStringToHandle(730, 480, "えんど", 0xffffff, MenuFont);
 
 	//カーソルの描画
-	int select_y = 280 + Select * 80;
-	DrawGraph(700, select_y, cursor_img, TRUE);
+	int select_y = 240 + Select * 80;
+	DrawGraph(650, select_y, cursor_img, TRUE);
 }
