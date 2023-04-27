@@ -8,7 +8,6 @@ private:
 	int gTimeLimit;
 	int time;
 
-
 public:
 	Score();
 	~Score();

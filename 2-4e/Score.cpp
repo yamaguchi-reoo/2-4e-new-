@@ -1,10 +1,10 @@
 #include"DxLib.h"
 #include"Score.h"
 
-Score::Score()
+Score::Score() 
 {
 	gTimeLimit = GetNowCount();
-	time = 60000 - (GetNowCount() - gTimeLimit);
+	time = 60000;
 
 	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
 	{
@@ -24,12 +24,9 @@ Score::~Score()
 	delete[] gAppleImg;
 }
 void Score::UpDate()
+
 {
-	if (time >=0)
-	{
-		time--;
-	}
-	return;
+	return ;
 }
 void Score::Draw() const
 {
@@ -38,5 +35,5 @@ void Score::Draw() const
 	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
 	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
 
-	DrawFormatString(1140, 100, 0x000000, "%2d",time/1000);
+	DrawFormatString(1140, 100, 0x000000, "%2d", time - (GetNowCount() - gTimeLimit) / 1000);
 }
