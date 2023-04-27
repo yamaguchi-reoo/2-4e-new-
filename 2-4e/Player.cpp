@@ -14,7 +14,7 @@ Player::Player()
 
 	erea.width = PLAYER_WIDTH;
 	erea.height = PLAYER_HEIGHT;
-	erea.rate = 1;
+	erea.rate = 0.0;
 
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
@@ -85,9 +85,9 @@ void Player::UpDate()
 		}
 	}
 	//•Ç‚É‚Ô‚Â‚©‚é
-	if (location.x > 900)
+	if (location.x > 950)
 	{
-		location.x = 900;
+		location.x = 950;
 		PlayerState = PLAYER_STATE::IDOL;
 		AccelerationRight = 0;
 		AccelerationLeft = 0;

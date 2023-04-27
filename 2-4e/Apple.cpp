@@ -59,6 +59,7 @@ void Apple::Draw() const
 			else
 			{
 				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
+				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), (g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
 			}
 		}
 	}

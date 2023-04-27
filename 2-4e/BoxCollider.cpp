@@ -6,19 +6,19 @@ int BoxCollider::HitBox(BoxCollider* bCollider)
 {
 	int ret = false; //返り値
 
-		//自分の当たり判定の範囲
-		float mx1 = location.x - (APPLE_SIZE * erea.rate);
-		float my1 = location.y - (APPLE_SIZE * erea.rate);
-		float mx2 = mx1 + APPLE_SIZE;
-		float my2 = my1 + APPLE_SIZE;
+		//りんごの当たり判定の範囲
+		float ax1 = location.x - (APPLE_SIZE * erea.rate);
+		float ay1 = location.y - (APPLE_SIZE * erea.rate);
+		float ax2 = ax1 + APPLE_SIZE;
+		float ay2 = ay1 + APPLE_SIZE;
 
-		//相手の当たり判定の範囲
-		float px1 = bCollider->GetLocation().x - (bCollider->GetErea().width * bCollider->GetErea().rate);
-		float py1 = bCollider->GetLocation().y - (bCollider->GetErea().height * bCollider->GetErea().rate);
+		//プレイヤーの当たり判定の範囲
+		float px1 = bCollider->GetLocation().x;
+		float py1 = bCollider->GetLocation().y;
 		float px2 = px1 + bCollider->GetErea().width;
 		float py2 = py1 + bCollider->GetErea().height;
 
-		if ((mx1 < px2) && (px1 < mx2) && (my1 < py2) && (py1 < my2)) //当たり判定
+		if ((ax1 < px2) && (px1 < ax2) && (ay1 < py2) && (py1 < ay2)) //当たり判定
 		{
 			ret = true;
 		}
