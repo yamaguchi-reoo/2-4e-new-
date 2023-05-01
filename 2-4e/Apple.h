@@ -15,6 +15,7 @@ private:
 	int Count;	//一度にスポーンしたリンゴの計測
 
 	int gAppleImg[4];	//画像用変数
+	int gGetApple[4];	//カウント用変数
 
 	int CheckSpawn[10];	//りんごが重ならないかチェックする用
 
@@ -33,11 +34,11 @@ public:
 	struct AppleData	g_Apple[MAX_APPLE] = { FALSE };
 private:
 	//imgに仮で色データをいれている
-	struct AppleData	g_AppleRd = { TRUE,0,		0,0 ,0, 1.1, 1.0, 100,0};
-	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,0	,0, 1.1, 2.0, 200,0 };
-	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,0 ,0, 1.1, 3.5, 500,0 };
-	struct AppleData	g_AppleTx = { TRUE,3,0xff00ff,0 ,0, 0.9, 0.5,-750,0 };
-	struct AppleData	g_AppleNl = { FALSE,4,	    0,0 ,0, 0  , 0  , 0 };
+	struct AppleData	g_AppleRd = { TRUE,0,		0,10000 ,0, 0.1, 1.0, 100,0};
+	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,10000	,0, 0.1, 2.0, 200,0 };
+	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,10000 ,0, 0.1, 3.5, 500,0 };
+	struct AppleData	g_AppleTx = { TRUE,3,0xff00ff,10000 ,0, -0.1, 0.5,-750,0 };
+	struct AppleData	g_AppleNl = { FALSE,4,	    0,10000 ,0, 0  , 0  , 0 };
 
 public:
 	//コンストラクタ
@@ -59,7 +60,7 @@ public:
 	int Rand();
 
 	//りんごがスポーン可能か判断
-	int AppleSpawn();
+	int AppleSpawnPos();
 
 	//りんご削除
 	void AppleDelete(int i);

@@ -3,7 +3,7 @@
 
 #define PLAYER_WIDTH 50
 #define PLAYER_HEIGHT 100
-#define WALK_SPEED  5
+#define WALK_SPEED  4
 
 enum class PLAYER_STATE {
 	IDOL = 0,

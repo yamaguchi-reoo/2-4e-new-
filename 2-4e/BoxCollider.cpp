@@ -9,8 +9,8 @@ int BoxCollider::HitBox(BoxCollider* bCollider)
 		//‚è‚ñ‚²‚Ì“–‚½‚è”»’è‚Ì”ÍˆÍ
 		float ax1 = location.x - (APPLE_SIZE * erea.rate);
 		float ay1 = location.y - (APPLE_SIZE * erea.rate);
-		float ax2 = ax1 + APPLE_SIZE;
-		float ay2 = ay1 + APPLE_SIZE;
+		float ax2 = location.x + APPLE_SIZE + (APPLE_SIZE * erea.rate);
+		float ay2 = location.y + APPLE_SIZE + (APPLE_SIZE * erea.rate);
 
 		//ƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è‚Ì”ÍˆÍ
 		float px1 = bCollider->GetLocation().x;

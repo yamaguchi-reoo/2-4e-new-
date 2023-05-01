@@ -8,8 +8,13 @@
 Apple::Apple()
 {
 	a_Count = 0;		
-	frame = 0;			
-	CheckSpawn[10] = { 0 };
+	frame = 0;	
+	for (int i = 0; i < 10; i++) {
+		CheckSpawn[i] = 0;
+	}
+	for (int i = 0; i < 4; i++) {
+		gGetApple[i] = 0;
+	}
 
 	//りんご画像の読み込み
 	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
@@ -45,12 +50,14 @@ void Apple::UpDate()
 		frame = 0;
 	}
 }
+
 void Apple::Draw() const
 {
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
+			//りんごの画像がアップされたらDrawGraphの方に変更
 			if (g_Apple[i].type != 0)
 			{
 				DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
@@ -62,6 +69,10 @@ void Apple::Draw() const
 				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), (g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
 			}
 		}
+	}
+	//取得したりんごの個数表示
+	for (int i = 0; i < 3; i++) {
+		DrawFormatString(1067+i*60, 320, 0x000000, "%.2d", gGetApple[i]);
 	}
 }
 
@@ -75,7 +86,7 @@ void Apple::Spawn()
 		{
 
 			//ランダムなスポーンできるエリアを取得する
-			int Spawn = AppleSpawn();
+			int Spawn = AppleSpawnPos();
 
 			//どこにもスポーンできない場合以外はりんごのスポーン処理へはいる
 			if (Spawn != -1) {
@@ -146,32 +157,32 @@ int Apple::Rand()
 	}
 }
 
-int Apple::AppleSpawn()
+int Apple::AppleSpawnPos()
 {
 	int SpawnPos;				// スポーンエリア
 	int SpawnFlg = 1;			// スポーン出来るか判断する
-	int Check[7] = { 0 };		// どこがスポーン出来ないかチェックする
+	int Check[7] = {};		// どこがスポーン出来ないかチェックする
 	int Count = 0;				// 計測用		
 
 	while (1) {
 
 		do {
-			SpawnPos = GetRand(6) * 150;
-		} while (Check[SpawnPos / 150] == 1);
+			SpawnPos = GetRand(6);
+		} while (Check[SpawnPos] == 1);
 
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			//スポーンしようとしているレーンにもうりんごがある＆スポーンしてから一定時間経っていなければ
-			if (g_Apple[i].x == SpawnPos && g_Apple[i].span <= 90)
+			if (g_Apple[i].x == SpawnPos * 150 && g_Apple[i].span <= 90)
 			{
 				//スポーン出来ないのでチェックをいれる
-				Check[SpawnPos / 150] = 1;
+				Check[SpawnPos] = 1;
 			}
 		}
 		//スポーンしようとしているレーンが空いていればそこにスポーンさせる
-		if (Check[SpawnPos / 150] == 0)
+		if (Check[SpawnPos] == 0)
 		{
-			return SpawnPos;
+			return SpawnPos * 150;
 		}
 
 		//どのレーンがスポーンできないか調べる
@@ -197,8 +208,13 @@ void Apple::AppleDelete(int i) {
 
 int Apple::AppleGet(int i)
 {
+	//戻り値（取得する得点数）を避難
 	int p = g_Apple[i].point;
+	//取得したりんごの種類を判別
+	gGetApple[g_Apple[i].type]++;
+	//取得されたりんごをリセット
 	g_Apple[i] = g_AppleNl;
+	//場に存在しているりんごの個数を減少
 	a_Count--;
 	return p;
 }

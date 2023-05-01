@@ -4,14 +4,16 @@
 #include "Player.h"
 #include "Apple.h"
 #include "FpsController.h"
-#include"Score.h"
+#include "Score.h"
 
 class GameMain :
     public AbstractScene
 {
 private:
-    int TotalScore;
+    int TotalScore;  //合計点
+    bool PauseFlg;   //一時停止中か判断
     int GetApple[10];
+    int PauseFlash; //ポーズ中の文字点滅用
 
     Player* player; //プレイヤー
     Apple* apple;   //リンゴ 

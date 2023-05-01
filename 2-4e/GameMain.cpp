@@ -2,6 +2,7 @@
 #include "GameMain.h"
 #include "Result.h"
 #include "Score.h"
+#include "PadInput.h"
 
 #define TIMER 180
 
@@ -9,6 +10,8 @@ GameMain::GameMain()
 {
 	//初期化
 	TotalScore = 0;
+	PauseFlg = FALSE;
+	PauseFlash = 0;
 
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
@@ -45,24 +48,42 @@ GameMain::~GameMain()
 
 AbstractScene* GameMain::Update()
 {
-	//処理の更新
-	player->UpDate();
-	apple->UpDate();
-	fps->All();
-	for (int i = 0; i < MAX_APPLE; i++) 
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
-		apple->SetLocation(i);
-		if (apple->HitBox(player) == true)
+		PauseFlg = !PauseFlg;
+	}
+
+	if (PauseFlg == FALSE) {
+		//処理の更新
+		player->UpDate();
+		apple->UpDate();
+		fps->All();
+		for (int i = 0; i < MAX_APPLE; i++)
 		{
-			TotalScore += apple->AppleGet(i);
-			//得点の下限を０にする
-			if (TotalScore < 0)
+			apple->SetLocation(i);
+			if (apple->HitBox(player) == true)
 			{
-				TotalScore = 0;
+				TotalScore += apple->AppleGet(i);
+				//得点の下限を０にする
+				if (TotalScore < 0)
+				{
+					TotalScore = 0;
+				}
 			}
+		}
+
+	}
+
+	if (PauseFlg == TRUE)
+	{
+		PauseFlash++;
+		if (PauseFlash > 20)
+		{
+			PauseFlash = 0;
 		}
 	}
 	return this;
+	
 }
 
 void GameMain::Draw()const
@@ -77,9 +98,26 @@ void GameMain::Draw()const
 
 	//スコアの描画
 	score->Draw();
-	DrawFormatString(100, 100, 0x000000, "%d",TotalScore);
+	//仮のスコア描画	
+	DrawFormatString(1070, 100, 0x000000, "%d",TotalScore);
 
 	//リンゴの描画
 	apple->Draw();
+
+	if (PauseFlg == TRUE)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
+		DrawBox(0, 0, 1000, 780, 0x000000, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+		SetFontSize(30);
+		if (PauseFlash <= 10) {
+			DrawString(370, 370, "---ポーズ中---", 0x000000, TRUE);
+		}
+		else if (PauseFlash > 10) {
+			DrawString(370, 370, "---ポーズ中---", 0xffffff, TRUE);
+		}
+		SetFontSize(20);
+		DrawString(390, 420, "Startボタンで再開", 0xffffff, TRUE);
+	}
 }
 
