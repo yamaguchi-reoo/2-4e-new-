@@ -4,14 +4,13 @@
 #include "Score.h"
 #include "PadInput.h"
 
-#define TIMER 180
-
 GameMain::GameMain()
 {
 	//初期化
 	TotalScore = 0;
 	PauseFlg = FALSE;
 	PauseFlash = 0;
+	Time = 3599;
 
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
@@ -71,7 +70,8 @@ AbstractScene* GameMain::Update()
 				}
 			}
 		}
-
+		//制限時間減少
+		Time--;
 	}
 
 	if (PauseFlg == TRUE)
@@ -81,6 +81,11 @@ AbstractScene* GameMain::Update()
 		{
 			PauseFlash = 0;
 		}
+	}
+	if (Time <= 0)
+	{
+		//ここでリザルト画面へ移行（スコアはTotarScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
+		Time = 600;	//リザルト移行処理が出来たら消していい
 	}
 	return this;
 	
@@ -94,16 +99,31 @@ void GameMain::Draw()const
 	//プレイヤーの描画
 	player->Draw();
 
-	fps->Disp();
-
 	//スコアの描画
 	score->Draw();
 	//仮のスコア描画	
-	DrawFormatString(1070, 100, 0x000000, "%d",TotalScore);
+	SetFontSize(30);
+	DrawString(1105, 450, "得点", 0x000000);
+	DrawFormatString(1095, 500, 0x000000, "%.5d",TotalScore);
+	SetFontSize(24);
+
+	//制限時間
+	SetFontSize(30);
+	DrawString(1075, 150, "制限時間", 0x000000);
+	SetFontSize(40);
+	//5秒を切ると文字が揺れる
+	if (Time <= 300) {
+		DrawFormatString(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), 0x000000, "%2.2d", Time / 60 + 1);
+	}
+	else {
+		DrawFormatString(1120, 200, 0x000000, "%.2d", Time / 60 + 1);
+	}
+	SetFontSize(24);
 
 	//リンゴの描画
 	apple->Draw();
 
+	//一時停止中の描画
 	if (PauseFlg == TRUE)
 	{
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
@@ -118,6 +138,7 @@ void GameMain::Draw()const
 		}
 		SetFontSize(20);
 		DrawString(390, 420, "Startボタンで再開", 0xffffff, TRUE);
+		SetFontSize(24);
 	}
 }
 

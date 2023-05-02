@@ -14,6 +14,7 @@ private:
     bool PauseFlg;   //一時停止中か判断
     int GetApple[10];
     int PauseFlash; //ポーズ中の文字点滅用
+    int Time;       //制限時間用
 
     Player* player; //プレイヤー
     Apple* apple;   //リンゴ 
