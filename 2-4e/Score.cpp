@@ -21,7 +21,7 @@ Score::Score()
 }
 Score::~Score()
 {
-	delete[] gAppleImg;
+	
 }
 void Score::UpDate()
 
