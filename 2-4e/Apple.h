@@ -27,18 +27,19 @@ private:
 		float rate;			//大きさ（当たり判定用）
 		float speed;		//移動速度
 		int point;			//スコア加算ポイント
-		int span;			//画像被りをなくす用
+		int time;			//りんごが出現してからの経過時間
+		int span;			//各りんごが被らないようにするための待ち時間
 	};
 public:
 	//ランキングデータの変数宣言
 	struct AppleData	g_Apple[MAX_APPLE] = { FALSE };
 private:
 	//imgに仮で色データをいれている
-	struct AppleData	g_AppleRd = { TRUE,0,		0,10000 ,0, 0.1, 1.0, 100,0};
-	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,10000	,0, 0.1, 2.0, 200,0 };
-	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,10000 ,0, 0.1, 3.5, 500,0 };
-	struct AppleData	g_AppleTx = { TRUE,3,0xff00ff,10000 ,0, -0.1, 0.5,-750,0 };
-	struct AppleData	g_AppleNl = { FALSE,4,	    0,10000 ,0, 0  , 0  , 0 };
+	struct AppleData	g_AppleRd = { TRUE,0,	    0,10000 ,0,  0.1, 1.0, 100,0, 90};
+	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,10000 ,0,  0.1, 2.0, 200,0, 45};
+	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,10000 ,0,  0.1, 3.5, 500,0, 30};
+	struct AppleData	g_AppleTx = { TRUE,3,0xff00ff,10000 ,0, -0.1, 0.5,-750,0,180};
+	struct AppleData	g_AppleNl = {FALSE,4,	    0,10000 ,0,    0,   0,   0,0,  0};
 
 public:
 	//コンストラクタ
@@ -53,22 +54,22 @@ public:
 	//描画
 	void Draw() const;
 
-	//りんごのスポーン
+	//スポーン処理
 	void Spawn();
 
-	//りんごのスポーン確率用
+	//スポーンするりんごの種類の抽選
 	int Rand();
 
-	//りんごがスポーン可能か判断
+	//スポーンする位置の抽選
 	int AppleSpawnPos();
 
-	//りんご削除
+	//りんごの削除
 	void AppleDelete(int i);
 
-	//りんご入手
+	//りんごの取得
 	int AppleGet(int i);
 
-	//BoxColliderで使う用の箱に格納する
+	//BoxColliderに渡す数値の設定
 	void SetLocation(int i);
 };
 
