@@ -11,6 +11,7 @@ GameMain::GameMain()
 	PauseFlg = FALSE;
 	PauseFlash = 0;
 	Time = 3599;
+	GetTxAppleFlg = 0;
 
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
@@ -59,7 +60,7 @@ AbstractScene* GameMain::Update()
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			apple->SetLocation(i);
-			if (apple->HitBox(player) == true)
+			if (apple->HitBox(player) == true && GetTxAppleFlg == 0)
 			{
 				TotalScore += apple->AppleGet(i);
 				//“¾“_‚Ì‰ºŒÀ‚ð‚O‚É‚·‚é

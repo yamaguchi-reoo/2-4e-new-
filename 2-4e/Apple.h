@@ -14,6 +14,7 @@ private:
 	int frame;	//フレーム
 	int Count;	//一度にスポーンしたリンゴの計測
 
+
 	int gAppleImg[4];	//画像用変数
 	int gGetApple[4];	//カウント用変数
 

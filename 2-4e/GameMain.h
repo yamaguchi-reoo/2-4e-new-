@@ -24,6 +24,8 @@ private:
     int mori_img;
     int gAppleImg[2];
 
+    int GetTxAppleFlg; //毒リンゴを取ったかのフラグ
+
 public:
     //コンストラクタ
     GameMain();

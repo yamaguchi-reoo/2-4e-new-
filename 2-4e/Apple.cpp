@@ -11,6 +11,8 @@ Apple::Apple()
 	//初期化
 	a_Count = 0;		
 	frame = 0;	
+	GetTxAppleFlg = FALSE;
+
 	for (int i = 0; i < 10; i++) {
 		CheckSpawn[i] = 0;
 	}
@@ -225,6 +227,15 @@ int Apple::AppleGet(int i)
 	int p = g_Apple[i].point;
 	//取得したりんごの種類を判別
 	gGetApple[g_Apple[i].type]++;
+
+	if (g_Apple[i].type == 3) {
+		//毒リンゴを取得したときの処理
+	
+	}
+	else
+	{
+		//毒リンゴ以外のりんごを取った時の処理
+	}
 	//取得されたりんごをリセット
 	g_Apple[i] = g_AppleNl;
 	//場に存在しているりんごの個数を減少
