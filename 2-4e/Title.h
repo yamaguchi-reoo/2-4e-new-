@@ -16,7 +16,10 @@ private:
 
     int TitleBGM;       //BGM
     int MenuSE;         //‘I‘ðSE
-    int DecisionSE;     //Œˆ’è‰¹SE
+    int StateSE;    //Œˆ’è‰¹SE
+    int RankingSE;
+    int HelpSE;
+    int EndSE;
     int mori_img;
     int cursor_img;
 
