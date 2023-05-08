@@ -1,6 +1,2 @@
 2023年 04月 24日 12時 00分 05秒 : Resource/Images/mori.pngがありません。
-2023年 05月 08日 11時 24分 44秒 : Resource/Images/apple gold.pngがありません。
-2023年 05月 08日 11時 24分 53秒 : Resource/Images/apple gold.pngがありません。
-2023年 05月 08日 13時 15分 09秒 : Resource/Images/apple gold.pngがありません。
-2023年 05月 08日 13時 15分 17秒 : Resource/Images/apple gold.pngがありません。
-2023年 05月 08日 13時 15分 26秒 : Resource/Images/End.pngがありません。
+2023年 04月 26日 11時 52分 13秒 : Resource/Images/End.pngがありません。

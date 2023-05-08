@@ -24,6 +24,9 @@ private:
     int mori_img;
     int gAppleImg[2];
 
+    int GetTxAppleTime; //毒リンゴを取ってからの経過時間
+    bool PlayerDispFlg; //点滅用フラグ
+
 public:
     //コンストラクタ
     GameMain();

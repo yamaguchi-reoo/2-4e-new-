@@ -11,6 +11,8 @@ GameMain::GameMain()
 	PauseFlg = FALSE;
 	PauseFlash = 0;
 	Time = 3599;
+	GetTxAppleTime = 0;
+	PlayerDispFlg = TRUE;
 
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
@@ -59,14 +61,32 @@ AbstractScene* GameMain::Update()
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			apple->SetLocation(i);
-			if (apple->HitBox(player) == true)
+			if (apple->HitBox(player) == true && GetTxAppleTime == 0)
 			{
+				//もし取得したりんごが毒なら、
+				if (apple->AppleTypeGet(i) == 3)
+				{
+					//プレイヤーの点滅処理を開始する
+					GetTxAppleTime = 1;
+				}
 				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする
 				if (TotalScore < 0)
 				{
 					TotalScore = 0;
 				}
+			}
+		}
+		//点滅中の処理
+		if (GetTxAppleTime > 0)
+		{
+			if (++GetTxAppleTime % 20 == 0)
+			{
+				PlayerDispFlg = !PlayerDispFlg;
+			}
+			if (GetTxAppleTime >= 120)
+			{
+				GetTxAppleTime = 0;
 			}
 		}
 		//制限時間減少
@@ -96,7 +116,9 @@ void GameMain::Draw()const
 	DrawGraph(0, 0, mori_img, TRUE);
 
 	//プレイヤーの描画
-	player->Draw();
+	if (PlayerDispFlg == TRUE) {
+		player->Draw();
+	}
 
 	//スコアの描画
 	score->Draw();

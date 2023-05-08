@@ -14,6 +14,7 @@ private:
 	int frame;	//フレーム
 	int Count;	//一度にスポーンしたリンゴの計測
 
+
 	int gAppleImg[4];	//画像用変数
 	int gGetApple[4];	//カウント用変数
 
@@ -68,6 +69,9 @@ public:
 
 	//りんごの取得
 	int AppleGet(int i);
+
+	//取得したりんごの種類の判別
+	int AppleTypeGet(int i);
 
 	//BoxColliderに渡す数値の設定
 	void SetLocation(int i);

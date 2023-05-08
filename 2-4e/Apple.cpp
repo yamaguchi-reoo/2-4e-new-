@@ -11,6 +11,7 @@ Apple::Apple()
 	//初期化
 	a_Count = 0;		
 	frame = 0;	
+
 	for (int i = 0; i < 10; i++) {
 		CheckSpawn[i] = 0;
 	}
@@ -171,7 +172,7 @@ int Apple::Rand()
 		return 2;
 	}
 	//randが19なら紫色（毒）（５％）
-	else if (rand == 19)
+	else if (rand > 18)
 	{
 		return 3;
 	}
@@ -237,11 +238,25 @@ int Apple::AppleGet(int i)
 	int p = g_Apple[i].point;
 	//取得したりんごの種類を判別
 	gGetApple[g_Apple[i].type]++;
+
+	if (g_Apple[i].type == 3) {
+		//毒リンゴを取得したときの処理
+	
+	}
+	else
+	{
+		//毒リンゴ以外のりんごを取った時の処理
+	}
 	//取得されたりんごをリセット
 	g_Apple[i] = g_AppleNl;
 	//場に存在しているりんごの個数を減少
 	a_Count--;
 	return p;
+}
+//取得したりんごの種類の判別
+int Apple::AppleTypeGet(int i)
+{
+	return g_Apple[i].type;
 }
 //BoxColliderに渡す数値の設定
 void Apple::SetLocation(int i)
