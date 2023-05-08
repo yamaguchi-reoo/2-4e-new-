@@ -12,6 +12,10 @@ Player::Player()
 	location.x = 100;
 	location.y = 550;
 
+	erea.width = PLAYER_WIDTH;
+	erea.height = PLAYER_HEIGHT;
+	erea.rate = 0.0;
+
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
 
@@ -27,7 +31,6 @@ Player::~Player()
 void Player::UpDate()
 {
 	//ˆÚ“®
-
 	if (PAD_INPUT::GetLStick().ThumbX < -10000)
 	{
 		PlayerState = PLAYER_STATE::WALK_LEFT;
@@ -38,11 +41,12 @@ void Player::UpDate()
 		}
 		if (AccelerationRight > 0)  //‰E‚É“®‚¢‚Ä‚¢‚½Žž‚Ì¨‚¢‚ðŽE‚·ˆ—
 		{
-			location.x += (AccelerationRight / 5);
+			location.x += (AccelerationRight / 10);
 			AccelerationRight--;
 		}
-		location.x = location.x - Speed - (AccelerationLeft / 5);
+		location.x = location.x - Speed - (AccelerationLeft / 10);
 	}
+
 	else if (PAD_INPUT::GetLStick().ThumbX > 10000)
 	{
 		PlayerState = PLAYER_STATE::WALK_RIGTH;
@@ -53,35 +57,36 @@ void Player::UpDate()
 		}
 		if (AccelerationLeft > 0)		//¶‚É“®‚¢‚Ä‚¢‚½Žž‚Ì¨‚¢‚ðŽE‚·ˆ—
 		{
-			location.x -= (AccelerationLeft / 5);
+			location.x -= (AccelerationLeft / 10);
 			AccelerationLeft--;
 
 		}
-		location.x = location.x + Speed + (AccelerationRight / 5);
+		location.x = location.x + Speed + (AccelerationRight / 10);
 	}
+	//‰Á‘¬“x‚É‰ž‚¶‚ÄŠµ«‚ª“­‚­
 	else
 	{
 		if (AccelerationRight > 0)
 		{
 			location.x += (AccelerationRight / 5);
 			AccelerationRight -= 1;
-
+			PlayerState = PLAYER_STATE::WALK_RIGTH;
 		}
-		if (AccelerationLeft > 0)
+		else if (AccelerationLeft > 0)
 		{
 			location.x -= (AccelerationLeft / 5);
 			AccelerationLeft -= 1;
-
+			PlayerState = PLAYER_STATE::WALK_LEFT;
 		}
 		else
 		{
 			PlayerState = PLAYER_STATE::IDOL;
 		}
 	}
-
-	if (location.x > 900)
+	//•Ç‚É‚Ô‚Â‚©‚é
+	if (location.x > 950)
 	{
-		location.x = 900;
+		location.x = 950;
 		PlayerState = PLAYER_STATE::IDOL;
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
@@ -98,5 +103,6 @@ void Player::UpDate()
 
 void Player::Draw() const
 {
-	DrawBox(location.x, location.y, location.x + PLAYER_SIZE, location.y + PLAYER_SIZE, 0x00ff00, TRUE);
+	DrawBox(location.x, location.y, location.x + PLAYER_WIDTH, location.y + PLAYER_HEIGHT, 0x00ff00, TRUE);
+	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
 }

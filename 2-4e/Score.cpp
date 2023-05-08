@@ -19,7 +19,7 @@ Score::Score()
 }
 Score::~Score()
 {
-
+	
 }
 void Score::UpDate()
 {

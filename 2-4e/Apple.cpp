@@ -3,52 +3,89 @@
 #include<math.h>
 #include "Apple.h"
 #include "define.h"
+#include "GameMain.h"
 
+//コンストラクタ
 Apple::Apple()
 {
-	a_Count = 0;
-	frame = 0;
-	CheckSpawn[10] = { 0 };
+	//初期化
+	a_Count = 0;		
+	frame = 0;	
+	for (int i = 0; i < 10; i++) {
+		CheckSpawn[i] = 0;
+	}
+	for (int i = 0; i < 4; i++) {
+		gGetApple[i] = 0;
+	}
+
+	//りんご画像の読み込み
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	{
+		throw "Resource/Images/apple.png";
+	}
 }
+//デストラクタ
 Apple::~Apple()
 {
 
 }
+
+//更新
 void Apple::UpDate()
 {
-	Count = 0;
+	//一画面に存在出来るりんごの個数分繰り返す
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
+		//もしりんごがスポーン済なら
 		if (g_Apple[i].flg == TRUE)
 		{
+			//各りんごの速度の数だけY座標を加算する
 			g_Apple[i].y += g_Apple[i].speed;
-			g_Apple[i].span += 1;
-			Count++;
+
+			//りんごが画面内にいる時間を計る
+			g_Apple[i].time += 1;
+
+			//Yが1000以上なら削除処理
+			if (g_Apple[i].y >= 1000)
+			{
+				AppleDelete(i);
+			}
 		}
-		if (g_Apple[i].y >= 500)
-		{
-			g_Apple[i] = g_AppleNl;
-			a_Count--;
-		}
-	}
+	}	
+	//25フレーム毎にりんごのスポーン処理
 	if (++frame >= 25)
 	{
 		Spawn();
 		frame = 0;
 	}
 }
+//描画
 void Apple::Draw() const
 {
 	for (int i = 0; i < MAX_APPLE; i++)
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
-			DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
-			DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
+			//りんごの画像がアップされたらDrawGraphの方に変更
+			if (g_Apple[i].type != 0)
+			{
+				DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
+				DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
+			}
+			else
+			{
+				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
+				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), (g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
+			}
 		}
+	}
+	//取得したりんごの個数表示
+	for (int i = 0; i < 3; i++) {
+		DrawFormatString(1067+i*60, 320, 0x000000, "%.2d", gGetApple[i]);
 	}
 }
 
+//スポーン処理
 void Apple::Spawn()
 {
 	Count = 0;
@@ -59,7 +96,7 @@ void Apple::Spawn()
 		{
 
 			//ランダムなスポーンできるエリアを取得する
-			int Spawn = AppleSpawn();
+			int Spawn = AppleSpawnPos();
 
 			//どこにもスポーンできない場合以外はりんごのスポーン処理へはいる
 			if (Spawn != -1) {
@@ -68,22 +105,26 @@ void Apple::Spawn()
 				switch (Rand())
 				{
 				case 0:
-					g_Apple[i] = g_AppleRd;
-					g_Apple[i].x = Spawn;
-					Count++;	//一度にスポーンさせたりんごを計測する
+					g_Apple[i] = g_AppleRd;			//指定された色のりんごの情報を格納する
+					g_Apple[i].img = gAppleImg[0];	//imgに画像を格納する
+					g_Apple[i].x = Spawn;			//スポーンする場所の抽選
+					Count++;						//一度にスポーンさせたりんごを計測する
 					break;
 				case 1:
 					g_Apple[i] = g_AppleBr;
+
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 2:
 					g_Apple[i] = g_AppleGr;
+
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 3:
 					g_Apple[i] = g_AppleTx;
+
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
@@ -98,7 +139,7 @@ void Apple::Spawn()
 	}
 	a_Count += Count;	//一回で出したリンゴの個数を合計に足す
 }
-
+//スポーンするりんごの種類の抽選
 int Apple::Rand()
 {
 	int rand = GetRand(19);
@@ -128,33 +169,33 @@ int Apple::Rand()
 		return -1;
 	}
 }
-
-int Apple::AppleSpawn()
+//スポーンする位置の抽選
+int Apple::AppleSpawnPos()
 {
 	int SpawnPos;				// スポーンエリア
 	int SpawnFlg = 1;			// スポーン出来るか判断する
-	int Check[7] = { 0 };		// どこがスポーン出来ないかチェックする
+	int Check[7] = {};		// どこがスポーン出来ないかチェックする
 	int Count = 0;				// 計測用		
 
 	while (1) {
 
 		do {
-			SpawnPos = GetRand(6) * 150;
-		} while (Check[SpawnPos / 150] == 1);
+			SpawnPos = GetRand(6);
+		} while (Check[SpawnPos] == 1);
 
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			//スポーンしようとしているレーンにもうりんごがある＆スポーンしてから一定時間経っていなければ
-			if (g_Apple[i].x == SpawnPos && g_Apple[i].span <= 90)
+			if (g_Apple[i].x == SpawnPos * 150 && g_Apple[i].time <= g_Apple[i].span)
 			{
 				//スポーン出来ないのでチェックをいれる
-				Check[SpawnPos / 150] = 1;
+				Check[SpawnPos] = 1;
 			}
 		}
 		//スポーンしようとしているレーンが空いていればそこにスポーンさせる
-		if (Check[SpawnPos / 150] == 0)
+		if (Check[SpawnPos] == 0)
 		{
-			return SpawnPos;
+			return SpawnPos * 150;
 		}
 
 		//どのレーンがスポーンできないか調べる
@@ -171,4 +212,30 @@ int Apple::AppleSpawn()
 			return -1;	//スポーン失敗
 		}
 	}
+}
+//りんごの削除
+void Apple::AppleDelete(int i) {
+	g_Apple[i] = g_AppleNl;
+	a_Count--;
+}
+//りんごの取得
+int Apple::AppleGet(int i)
+{
+	//戻り値（取得する得点数）を避難
+	int p = g_Apple[i].point;
+	//取得したりんごの種類を判別
+	gGetApple[g_Apple[i].type]++;
+	//取得されたりんごをリセット
+	g_Apple[i] = g_AppleNl;
+	//場に存在しているりんごの個数を減少
+	a_Count--;
+	return p;
+}
+//BoxColliderに渡す数値の設定
+void Apple::SetLocation(int i)
+{
+	//BoxColliderに渡す値の設定
+	location.x = g_Apple[i].x;
+	location.y = g_Apple[i].y;
+	erea.rate = g_Apple[i].rate;
 }
