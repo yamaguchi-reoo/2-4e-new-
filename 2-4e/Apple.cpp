@@ -23,6 +23,18 @@ Apple::Apple()
 	{
 		throw "Resource/Images/apple.png";
 	}
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
+	{
+		throw "Resource/Images/BlueApple.png";
+	}
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/apple gold.png")) == -1)
+	{
+		throw "Resource/Images/apple gold.png";
+	}
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/apple poison.png")) == -1)
+	{
+		throw "Resource/Images/apple poison.png";
+	}
 }
 //デストラクタ
 Apple::~Apple()
@@ -112,19 +124,19 @@ void Apple::Spawn()
 					break;
 				case 1:
 					g_Apple[i] = g_AppleBr;
-
+					g_Apple[i].img = gAppleImg[1];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 2:
 					g_Apple[i] = g_AppleGr;
-
+					g_Apple[i].img = gAppleImg[2];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 3:
 					g_Apple[i] = g_AppleTx;
-
+					g_Apple[i].img = gAppleImg[3];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
