@@ -20,7 +20,6 @@ GameMain::GameMain()
 	//オブジェクト化
 	player = new Player();
 	apple = new Apple();
-	fps = new FpsController();
 	score = new Score();
 
 	//画像の読み込み
@@ -40,23 +39,23 @@ GameMain::~GameMain()
 	//オブジェクトの削除
 	delete player;
 	delete apple;
-	delete fps;
 	delete score;
 
 }
 
 AbstractScene* GameMain::Update()
 {
+	//ポーズフラグ切り替え処理
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
 		PauseFlg = !PauseFlg;
 	}
-
+	//ポーズ中でないなら
 	if (PauseFlg == FALSE) {
 		//処理の更新
 		player->UpDate();
 		apple->UpDate();
-		fps->All();
+
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			apple->SetLocation(i);
