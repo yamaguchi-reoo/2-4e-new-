@@ -6,6 +6,7 @@
 
 GameMain::GameMain()
 {
+	
 	//初期化
 	TotalScore = 0;
 	PauseFlg = FALSE;
@@ -31,6 +32,10 @@ GameMain::GameMain()
 	{
 		throw "Resource/Images/apple.png";
 	}
+	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) //決定ボタン
+	{
+		throw "Resource/sounds/SE/Start.wav";
+	}
 
 }
 
@@ -45,6 +50,9 @@ GameMain::~GameMain()
 
 AbstractScene* GameMain::Update()
 {
+	if (CheckSoundMem(StartSE) == 0) {
+		PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+	}
 	//ポーズフラグ切り替え処理
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
@@ -86,6 +94,7 @@ AbstractScene* GameMain::Update()
 		//ここでリザルト画面へ移行（スコアはTotarScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
 		Time = 600;	//リザルト移行処理が出来たら消していい
 	}
+
 	return this;
 	
 }

@@ -23,6 +23,7 @@ private:
 
     int mori_img;
     int gAppleImg[2];
+    int StartSE;
 
 public:
     //コンストラクタ

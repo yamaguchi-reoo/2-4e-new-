@@ -48,13 +48,13 @@ Title::Title()
 	{
 		throw "Resource/sounds/SE/select01.wav";
 	}
-	if ((StateSE = LoadSoundMem("Resource/sounds/SE/State.wav")) == -1) //決定ボタン
+	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) //決定ボタン
 	{
-		throw "Resource/sounds/SE/State.wav";
+		throw "Resource/sounds/SE/Start.wav";
 	}
 	//SEの音量変更
 	ChangeVolumeSoundMem(100, MenuSE);
-	ChangeVolumeSoundMem(200, StateSE);
+	ChangeVolumeSoundMem(200, StartSE);
 
 	//タイトルBGMをスタート
 	//if (CheckSoundMem(TitleBGM) == 0) {
@@ -70,7 +70,7 @@ Title::~Title()
 	//サウンドの削除
 	DeleteSoundMem(TitleBGM);
 	DeleteSoundMem(MenuSE);
-	DeleteSoundMem(StateSE);
+	DeleteSoundMem(StartSE);
 	DeleteSoundMem(RankingSE);
 	DeleteSoundMem(HelpSE);
 	DeleteSoundMem(EndSE);
@@ -131,12 +131,12 @@ AbstractScene* Title::Update()
 			break;
 			//ランキング画面へ
 		case TITLE_MENU::GAME_RANKING:
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			return new DrawRanking();
 			break;
 			//エンド画面へ
 		case TITLE_MENU::GAME_END:
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			return new End();
 			break;
 		default:

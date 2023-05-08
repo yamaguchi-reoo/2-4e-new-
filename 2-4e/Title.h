@@ -16,7 +16,7 @@ private:
 
     int TitleBGM;       //BGM
     int MenuSE;         //‘I‘ðSE
-    int StateSE;    //Œˆ’è‰¹SE
+    int StartSE;    //Œˆ’è‰¹SE
     int RankingSE;
     int HelpSE;
     int EndSE;
