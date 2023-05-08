@@ -15,6 +15,7 @@ GameMain::GameMain()
 	GetTxAppleTime = 0;
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
+	Soundflg = 0;
 
 	//オブジェクト化
 	player = new Player();
@@ -50,8 +51,12 @@ GameMain::~GameMain()
 
 AbstractScene* GameMain::Update()
 {
-	if (CheckSoundMem(StartSE) == 0) {
-		PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+	if (CheckSoundMem(StartSE) == 0) 
+	{
+		if (Soundflg++ == 1)
+		{
+			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+		}
 	}
 	//ポーズフラグ切り替え処理
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
@@ -74,6 +79,12 @@ AbstractScene* GameMain::Update()
 				{
 					//プレイヤーの点滅処理を開始する
 					GetTxAppleTime = 1;
+					PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+
+				}
+				else
+				{
+					PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
 				}
 				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする
