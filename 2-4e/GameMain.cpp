@@ -46,6 +46,8 @@ GameMain::~GameMain()
 	delete apple;
 	delete score;
 
+	DeleteSoundMem(StartSE);
+
 }
 
 AbstractScene* GameMain::Update()
