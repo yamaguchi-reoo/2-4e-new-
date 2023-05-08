@@ -24,7 +24,21 @@ Apple::Apple()
 	{
 		throw "Resource/Images/apple.png";
 	}
-	
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
+	{
+		throw "Resource/Images/BlueApple.png";
+	}
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/applegold.png")) == -1)
+	{
+		throw "Resource/Images/applegold.png";
+	}
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/applepoison.png")) == -1)
+	{
+		throw "Resource/Images/applepoison.png";
+	}
+
+	//画像の縮小
+	DrawExtendGraph(0, 0,700 / 8, -1,gAppleImg[2], TRUE);
 }
 //デストラクタ
 Apple::~Apple()
@@ -69,18 +83,12 @@ void Apple::Draw() const
 		if (g_Apple[i].flg == TRUE)
 		{
 			//りんごの画像がアップされたらDrawGraphの方に変更
-			if (g_Apple[i].type != 0)
-			{
-				DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
-				DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
-			}
-			else
-			{
 				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
-				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), (g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
-			}
+				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), 
+					(g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
 		}
 	}
+
 	//取得したりんごの個数表示
 	for (int i = 0; i < 3; i++) {
 		DrawFormatString(1067+i*60, 320, 0x000000, "%.2d", gGetApple[i]);
