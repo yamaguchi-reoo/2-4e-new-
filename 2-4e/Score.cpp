@@ -3,8 +3,6 @@
 
 Score::Score() 
 {
-	gTimeLimit = GetNowCount();
-	time = 60000;
 
 	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
 	{
@@ -35,5 +33,4 @@ void Score::Draw() const
 	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
 	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
 
-	DrawFormatString(1140, 100, 0x000000, "%2d", time - (GetNowCount() - gTimeLimit) / 1000);
 }
