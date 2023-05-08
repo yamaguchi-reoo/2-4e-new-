@@ -36,9 +36,6 @@ Apple::Apple()
 	{
 		throw "Resource/Images/applepoison.png";
 	}
-
-	//画像の縮小
-	DrawExtendGraph(0, 0,700 / 8, -1,gAppleImg[2], TRUE);
 }
 //デストラクタ
 Apple::~Apple()
