@@ -70,6 +70,9 @@ public:
 	//‚è‚ñ‚²‚Ìæ“¾
 	int AppleGet(int i);
 
+	//æ“¾‚µ‚½‚è‚ñ‚²‚Ìí—Ş‚Ì”»•Ê
+	int AppleTypeGet(int i);
+
 	//BoxCollider‚É“n‚·”’l‚Ìİ’è
 	void SetLocation(int i);
 };
