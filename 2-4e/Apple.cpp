@@ -20,9 +20,9 @@ Apple::Apple()
 	}
 
 	//ÇËÇÒÇ≤âÊëúÇÃì«Ç›çûÇ›
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple red.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/apple red.png";
 	}
 	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
 	{
