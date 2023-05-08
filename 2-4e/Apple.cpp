@@ -24,18 +24,7 @@ Apple::Apple()
 	{
 		throw "Resource/Images/apple.png";
 	}
-	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
-	{
-		throw "Resource/Images/BlueApple.png";
-	}
-	if ((gAppleImg[2] = LoadGraph("Resource/Images/apple gold.png")) == -1)
-	{
-		throw "Resource/Images/apple gold.png";
-	}
-	if ((gAppleImg[3] = LoadGraph("Resource/Images/apple poison.png")) == -1)
-	{
-		throw "Resource/Images/apple poison.png";
-	}
+	
 }
 //デストラクタ
 Apple::~Apple()
