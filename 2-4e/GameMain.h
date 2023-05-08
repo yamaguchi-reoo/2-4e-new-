@@ -10,11 +10,12 @@ class GameMain :
     public AbstractScene
 {
 private:
-    int TotalScore;  //合計点
-    bool PauseFlg;   //一時停止中か判断
+    int TotalScore;         //合計点
+    bool PauseFlg;          //一時停止中か判断
     int GetApple[10];
-    int PauseFlash; //ポーズ中の文字点滅用
-    int Time;       //制限時間用
+    int PauseFlash;         //ポーズ中の文字点滅用
+    int Time;               //制限時間用
+    int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー
     Apple* apple;   //リンゴ 
@@ -24,6 +25,9 @@ private:
     int mori_img;
     int gAppleImg[2];
     int StartSE;
+
+    int GetTxAppleTime; //毒リンゴを取ってからの経過時間
+    bool PlayerDispFlg; //点滅用フラグ
 
 public:
     //コンストラクタ

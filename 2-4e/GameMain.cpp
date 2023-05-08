@@ -12,11 +12,9 @@ GameMain::GameMain()
 	PauseFlg = FALSE;
 	PauseFlash = 0;
 	Time = 3599;
-
-	for (int i = 0; i < MAX_APPLE; i++)
-	{
-		GetApple[i] = 0;
-	}
+	GetTxAppleTime = 0;
+	PlayerDispFlg = TRUE;
+	TimerColor = GetColor(0,0,0);
 
 	//オブジェクト化
 	player = new Player();
@@ -69,14 +67,32 @@ AbstractScene* GameMain::Update()
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			apple->SetLocation(i);
-			if (apple->HitBox(player) == true)
+			if (apple->HitBox(player) == true && GetTxAppleTime == 0)
 			{
+				//もし取得したりんごが毒なら、
+				if (apple->AppleTypeGet(i) == 3)
+				{
+					//プレイヤーの点滅処理を開始する
+					GetTxAppleTime = 1;
+				}
 				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする
 				if (TotalScore < 0)
 				{
 					TotalScore = 0;
 				}
+			}
+		}
+		//点滅中の処理
+		if (GetTxAppleTime > 0)
+		{
+			if (++GetTxAppleTime % 20 == 0)
+			{
+				PlayerDispFlg = !PlayerDispFlg;
+			}
+			if (GetTxAppleTime >= 120)
+			{
+				GetTxAppleTime = 0;
 			}
 		}
 		//制限時間減少
@@ -93,10 +109,12 @@ AbstractScene* GameMain::Update()
 	}
 	if (Time <= 0)
 	{
-		//ここでリザルト画面へ移行（スコアはTotarScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
+		//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
 		Time = 600;	//リザルト移行処理が出来たら消していい
 	}
-
+	if (Time <= 600) {
+		TimerColor = GetColor(255-Time/3,0,0);
+	}
 	return this;
 	
 }
@@ -107,7 +125,9 @@ void GameMain::Draw()const
 	DrawGraph(0, 0, mori_img, TRUE);
 
 	//プレイヤーの描画
-	player->Draw();
+	if (PlayerDispFlg == TRUE) {
+		player->Draw();
+	}
 
 	//スコアの描画
 	score->Draw();
@@ -123,10 +143,10 @@ void GameMain::Draw()const
 	SetFontSize(40);
 	//5秒を切ると文字が揺れる
 	if (Time <= 300) {
-		DrawFormatString(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), 0x000000, "%2.2d", Time / 60 + 1);
+		DrawFormatString(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), TimerColor, "%2.2d", Time / 60 + 1);
 	}
 	else {
-		DrawFormatString(1120, 200, 0x000000, "%.2d", Time / 60 + 1);
+		DrawFormatString(1120, 200, TimerColor, "%.2d", Time / 60 + 1);
 	}
 	SetFontSize(24);
 
