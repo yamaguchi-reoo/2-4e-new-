@@ -23,7 +23,7 @@ GameMain::GameMain()
 	score = new Score();
 
 	//‰æ‘œ‚Ì“Ç‚İ‚İ
-	if ((mori_img = LoadGraph("Resource/Images/mori.png")) == -1)
+	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
@@ -151,7 +151,7 @@ AbstractScene* GameMain::Update()
 void GameMain::Draw()const
 {
 	// ”wŒi‚Ì•`‰æ
-	DrawGraph(0, 0, mori_img, TRUE);
+	DrawGraph(0, 0, ForestImg, TRUE);
 
 	//ƒvƒŒƒCƒ„[‚Ì•`‰æ
 	if (PlayerDispFlg == TRUE) {

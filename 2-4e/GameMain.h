@@ -22,7 +22,7 @@ private:
     FpsController* fps;
     Score* score;
 
-    int mori_img;
+    int ForestImg;
     int gAppleImg[2];
     int StartSE;
     int AppleSE;
