@@ -20,9 +20,21 @@ Apple::Apple()
 	}
 
 	//りんご画像の読み込み
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple red.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/apple red.png";
+	}
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
+	{
+		throw "Resource/Images/BlueApple.png";
+	}
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/applegold.png")) == -1)
+	{
+		throw "Resource/Images/applegold.png";
+	}
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/applepoison.png")) == -1)
+	{
+		throw "Resource/Images/applepoison.png";
 	}
 }
 //デストラクタ
@@ -68,18 +80,12 @@ void Apple::Draw() const
 		if (g_Apple[i].flg == TRUE)
 		{
 			//りんごの画像がアップされたらDrawGraphの方に変更
-			if (g_Apple[i].type != 0)
-			{
-				DrawCircle(g_Apple[i].x + APPLE_SIZE / 2, g_Apple[i].y + APPLE_SIZE / 2, APPLE_SIZE / 2, g_Apple[i].img, TRUE);
-				DrawBox(g_Apple[i].x, g_Apple[i].y, g_Apple[i].x + APPLE_SIZE, g_Apple[i].y + APPLE_SIZE, 0x000000, FALSE);
-			}
-			else
-			{
 				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
-				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), (g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
-			}
+				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), 
+					(g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
 		}
 	}
+
 	//取得したりんごの個数表示
 	for (int i = 0; i < 3; i++) {
 		DrawFormatString(1067+i*60, 320, 0x000000, "%.2d", gGetApple[i]);
@@ -113,19 +119,19 @@ void Apple::Spawn()
 					break;
 				case 1:
 					g_Apple[i] = g_AppleBr;
-
+					g_Apple[i].img = gAppleImg[1];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 2:
 					g_Apple[i] = g_AppleGr;
-
+					g_Apple[i].img = gAppleImg[2];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;
 				case 3:
 					g_Apple[i] = g_AppleTx;
-
+					g_Apple[i].img = gAppleImg[3];
 					g_Apple[i].x = Spawn;
 					Count++;
 					break;

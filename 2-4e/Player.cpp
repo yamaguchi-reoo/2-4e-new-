@@ -21,6 +21,8 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
+	LoadDivGraph("imgaes/147431.png", 10, 2, 5, 50,50,image);
+
 }
 
 Player::~Player()
