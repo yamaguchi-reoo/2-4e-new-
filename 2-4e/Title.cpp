@@ -12,7 +12,6 @@ enum class TITLE_MENU
 	GAME_START = 0,
 	GAME_RANKING,
 	GAME_HELP,
-	GAME_CREDIT,
 	GAME_END
 };
 
@@ -76,8 +75,6 @@ Title::~Title()
 //更新
 AbstractScene* Title::Update()
 {
-
-
 	//十字キー↑入力
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP))
 	{
