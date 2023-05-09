@@ -6,6 +6,7 @@ class End :
 {
 private:
     int WaitTime; //終了までの時間
+    int MoveString; //エンドロール用
     int ForestImg; //画像用
 
 public:
