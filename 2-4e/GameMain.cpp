@@ -36,8 +36,8 @@ GameMain::GameMain()
 	{
 		throw "Resource/sounds/BGM/seiya.wav";
 	}
-	//SEの音量変更
-	ChangeVolumeSoundMem(70, MainBGM);
+	//BGMの音量変更
+	ChangeVolumeSoundMem(90, MainBGM);
 
 	//サウンド読込
 	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) 
@@ -77,20 +77,6 @@ GameMain::~GameMain()
 
 AbstractScene* GameMain::Update()
 {
-	//画面切替時SE
-	if (CheckSoundMem(StartSE) == 0)
-	{
-		PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
-	}
-
-	//画面切替時SE
-	if (CheckSoundMem(StartSE) == 0) 
-	{
-		if (Soundflg++ == 1)
-		{
-			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
-		}
-	}
 	//ポーズフラグ切り替え処理
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
@@ -158,6 +144,20 @@ AbstractScene* GameMain::Update()
 	}
 	if (Time <= 600) {
 		TimerColor = GetColor(255-Time/3,0,0);
+	}
+
+	//BGM
+	if (CheckSoundMem(MainBGM) == 0)
+	{
+		PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
+	}
+	//画面切替時SE
+	if (CheckSoundMem(StartSE) == 0)
+	{
+		if (Soundflg++ == 1)
+		{
+			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+		}
 	}
 	return this;
 	
