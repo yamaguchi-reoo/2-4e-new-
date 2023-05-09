@@ -68,6 +68,7 @@ GameMain::~GameMain()
 	delete score;
 
 	//ƒTƒEƒ“ƒhíœ
+	DeleteSoundMem(MainBGM);
 	DeleteSoundMem(StartSE);
 	DeleteSoundMem(AppleSE);
 	DeleteSoundMem(ToxicAppleSE);

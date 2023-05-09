@@ -32,6 +32,14 @@ Title::Title()
 	{
 		throw "Resource/Images/apple.png";
 	}
+	//BGMの読み込み
+	if ((TitleBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
+	{
+		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
+	}
+	//BGMの音量変更
+	ChangeVolumeSoundMem(70, TitleBGM);
+
 	//SEの読み込み
 	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //選択SE
 	{
@@ -48,6 +56,7 @@ Title::~Title()
 	DeleteFontToHandle(MenuFont);
 
 	//サウンドの削除
+	DeleteSoundMem(TitleBGM);
 	DeleteSoundMem(MenuSE);
 }
 
@@ -113,7 +122,11 @@ AbstractScene* Title::Update()
 			break;
 		}
 	}
-
+	//BGM
+	if (CheckSoundMem(TitleBGM) == 0)
+	{
+		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK);
+	}
 	return this;
 }
 
