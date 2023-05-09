@@ -6,6 +6,7 @@ class End :
 {
 private:
     int WaitTime; //I—¹‚Ü‚Å‚ÌŠÔ
+    int ForestImg; //‰æ‘œ—p
 
 public:
     
