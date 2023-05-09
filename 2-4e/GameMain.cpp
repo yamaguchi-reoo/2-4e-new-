@@ -6,6 +6,7 @@
 
 GameMain::GameMain()
 {
+	
 	//初期化
 	TotalScore = 0;
 	PauseFlg = FALSE;
@@ -13,11 +14,7 @@ GameMain::GameMain()
 	Time = 3599;
 	GetTxAppleTime = 0;
 	PlayerDispFlg = TRUE;
-
-	for (int i = 0; i < MAX_APPLE; i++)
-	{
-		GetApple[i] = 0;
-	}
+	TimerColor = GetColor(0,0,0);
 
 	//オブジェクト化
 	player = new Player();
@@ -33,6 +30,10 @@ GameMain::GameMain()
 	{
 		throw "Resource/Images/apple.png";
 	}
+	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) //決定ボタン
+	{
+		throw "Resource/sounds/SE/Start.wav";
+	}
 
 }
 
@@ -43,10 +44,15 @@ GameMain::~GameMain()
 	delete apple;
 	delete score;
 
+	DeleteSoundMem(StartSE);
+
 }
 
 AbstractScene* GameMain::Update()
 {
+	if (CheckSoundMem(StartSE) == 0) {
+		PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+	}
 	//ポーズフラグ切り替え処理
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
@@ -103,8 +109,11 @@ AbstractScene* GameMain::Update()
 	}
 	if (Time <= 0)
 	{
-		//ここでリザルト画面へ移行（スコアはTotarScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
+		//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
 		Time = 600;	//リザルト移行処理が出来たら消していい
+	}
+	if (Time <= 600) {
+		TimerColor = GetColor(255-Time/3,0,0);
 	}
 	return this;
 	
@@ -134,10 +143,10 @@ void GameMain::Draw()const
 	SetFontSize(40);
 	//5秒を切ると文字が揺れる
 	if (Time <= 300) {
-		DrawFormatString(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), 0x000000, "%2.2d", Time / 60 + 1);
+		DrawFormatString(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), TimerColor, "%2.2d", Time / 60 + 1);
 	}
 	else {
-		DrawFormatString(1120, 200, 0x000000, "%.2d", Time / 60 + 1);
+		DrawFormatString(1120, 200, TimerColor, "%.2d", Time / 60 + 1);
 	}
 	SetFontSize(24);
 

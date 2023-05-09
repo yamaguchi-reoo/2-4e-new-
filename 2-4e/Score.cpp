@@ -1,9 +1,9 @@
 #include"DxLib.h"
 #include"Score.h"
 
-Score::Score()
+Score::Score() 
 {
-	gScore = 0;
+
 	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
 	{
 		throw "Resource/Images/apple.png";
@@ -22,8 +22,9 @@ Score::~Score()
 	
 }
 void Score::UpDate()
+
 {
-	return;
+	return ;
 }
 void Score::Draw() const
 {
@@ -31,4 +32,5 @@ void Score::Draw() const
 	DrawRotaGraph(1080, 370, 0.5f, 0, gAppleImg[0], TRUE, FALSE);
 	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
 	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
+
 }

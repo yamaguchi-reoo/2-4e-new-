@@ -44,22 +44,22 @@ Title::Title()
 	ChangeVolumeSoundMem(125, TitleBGM);
 
 	//SEの読み込み
-	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/Select.wav")) == -1) //選択SE
+	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //選択SE
 	{
-		throw "Resource/sounds/SE/Select.wav";
+		throw "Resource/sounds/SE/select01.wav";
 	}
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision.wav")) == -1) //決定ボタン
+	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) //決定ボタン
 	{
-		throw "Resource/sounds/SE/Decision.wav";
+		throw "Resource/sounds/SE/Start.wav";
 	}
 	//SEの音量変更
-	ChangeVolumeSoundMem(200, MenuSE);
-	ChangeVolumeSoundMem(200, DecisionSE);
+	ChangeVolumeSoundMem(100, MenuSE);
+	ChangeVolumeSoundMem(200, StartSE);
 
 	//タイトルBGMをスタート
-	if (CheckSoundMem(TitleBGM) == 0) {
-		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK, TRUE);
-	}
+	//if (CheckSoundMem(TitleBGM) == 0) {
+		//PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK, TRUE);
+	//}
 }
 
 Title::~Title()
@@ -70,7 +70,10 @@ Title::~Title()
 	//サウンドの削除
 	DeleteSoundMem(TitleBGM);
 	DeleteSoundMem(MenuSE);
-	DeleteSoundMem(DecisionSE);
+	DeleteSoundMem(StartSE);
+	DeleteSoundMem(RankingSE);
+	DeleteSoundMem(HelpSE);
+	DeleteSoundMem(EndSE);
 }
 
 //更新
@@ -119,22 +122,21 @@ AbstractScene* Title::Update()
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		switch (static_cast<TITLE_MENU>(Select))
 		{
 			//ゲーム画面へ
 		case TITLE_MENU::GAME_START:
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			return new GameMain();
 			break;
 			//ランキング画面へ
 		case TITLE_MENU::GAME_RANKING:
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			return new DrawRanking();
 			break;
 			//エンド画面へ
 		case TITLE_MENU::GAME_END:
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			return new End();
 			break;
 		default:
