@@ -21,7 +21,7 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	LoadDivGraph("imgaes/147431.png", 10, 2, 5, 50,50,image);
+	LoadDivGraph("Imgaes/147431.png", 10, 2, 5, 50,50,gh);
 
 }
 
@@ -40,6 +40,9 @@ void Player::UpDate()
 		if (AccelerationLeft <= 30) //左移動時の勢い
 		{
 			AccelerationLeft++;
+			if (xcount > 0)
+				xcount = 0;
+				--xcount;
 		}
 		if (AccelerationRight > 0)  //右に動いていた時の勢いを殺す処理
 		{
@@ -56,6 +59,9 @@ void Player::UpDate()
 		if (AccelerationRight <= 30)	//右移動時の勢い
 		{
 			AccelerationRight++;
+			if (xcount < 0)
+				xcount = 0;
+			++xcount;
 		}
 		if (AccelerationLeft > 0)		//左に動いていた時の勢いを殺す処理
 		{
@@ -101,10 +107,24 @@ void Player::UpDate()
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
 	}
+	//カウント数から添字を求める。
+		ix = abs(xcount) % 30 / 10;
+
+		//xカウントがプラスなら右向きなので2行目の先頭添字番号を足す。
+		if (xcount > 0) {
+				ix += 3;
+				result = ix;
+		}
+		else if (xcount < 0) {
+				//マイナスなら左向きなので、4行目の先頭添字番号を足す。
+				ix += 9;
+				result = ix;
+		}																																																																																																																																																																																																																																																																																																																										
+
 }
 
 void Player::Draw() const
 {
-	DrawBox(location.x, location.y, location.x + PLAYER_WIDTH, location.y + PLAYER_HEIGHT, 0x00ff00, TRUE);
+	DrawGraph(0,0, gh[result], TRUE);
 	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
 }

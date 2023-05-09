@@ -25,8 +25,10 @@ private:
 
 private:
 
-	int image[10];
-
+	int gh[10];
+	int xcount = 0;
+	int ix, iy;
+	int result = 0;
 
 public:
 	//コンストラクタ
