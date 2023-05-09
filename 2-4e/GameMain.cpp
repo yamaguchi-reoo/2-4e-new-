@@ -45,9 +45,9 @@ GameMain::GameMain()
 		throw "Resource/sounds/SE/ToxicAplle.wav";
 	}
 	//SEÇÃâπó ïœçX
-	ChangeVolumeSoundMem(50, StartSE);
-	ChangeVolumeSoundMem(60, AppleSE);
-	ChangeVolumeSoundMem(60, ToxicAppleSE);
+	ChangeVolumeSoundMem(70, StartSE);
+	ChangeVolumeSoundMem(100, AppleSE);
+	ChangeVolumeSoundMem(100, ToxicAppleSE);
 
 
 }
