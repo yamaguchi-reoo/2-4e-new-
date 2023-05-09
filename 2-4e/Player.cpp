@@ -19,10 +19,16 @@ Player::Player()
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
 
+	cnt = 0;
+
 	PlayerState = PLAYER_STATE::IDOL;
 
-	LoadDivGraph("Imgaes/147431.png", 10, 2, 5, 50,50,gh);
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 100, 125, gh)) == -1)
+	{
+		throw "Resource/Images/147431.png";
+	}
 
+	DrawTurnGraph(location.x, location.y, gh[0], TRUE);
 }
 
 Player::~Player()
@@ -39,10 +45,9 @@ void Player::UpDate()
 		Speed = WALK_SPEED;
 		if (AccelerationLeft <= 30) //左移動時の勢い
 		{
-			AccelerationLeft++;
-			if (xcount > 0)
-				xcount = 0;
-				--xcount;
+			if (AccelerationLeft++ == 15){
+				cnt++;
+			}
 		}
 		if (AccelerationRight > 0)  //右に動いていた時の勢いを殺す処理
 		{
@@ -59,9 +64,6 @@ void Player::UpDate()
 		if (AccelerationRight <= 30)	//右移動時の勢い
 		{
 			AccelerationRight++;
-			if (xcount < 0)
-				xcount = 0;
-			++xcount;
 		}
 		if (AccelerationLeft > 0)		//左に動いていた時の勢いを殺す処理
 		{
@@ -107,24 +109,10 @@ void Player::UpDate()
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
 	}
-	//カウント数から添字を求める。
-		ix = abs(xcount) % 30 / 10;
-
-		//xカウントがプラスなら右向きなので2行目の先頭添字番号を足す。
-		if (xcount > 0) {
-				ix += 3;
-				result = ix;
-		}
-		else if (xcount < 0) {
-				//マイナスなら左向きなので、4行目の先頭添字番号を足す。
-				ix += 9;
-				result = ix;
-		}																																																																																																																																																																																																																																																																																																																										
-
 }
 
 void Player::Draw() const
 {
-	DrawGraph(0,0, gh[result], TRUE);
+	DrawGraph(location.x, location.y, gh[cnt], TRUE);
 	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
 }

@@ -20,6 +20,8 @@ private:
 
 	int CheckSpawn[10];	//りんごが重ならないかチェックする用
 
+	int cnt;
+
 	struct AppleData {
 		int flg;			//使用フラグ
 		int type;			//タイプ

@@ -25,10 +25,8 @@ private:
 
 private:
 
-	int gh[10];
-	int xcount = 0;
-	int ix, iy;
-	int result = 0;
+	int gh[9];
+	int cnt;
 
 public:
 	//コンストラクタ
