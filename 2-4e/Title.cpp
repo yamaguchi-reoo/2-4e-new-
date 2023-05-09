@@ -24,12 +24,12 @@ Title::Title()
 	MenuFont = CreateFontToHandle("HeadLine", 80, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
 
 	//タイトル画像の読み込み
-	if ((mori_img = LoadGraph("Resource/Images/mori.png")) == -1)
+	if ((TitleImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
 	// カーソル画像の読み込み
-	if ((cursor_img = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((CursorImg = LoadGraph("Resource/Images/apple.png")) == -1)
 	{
 		throw "Resource/Images/apple.png";
 	}
@@ -123,14 +123,13 @@ AbstractScene* Title::Update()
 //画像描画
 void Title::Draw()const
 {
-	DrawGraph(0, 0, mori_img, FALSE);
-
 	// ステージの描画
 	SetFontSize(64);                             //サイズを64に変更
 	SetFontThickness(8);                         //太さを8に変更
 
 
 	//タイトルの描画
+	DrawGraph(0, 0, TitleImg, FALSE);
 	DrawStringToHandle(150, 100, "りんごおとし", 0xffffff, MenuFont);
 
 	//メニューの描画
@@ -141,5 +140,5 @@ void Title::Draw()const
 
 	//カーソルの描画
 	int select_y = 240 + Select * 80;
-	DrawGraph(650, select_y, cursor_img, TRUE);
+	DrawGraph(650, select_y, CursorImg, TRUE);
 }

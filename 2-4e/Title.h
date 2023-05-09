@@ -7,21 +7,16 @@ class Title :
 {
 private:
     int Select;         //選択数
-    int TitleImage;     //背景画像
     int OldKey;		//前の入力キー
     int NowKey;		//今の入力キー
     int KeyFlg;		//入力キー情報
 
     int MenuFont; //メニュー用のフォント
 
-    int TitleBGM;       //BGM
-    int MenuSE;         //選択SE
-    int StartSE;    //決定音SE
-    int RankingSE;
-    int HelpSE;
-    int EndSE;
-    int mori_img;
-    int cursor_img;
+    int TitleBGM;     //BGM
+    int MenuSE;       //選択SE
+    int TitleImg;     //タイトル画像
+    int CursorImg;    //カーソル画像
 
 public:
     //コンストラクタ
