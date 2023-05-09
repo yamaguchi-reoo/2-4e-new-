@@ -24,6 +24,7 @@ private:
 
     int ForestImg;
     int gAppleImg[2];
+    int MainBGM;
     int StartSE;
     int AppleSE;
     int ToxicAppleSE;

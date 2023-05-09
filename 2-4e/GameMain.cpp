@@ -31,6 +31,14 @@ GameMain::GameMain()
 	{
 		throw "Resource/Images/apple.png";
 	}
+	//BGMの読み込み
+	if ((MainBGM = LoadSoundMem("Resource/sounds/BGM/seiya.wav")) == -1)
+	{
+		throw "Resource/sounds/BGM/seiya.wav";
+	}
+	//SEの音量変更
+	ChangeVolumeSoundMem(70, MainBGM);
+
 	//サウンド読込
 	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) 
 	{
@@ -69,6 +77,13 @@ GameMain::~GameMain()
 
 AbstractScene* GameMain::Update()
 {
+	//画面切替時SE
+	if (CheckSoundMem(StartSE) == 0)
+	{
+		PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
+	}
+
+	//画面切替時SE
 	if (CheckSoundMem(StartSE) == 0) 
 	{
 		if (Soundflg++ == 1)
