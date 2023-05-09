@@ -31,10 +31,24 @@ GameMain::GameMain()
 	{
 		throw "Resource/Images/apple.png";
 	}
-	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) //決定ボタン
+	//サウンド読込
+	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) 
 	{
 		throw "Resource/sounds/SE/Start.wav";
 	}
+	if ((AppleSE = LoadSoundMem("Resource/sounds/SE/Apple.wav")) == -1) 
+	{
+		throw "Resource/sounds/SE/Apple.wav";
+	}
+	if ((ToxicAppleSE = LoadSoundMem("Resource/sounds/SE/ToxicApple.wav")) == -1) 
+	{
+		throw "Resource/sounds/SE/ToxicAplle.wav";
+	}
+	//SEの音量変更
+	ChangeVolumeSoundMem(50, StartSE);
+	ChangeVolumeSoundMem(60, AppleSE);
+	ChangeVolumeSoundMem(60, ToxicAppleSE);
+
 
 }
 
@@ -45,7 +59,11 @@ GameMain::~GameMain()
 	delete apple;
 	delete score;
 
+	//サウンド削除
 	DeleteSoundMem(StartSE);
+	DeleteSoundMem(AppleSE);
+	DeleteSoundMem(ToxicAppleSE);
+
 
 }
 
@@ -79,12 +97,12 @@ AbstractScene* GameMain::Update()
 				{
 					//プレイヤーの点滅処理を開始する
 					GetTxAppleTime = 1;
-					PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+					PlaySoundMem(ToxicAppleSE, DX_PLAYTYPE_BACK);
 
 				}
 				else
 				{
-					PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+					PlaySoundMem(AppleSE, DX_PLAYTYPE_BACK);
 				}
 				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする

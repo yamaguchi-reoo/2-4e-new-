@@ -25,6 +25,8 @@ private:
     int mori_img;
     int gAppleImg[2];
     int StartSE;
+    int AppleSE;
+    int ToxicAppleSE;
     int Soundflg;
 
     int GetTxAppleTime; //“ÅƒŠƒ“ƒS‚ðŽæ‚Á‚Ä‚©‚ç‚ÌŒo‰ßŽžŠÔ
