@@ -22,7 +22,10 @@ private:
 	int AccelerationRight;	//加速度（右）
 	int AccelerationLeft;	//加速度（左）
 
+
 private:
+
+	int image[10];
 
 
 public:
