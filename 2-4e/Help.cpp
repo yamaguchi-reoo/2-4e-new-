@@ -13,6 +13,11 @@ Help::Help() {
 	{
 		throw "Resource/Images/Gamepad.png";
 	}
+	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
+	{
+		throw "Resource/Images/mori.png";
+	}
+
 	//BGMÇÃì«Ç›çûÇ›
 	if ((HelpBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
 	{
@@ -74,5 +79,10 @@ AbstractScene* Help::Update()
 //--------------------------------
 void Help::Draw()const
 {
-	DrawGraph(0, 0, HelpImg, FALSE);
+	DrawGraph(0, 0, ForestImg, FALSE);
+	DrawGraph(120, 320, HelpImg, TRUE);
+
+	SetFontSize(100);
+	DrawString(450, 50,"ëÄçÏï˚ñ@" ,0x000000);
+
 }

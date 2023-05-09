@@ -5,6 +5,7 @@ class Help :
 {
 private:
     int HelpImg;     //ヘルプ画像
+    int ForestImg;
     int HelpBGM;      //タイトルと同じBGM
     int DecisionSE;    //ketteibotann
 
