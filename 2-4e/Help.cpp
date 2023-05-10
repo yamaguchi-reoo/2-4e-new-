@@ -8,6 +8,9 @@
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 //--------------------------------
 Help::Help() {
+
+	HelpFont = CreateFontToHandle("HG‘n‰pŠpÎß¯Ìß‘Ì", 90, 9, DX_FONTTYPE_NORMAL);
+	HelpFont1 = CreateFontToHandle("HG‘n‰pŠpÎß¯Ìß‘Ì", 40, 20, DX_FONTTYPE_NORMAL);
 	//ƒwƒ‹ƒv‰æ–Ê“Ç‚İ‚İ
 	if ((HelpImg = LoadGraph("Resource/Images/Gamepad.png")) == -1)
 	{
@@ -79,10 +82,12 @@ AbstractScene* Help::Update()
 //--------------------------------
 void Help::Draw()const
 {
-	DrawGraph(0, 0, ForestImg, FALSE);
-	DrawGraph(120, 320, HelpImg, TRUE);
+	DrawGraph(0, 0, ForestImg, TRUE);
+	DrawGraph(420, 200, HelpImg, TRUE);
 
-	SetFontSize(100);
-	DrawString(450, 50,"‘€ì•û–@" ,0x000000);
+	//DrawBox(700, 100, 1000, 620, 0xffffff, TRUE);
+
+	//SetFontSize(90);
+	DrawStringToHandle(450, 50,"‘€ìà–¾" ,0xffffff,HelpFont);
 
 }

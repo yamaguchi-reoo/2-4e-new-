@@ -9,6 +9,10 @@ private:
     int HelpBGM;      //タイトルと同じBGM
     int DecisionSE;    //ketteibotann
 
+    int HelpFont;
+    int HelpFont1;
+
+
 public:
     //コンストラクタ
     Help();
