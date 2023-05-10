@@ -25,9 +25,9 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431(‰ü).png", 9, 5, 2, 100, 148, gh)) == -1)
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, gh)) == -1)
 	{
-		throw "Resource/Images/147431(‰ü).png";
+		throw "Resource/Images/147431.png";
 	}
 
 	
@@ -136,6 +136,5 @@ void Player::UpDate()
 void Player::Draw() const
 {
 	DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
-
 	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
 }
