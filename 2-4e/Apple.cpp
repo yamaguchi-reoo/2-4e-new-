@@ -14,6 +14,8 @@ Apple::Apple()
 
 	for (int i = 0; i < 10; i++) {
 		CheckSpawn[i] = 0;
+		e_Apple[i].point = 0;
+		e_Apple[i].pointeffect = 0;
 	}
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -64,6 +66,15 @@ void Apple::UpDate()
 				AppleDelete(i);
 			}
 		}
+		//点数取得演出用
+		if (e_Apple[i].effectflg == TRUE)
+		{
+			if (--e_Apple[i].y <= e_Apple[i].pointeffect)
+			{
+				e_Apple[i].effectflg == FALSE;
+			}
+
+		}
 	}	
 	//25フレーム毎にりんごのスポーン処理
 	if (++frame >= 25)
@@ -83,6 +94,11 @@ void Apple::Draw() const
 				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
 				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), 
 					(g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
+		}
+		//点数取得演出
+		if (e_Apple[i].effectflg == TRUE)
+		{
+			DrawFormatString(e_Apple[i].x, e_Apple[i].y, 0x000000, "+%d", e_Apple[i].point);
 		}
 	}
 
@@ -232,6 +248,12 @@ int Apple::AppleGet(int i)
 	int p = g_Apple[i].point;
 	//取得したりんごの種類を判別
 	gGetApple[g_Apple[i].type]++;
+	//取得演出開始
+	e_Apple[i].effectflg = TRUE;
+	e_Apple[i].point = g_Apple[i].point;
+	e_Apple[i].pointeffect = g_Apple[i].y - 50;
+	e_Apple[i].x = g_Apple[i].x;
+	e_Apple[i].y = g_Apple[i].y;
 
 	if (g_Apple[i].type == 3) {
 		//毒リンゴを取得したときの処理
