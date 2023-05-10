@@ -152,6 +152,7 @@ AbstractScene* GameMain::Update()
 	{
 		PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
 	}
+
 	//画面切替時SE
 	if (CheckSoundMem(StartSE) == 0)
 	{
@@ -176,7 +177,7 @@ void GameMain::Draw()const
 
 	//スコアの描画
 	score->Draw();
-	//仮のスコア描画	
+	//仮のスコア描画
 	SetFontSize(30);
 	DrawString(1105, 450, "得点", 0x000000);
 	DrawFormatString(1095, 500, 0x000000, "%.5d",TotalScore);
