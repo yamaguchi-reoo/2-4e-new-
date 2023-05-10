@@ -34,6 +34,8 @@ private:
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
+    
+    static int getScore;
     //コンストラクタ
     GameMain();
 

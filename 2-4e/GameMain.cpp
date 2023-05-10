@@ -4,6 +4,7 @@
 #include "Score.h"
 #include "PadInput.h"
 
+int GameMain::getScore = 0;
 GameMain::GameMain()
 {
 	
@@ -11,7 +12,7 @@ GameMain::GameMain()
 	TotalScore = 0;
 	PauseFlg = FALSE;
 	PauseFlash = 0;
-	Time = 3599;
+	Time = 599;
 	GetTxAppleTime = 0;
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
@@ -65,13 +66,11 @@ GameMain::~GameMain()
 	//オブジェクトの削除
 	delete player;
 	delete apple;
-	delete score;
+	
 
 	//サウンド削除
-	DeleteSoundMem(MainBGM);
 	DeleteSoundMem(StartSE);
-	DeleteSoundMem(AppleSE);
-	DeleteSoundMem(ToxicAppleSE);
+
 
 
 }
@@ -140,8 +139,8 @@ AbstractScene* GameMain::Update()
 	}
 	if (Time <= 0)
 	{
-		//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
-		Time = 600;	//リザルト移行処理が出来たら消していい
+		return new Result();//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
+		
 	}
 	if (Time <= 600) {
 		TimerColor = GetColor(255-Time/3,0,0);
@@ -160,6 +159,7 @@ AbstractScene* GameMain::Update()
 			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
 		}
 	}
+	GameMain::getScore = TotalScore;
 	return this;
 	
 }
@@ -216,4 +216,5 @@ void GameMain::Draw()const
 		SetFontSize(24);
 	}
 }
+
 
