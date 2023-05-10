@@ -25,12 +25,12 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 80, 130, gh)) == -1)
+	if ((LoadDivGraph("Resource/Images/147431(‰ü).png", 9, 5, 2, 100, 148, gh)) == -1)
 	{
-		throw "Resource/Images/147431.png";
+		throw "Resource/Images/147431(‰ü).png";
 	}
 
-	DrawTurnGraph(location.x, location.y, gh[0], TRUE);
+	
 }
 
 Player::~Player()
@@ -111,18 +111,31 @@ void Player::UpDate()
 	}
 
 	if (AccelerationLeft >= 15) {
-		if (++cnt_wait >= 5) {
+		if (++cnt_wait >= 6) {
 			cnt++;
 			cnt_wait = 0;
-			if (cnt >= 10) {
+			if (cnt >= 9) {
 				cnt = 0;
 			}
 		}
+	}
+	else if (AccelerationRight >= 15) {
+		{
+			if (++cnt_wait >= 6) {
+				cnt++;
+				cnt_wait = 0;
+				if (cnt >= 9) {
+					cnt = 0;
+				}
+			}
+		}
+
 	}
 }
 
 void Player::Draw() const
 {
-	DrawGraph(location.x, location.y, gh[cnt], TRUE);
+	DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+
 	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
 }
