@@ -66,12 +66,17 @@ void End::Draw()const {
 
 	if (BackTitle == TRUE) {
 		SetFontSize(20);
-		DrawString(10, 700, "Bボタンで戻る", 0xff0000);
+		DrawBox(1130,700,1280,750,0xffffff,TRUE);
+		DrawString(1135, 700, "Bボタンで戻る", 0xff0000);
+		DrawBox(0, 700, 195, 750, 0xffffff, TRUE);
+		DrawString(0, 700, "ゲーム終了まで  秒", 0xff0000);
+		DrawFormatString(147, 701, 0x000000, "%.2d", WaitTime/60+1);
 	}
-	for (int i = 0; i < 1280; i++)
+	/*for (int i = 0; i < 1280; i++)
 	{
 		if (i % 128==0)DrawLine(i, 0, i, 780, 0x000000, TRUE);
-	}
+	}*/
+
 	SetFontSize(70);
 	DrawString(500, 780 - MoveString * 2, "SE & BGM", 0x0000ff);
 	SetFontSize(50);
