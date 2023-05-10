@@ -20,10 +20,12 @@ Player::Player()
 	AccelerationLeft = 0;
 
 	cnt = 0;
+	cnt_wait = 0;
+	
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 100, 125, gh)) == -1)
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 80, 130, gh)) == -1)
 	{
 		throw "Resource/Images/147431.png";
 	}
@@ -45,9 +47,7 @@ void Player::UpDate()
 		Speed = WALK_SPEED;
 		if (AccelerationLeft <= 30) //¶ˆÚ“®Žž‚Ì¨‚¢
 		{
-			if (AccelerationLeft++ == 15){
-				cnt++;
-			}
+			AccelerationLeft++;
 		}
 		if (AccelerationRight > 0)  //‰E‚É“®‚¢‚Ä‚¢‚½Žž‚Ì¨‚¢‚ðŽE‚·ˆ—
 		{
@@ -108,6 +108,16 @@ void Player::UpDate()
 		PlayerState = PLAYER_STATE::IDOL;
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
+	}
+
+	if (AccelerationLeft >= 15) {
+		if (++cnt_wait >= 5) {
+			cnt++;
+			cnt_wait = 0;
+			if (cnt >= 10) {
+				cnt = 0;
+			}
+		}
 	}
 }
 
