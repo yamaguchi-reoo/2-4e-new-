@@ -9,7 +9,14 @@
 class GameMain :
     public AbstractScene
 {
-private:
+private:	
+    int a_Count;	//同時にスポーンしているりんごの数
+    int frame;	    //フレーム
+    int Count;	    //一度にスポーンしたリンゴの計測
+
+    int gGetApple[4];	//カウント用変数
+    int CheckSpawn[MAX_APPLE];	//りんごが重ならないかチェックする用
+
     int TotalScore;         //合計点
     bool PauseFlg;          //一時停止中か判断
     int PauseFlash;         //ポーズ中の文字点滅用
@@ -17,7 +24,7 @@ private:
     int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー
-    Apple* apple;   //リンゴ 
+    Apple* apple[10];   //リンゴ 
     FpsController* fps;
     Score* score;
 

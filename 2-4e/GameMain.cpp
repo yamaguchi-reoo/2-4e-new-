@@ -20,7 +20,7 @@ GameMain::GameMain()
 
 	//オブジェクト化
 	player = new Player();
-	apple = new Apple();
+	apple[MAX_APPLE] = new Apple();
 	score = new Score();
 
 	//画像の読み込み
@@ -92,8 +92,9 @@ AbstractScene* GameMain::Update()
 	if (PauseFlg == FALSE) {
 		//処理の更新
 		player->UpDate();
-		apple->UpDate();
-
+		for (int i = 0; i < 10; i++) {
+			apple[i]->UpDate();
+		}
 		//BGM
 		if (CheckSoundMem(MainBGM) == 0)
 		{
@@ -102,12 +103,12 @@ AbstractScene* GameMain::Update()
 
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
-			apple->SetLocation(i);
-			if (apple->HitBox(player) == true && GetPsAppleTime == 0)
+			if (apple[i]->HitBox(player) == true && GetPsAppleTime == 0)
 			{
 				//もし取得したりんごが毒なら、
-				if (apple->AppleTypeGet(i) == 3)
+				if (apple[i]->AppleGet() == 3)
 				{
+					TotalScore -= 750;
 					//プレイヤーの点滅処理を開始する
 					GetPsAppleTime = 1;
 					PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
@@ -115,9 +116,9 @@ AbstractScene* GameMain::Update()
 				}
 				else
 				{
+					TotalScore += 100;
 					PlaySoundMem(AppleSE, DX_PLAYTYPE_BACK);
 				}
-				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする
 				if (TotalScore < 0)
 				{
@@ -141,6 +142,7 @@ AbstractScene* GameMain::Update()
 		Time--;
 	}
 
+	//一時停止中
 	if (PauseFlg == TRUE)
 	{
 		PauseFlash++;
@@ -149,6 +151,7 @@ AbstractScene* GameMain::Update()
 			PauseFlash = 0;
 		}
 	}
+
 	if (Time <= 0)
 	{
 		return new Result();//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
@@ -181,6 +184,11 @@ void GameMain::Draw()const
 		player->Draw();
 	}
 
+	//取得したりんごの個数表示
+	for (int i = 0; i < 3; i++) {
+		DrawFormatString(1067 + i * 60, 320, 0x000000, "%.2d", gGetApple[i]);
+	}
+
 	//スコアの描画
 	score->Draw();
 	//仮のスコア描画
@@ -203,7 +211,9 @@ void GameMain::Draw()const
 	SetFontSize(24);
 
 	//リンゴの描画
-	apple->Draw();
+	for (int i = 0; i < 10; i++) {
+		apple[i]->Draw();
+	}
 
 	//一時停止中の描画
 	if (PauseFlg == TRUE)
