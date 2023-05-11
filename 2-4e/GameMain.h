@@ -7,15 +7,21 @@
 #include "Score.h"
 
 class GameMain :
-    public AbstractScene
+    public AbstractScene,Apple
 {
 private:	
     int a_Count;	//同時にスポーンしているりんごの数
     int frame;	    //フレーム
     int Count;	    //一度にスポーンしたリンゴの計測
 
-    int gGetApple[4];	//カウント用変数
-    int CheckSpawn[MAX_APPLE];	//りんごが重ならないかチェックする用
+    int gGetApple[4];	//どのりんごを何個取ったか集計用
+    int gGetAppleType;	//どのりんごを取ったか格納用
+
+    bool CheckSpawn[7];	//各レーンがりんごをスポーン可能か判断する用
+    bool SpawnFlg;	    //スポーンできる場所があるかチェック用
+
+    int SpawnPos;       //りんごスポーン用
+    int SpawnApple;     //スポーンしていないりんごのオブジェクト探索用
 
     int TotalScore;         //合計点
     bool PauseFlg;          //一時停止中か判断
@@ -24,12 +30,12 @@ private:
     int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー
-    Apple* apple[10];   //リンゴ 
+    Apple* apple[MAX_APPLE];   //リンゴ 
     FpsController* fps;
     Score* score;
 
     int ForestImg;
-    int gAppleImg[2];
+    int gAppleImg[4];	//画像用変数
     int MainBGM;
     int StartSE;
     int AppleSE;

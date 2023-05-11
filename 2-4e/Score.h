@@ -4,7 +4,7 @@ class Score
 {
 private:
 	int gScore;
-	int gAppleImg[2];
+	int gAppleImg[4];
 
 public:
 	Score();

@@ -14,7 +14,7 @@ class Apple :public BoxCollider
 private:
 	int gAppleImg[4];	//画像用変数
 
-		int flg;			//使用フラグ
+		bool flg;			//使用フラグ
 		int type;			//タイプ
 		int img;			//画像
 		float speed;		//移動速度
@@ -38,14 +38,31 @@ public:
 	//スポーン処理
 	void Spawn();
 
-	//スポーンするりんごの種類の抽選
+	//スポーンするりんごの種類抽選
 	int Rand();
 
-	//りんごの削除
-	void AppleDelete();
+	//スポーンするりんごのX座標設定
+	void SetLocation(int x);
 
-	//りんごの取得
-	int AppleGet();
+	//りんごが現在スポーン中か取得
+	int GetAppleFlg();
+
+	//りんごの種類取得
+	int GetAppleType();
+
+	//りんごのX座標取得
+	int GetAppleLocationX();
+
+	//りんごのY座標取得
+	int GetAppleLocationY();
+
+	//りんごの点数取得
+	int GetApplePoint();
+
+	//りんごがスポーンしてからの経過時間取得
+	int GetAppleTime();
+	//りんごリセット
+	void AppleReset();
 };
 
 

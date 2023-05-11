@@ -54,13 +54,7 @@ void Apple::UpDate()
 		location.y += speed;
 
 		//りんごが画面内にいる時間を計る
-		time += 1;
-
-		//Yが1000以上なら削除処理
-		if (location.y >= 1000)
-		{
-			AppleDelete();
-		}
+		time++;
 	}	
 }
 //描画
@@ -86,7 +80,6 @@ void Apple::Spawn()
 				flg = TRUE;
 				type = 0;						//タイプ
 				img = gAppleImg[0];				//画像
-				location.x = GetRand(6)*150;	//x座標
 				location.y = 0;					//y座標
 				erea.rate = 0.1;					//大きさ（当たり判定用）
 				speed = 1;						//移動速度
@@ -98,7 +91,6 @@ void Apple::Spawn()
 				flg = TRUE;
 				type = 1;						//タイプ
 				img = gAppleImg[1];				//画像
-				location.x = GetRand(6) * 150;	//x座標
 				location.y = 0;					//y座標
 				erea.rate = 0.1;					//大きさ（当たり判定用）
 				speed = 2;						//移動速度
@@ -110,7 +102,6 @@ void Apple::Spawn()
 				flg = TRUE;
 				type = 2;						//タイプ
 				img = gAppleImg[2];				//画像
-				location.x = GetRand(6) * 150;	//x座標
 				location.y = 0;					//y座標
 				erea.rate = 0.1;					//大きさ（当たり判定用）
 				speed = 3.5;						//移動速度
@@ -121,8 +112,7 @@ void Apple::Spawn()
 			case 3:
 				flg = TRUE;
 				type = 3;						//タイプ
-				img = gAppleImg[0];				//画像
-				location.x = GetRand(6) * 150;	//x座標
+				img = gAppleImg[3];				//画像
 				location.y = 0;					//y座標
 				erea.rate = -0.1;					//大きさ（当たり判定用）
 				speed = 0.5;						//移動速度
@@ -158,28 +148,51 @@ int Apple::Rand()
 		return 3;
 	}
 }
-//りんごの削除
-void Apple::AppleDelete() 
+//りんごのY座標設定
+void Apple::SetLocation(int x)
 {
-	//取得されたりんごをリセット
-	flg = FALSE;
-	type = 0;			//タイプ
-	img = 0;			//画像
-	location.x = 0;
-	location.y = 0;			//座標
-	erea.rate = 0;			//大きさ（当たり判定用）
-	speed = 0;			//移動速度
-	point = 0;			//スコア加算ポイント
-	time = 0;			//りんごが出現してからの経過時間
-	span = 0;			//各りんごが被らないようにするための待ち時間
+	location.x = x;
 }
-//りんごの取得
-int Apple::AppleGet()
+
+//りんごが現在スポーン中か取得
+int Apple::GetAppleFlg()
 {
-	//戻り値（取得する得点数）を避難
-	int t = type;
-	
-	//取得されたりんごをリセット
+	return flg;
+}
+
+//りんごの種類取得
+int Apple::GetAppleType()
+{
+	return type;
+}
+
+//りんごのX座標取得
+int Apple::GetAppleLocationX()
+{
+	return location.x;
+}
+
+//りんごのY座標取得
+int Apple::GetAppleLocationY()
+{
+	return location.y;
+}
+
+//りんごの点数取得
+int Apple::GetApplePoint()
+{
+	return point;
+}
+
+//りんごがスポーンしてからの経過時間取得
+int Apple::GetAppleTime()
+{
+	return time;
+}
+
+//りんごリセット
+void Apple::AppleReset()
+{
 	flg = FALSE;
 	type = 0;			//タイプ
 	img = 0;			//画像
@@ -190,6 +203,4 @@ int Apple::AppleGet()
 	point = 0;			//スコア加算ポイント
 	time = 0;			//りんごが出現してからの経過時間
 	span = 0;			//各りんごが被らないようにするための待ち時間
-
-	return t;
 }
