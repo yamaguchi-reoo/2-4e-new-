@@ -48,12 +48,11 @@ public:
 	struct AppleData		g_Apple[MAX_APPLE] = { FALSE };
 	struct GetAppleEffect	e_Apple[MAX_APPLE] = { FALSE };
 private:
-	//imgに仮で色データをいれている
-	struct AppleData	g_AppleRd = { TRUE,0,	    0,10000 ,0,  0.1, 1.0, 100,0, 90};
-	struct AppleData	g_AppleBr = { TRUE,1,0x0000ff,10000 ,0,  0.1, 2.0, 200,0, 45};
-	struct AppleData	g_AppleGr = { TRUE,2,0xffff00,10000 ,0,  0.1, 3.5, 500,0, 30};
-	struct AppleData	g_ApplePs = { TRUE,3,0xff00ff,10000 ,0, -0.1, 0.5,-750,0,180};
-	struct AppleData	g_AppleNl = {FALSE,4,	    0,10000 ,0,    0,   0,   0,0,  0};
+	struct AppleData	g_AppleRd = { TRUE,0,0,10000 ,0,  0.1, 1.0, 100,0, 90};
+	struct AppleData	g_AppleBr = { TRUE,1,0,10000 ,0,  0.1, 2.0, 200,0, 45};
+	struct AppleData	g_AppleGr = { TRUE,2,0,10000 ,0,  0.1, 3.5, 500,0, 30};
+	struct AppleData	g_ApplePs = { TRUE,3,0,10000 ,0, -0.1, 0.5,-750,0,180};
+	struct AppleData	g_AppleNl = {FALSE,4,0,10000 ,0,    0,   0,   0,0,  0};
 
 public:
 	//コンストラクタ
