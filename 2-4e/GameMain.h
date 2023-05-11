@@ -22,14 +22,20 @@ private:
     FpsController* fps;
     Score* score;
 
-    int mori_img;
+    int ForestImg;
     int gAppleImg[2];
+    int MainBGM;
     int StartSE;
+    int AppleSE;
+    int ToxicAppleSE;
+    int Soundflg;
 
     int GetTxAppleTime; //毒リンゴを取ってからの経過時間
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
+    
+    static int getScore;
     //コンストラクタ
     GameMain();
 

@@ -18,10 +18,14 @@ private:
 	int gAppleImg[4];	//画像用変数
 	int gGetApple[4];	//カウント用変数
 
-	int CheckSpawn[10];	//りんごが重ならないかチェックする用
+	int CheckSpawn[MAX_APPLE];	//りんごが重ならないかチェックする用
 
-	int cnt;
-
+	struct GetAppleEffect {
+		bool effectflg;		   //演出フラグ
+		int pointeffect;        //演出用
+		int point;              //点数表示用
+		float x, y;			//座標
+	};
 	struct AppleData {
 		int flg;			//使用フラグ
 		int type;			//タイプ
@@ -35,7 +39,8 @@ private:
 	};
 public:
 	//ランキングデータの変数宣言
-	struct AppleData	g_Apple[MAX_APPLE] = { FALSE };
+	struct AppleData		g_Apple[MAX_APPLE] = { FALSE };
+	struct GetAppleEffect	e_Apple[MAX_APPLE] = { FALSE };
 private:
 	//imgに仮で色データをいれている
 	struct AppleData	g_AppleRd = { TRUE,0,	    0,10000 ,0,  0.1, 1.0, 100,0, 90};
