@@ -110,7 +110,8 @@ void Player::UpDate()
 		AccelerationLeft = 0;
 	}
 
-	if (AccelerationLeft >= 15) {
+	//ˆÚ“®‚·‚éÛ‚É‰æ‘œ‚Ìcnt‚ð‘‚â‚·
+	if (AccelerationLeft >= 5) {
 		if (++cnt_wait >= 6) {
 			cnt++;
 			cnt_wait = 0;
@@ -119,7 +120,7 @@ void Player::UpDate()
 			}
 		}
 	}
-	else if (AccelerationRight >= 15) {
+	else if (AccelerationRight >= 5) {
 		{
 			if (++cnt_wait >= 6) {
 				cnt++;
@@ -135,6 +136,15 @@ void Player::UpDate()
 
 void Player::Draw() const
 {
-	DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
-	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
+	//DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+
+	if (AccelerationLeft) {
+		DrawGraph(location.x, location.y, gh[cnt], TRUE);
+	}
+	else if(AccelerationRight) {
+		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+	}
+	else {
+		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+	}
 }
