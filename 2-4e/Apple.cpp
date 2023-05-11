@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #define _USE_MATH_DEFINES
-#include<math.h>
+#include <math.h>
 #include "Apple.h"
 #include "define.h"
 #include "GameMain.h"
@@ -14,8 +14,6 @@ Apple::Apple()
 
 	for (int i = 0; i < 10; i++) {
 		CheckSpawn[i] = 0;
-		e_Apple[i].point = 0;
-		e_Apple[i].pointeffect = 0;
 	}
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -67,13 +65,22 @@ void Apple::UpDate()
 			}
 		}
 		//点数取得演出用
-		if (e_Apple[i].effectflg == TRUE)
+		if (e_Apple[i].flg == TRUE)
 		{
-			if (--e_Apple[i].y <= e_Apple[i].pointeffect)
+			if (e_Apple[i].type != 3) 
 			{
-				e_Apple[i].effectflg == FALSE;
+				if (--e_Apple[i].y <= e_Apple[i].pointeffect)
+				{
+					e_Apple[i].flg = FALSE;
+				}
 			}
-
+			else
+			{
+				if (++e_Apple[i].y >= e_Apple[i].pointeffect)
+				{
+					e_Apple[i].flg = FALSE;
+				}
+			}
 		}
 	}	
 	//25フレーム毎にりんごのスポーン処理
@@ -90,15 +97,23 @@ void Apple::Draw() const
 	{
 		if (g_Apple[i].flg == TRUE)
 		{
-			//りんごの画像がアップされたらDrawGraphの方に変更
-				DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
-				DrawBox(g_Apple[i].x - (APPLE_SIZE * 0.1), g_Apple[i].y - (APPLE_SIZE * 0.1), 
-					(g_Apple[i].x - (APPLE_SIZE * 0.1)) + APPLE_SIZE, (g_Apple[i].y - (APPLE_SIZE * 0.1)) + APPLE_SIZE, 0x000000, FALSE);
+			DrawGraph(g_Apple[i].x, g_Apple[i].y, g_Apple[i].img, TRUE);
+
+			//当たり判定表示用
+			DrawBox(g_Apple[i].x - (APPLE_SIZE * g_Apple[i].rate), g_Apple[i].y - (APPLE_SIZE * g_Apple[i].rate),
+					g_Apple[i].x + (APPLE_SIZE * g_Apple[i].rate) + APPLE_SIZE, g_Apple[i].y + (APPLE_SIZE * g_Apple[i].rate) + APPLE_SIZE, 0x000000, FALSE);
 		}
 		//点数取得演出
-		if (e_Apple[i].effectflg == TRUE)
+		if (e_Apple[i].flg == TRUE)
 		{
-			DrawFormatString(e_Apple[i].x, e_Apple[i].y, 0x000000, "+%d", e_Apple[i].point);
+			if (e_Apple[i].type != 3) 
+			{
+				DrawFormatString(e_Apple[i].x, e_Apple[i].y, e_Apple[i].color, "+%d", e_Apple[i].point);
+			}
+			else
+			{
+				DrawFormatString(e_Apple[i].x + GetRand(10), e_Apple[i].y + GetRand(10), e_Apple[i].color, "%d", e_Apple[i].point);
+			}
 		}
 	}
 
@@ -146,7 +161,7 @@ void Apple::Spawn()
 					Count++;
 					break;
 				case 3:
-					g_Apple[i] = g_AppleTx;
+					g_Apple[i] = g_ApplePs;
 					g_Apple[i].img = gAppleImg[3];
 					g_Apple[i].x = Spawn;
 					Count++;
@@ -248,21 +263,36 @@ int Apple::AppleGet(int i)
 	int p = g_Apple[i].point;
 	//取得したりんごの種類を判別
 	gGetApple[g_Apple[i].type]++;
-	//取得演出開始
-	e_Apple[i].effectflg = TRUE;
+	//りんご取得演出開始準備
+	e_Apple[i].flg = TRUE;
+	e_Apple[i].type = g_Apple[i].type;
 	e_Apple[i].point = g_Apple[i].point;
-	e_Apple[i].pointeffect = g_Apple[i].y - 50;
+	if (g_Apple[i].type != 3) 
+	{
+		e_Apple[i].pointeffect = g_Apple[i].y - 50;
+	}
+	else 
+	{
+		e_Apple[i].pointeffect = g_Apple[i].y + 50;
+	}
+	switch (g_Apple[i].type)
+	{
+	case 0:
+		e_Apple[i].color = GetColor(APPLE_RED);
+		break;
+	case 1:
+		e_Apple[i].color = GetColor(APPLE_BLUE);
+		break;
+	case 2:
+		e_Apple[i].color = GetColor(APPLE_GOLD);
+		break;
+	case 3:
+		e_Apple[i].color = GetColor(APPLE_POISON);
+		break;
+	}
 	e_Apple[i].x = g_Apple[i].x;
 	e_Apple[i].y = g_Apple[i].y;
 
-	if (g_Apple[i].type == 3) {
-		//毒リンゴを取得したときの処理
-	
-	}
-	else
-	{
-		//毒リンゴ以外のりんごを取った時の処理
-	}
 	//取得されたりんごをリセット
 	g_Apple[i] = g_AppleNl;
 	//場に存在しているりんごの個数を減少
