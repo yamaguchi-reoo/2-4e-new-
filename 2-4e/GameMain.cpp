@@ -15,7 +15,7 @@ GameMain::GameMain()
 	GetTxAppleTime = 0;
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
-	Soundflg = 0;
+	SEflg = 0;
 
 	//オブジェクト化
 	player = new Player();
@@ -57,6 +57,11 @@ GameMain::GameMain()
 	ChangeVolumeSoundMem(100, AppleSE);
 	ChangeVolumeSoundMem(100, ToxicAppleSE);
 
+	//BGM
+	//if (CheckSoundMem(MainBGM) == 0)
+	//{
+		//PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
+	//}
 
 }
 
@@ -73,7 +78,6 @@ GameMain::~GameMain()
 	DeleteSoundMem(AppleSE);
 	DeleteSoundMem(ToxicAppleSE);
 
-
 }
 
 AbstractScene* GameMain::Update()
@@ -82,12 +86,19 @@ AbstractScene* GameMain::Update()
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START))
 	{
 		PauseFlg = !PauseFlg;
+		StopSoundMem(MainBGM);
 	}
 	//ポーズ中でないなら
 	if (PauseFlg == FALSE) {
 		//処理の更新
 		player->UpDate();
 		apple->UpDate();
+
+		//BGM
+		if (CheckSoundMem(MainBGM) == 0)
+		{
+			PlaySoundMem(MainBGM, DX_PLAYTYPE_LOOP,FALSE);
+		}
 
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
@@ -147,19 +158,15 @@ AbstractScene* GameMain::Update()
 		TimerColor = GetColor(255-Time/3,0,0);
 	}
 
-	//BGM
-	if (CheckSoundMem(MainBGM) == 0)
-	{
-		PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
-	}
 	//画面切替時SE
 	if (CheckSoundMem(StartSE) == 0)
 	{
-		if (Soundflg++ == 1)
+		if (SEflg++ == 1)
 		{
 			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
 		}
 	}
+
 	return this;
 	
 }

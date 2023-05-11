@@ -7,18 +7,13 @@
 //--------------------------------
 // コンストラクタ
 //--------------------------------
-Help::Help() {
-
-	HelpFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 90, 9, DX_FONTTYPE_NORMAL);
-	HelpFont1 = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 40, 20, DX_FONTTYPE_NORMAL);
+Help::Help() 
+{
+	SEflg = 0;
 	//ヘルプ画面読み込み
-	if ((HelpImg = LoadGraph("Resource/Images/Gamepad.png")) == -1)
+	if ((HelpImg = LoadGraph("Resource/Images/Help.png")) == -1)
 	{
-		throw "Resource/Images/Gamepad.png";
-	}
-	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
-	{
-		throw "Resource/Images/mori.png";
+		throw "Resource/Images/Help.png";
 	}
 
 	//BGMの読み込み
@@ -30,12 +25,12 @@ Help::Help() {
 	ChangeVolumeSoundMem(70, HelpBGM);
 
 	//SEの読み込み
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision.wav")) == -1)
+	if ((HelpSE = LoadSoundMem("Resource/sounds/SE/Help.wav")) == -1)
 	{
-		throw "Resource/sounds/SE/Decision.wav";
+		throw "Resource/sounds/SE/Help.wav";
 	}
 	//SEの音量変更
-	ChangeVolumeSoundMem(125, DecisionSE);
+	ChangeVolumeSoundMem(125, HelpSE);
 
 	//BGMの再生
 	if (CheckSoundMem(HelpBGM) == 0) {
@@ -48,9 +43,10 @@ Help::Help() {
 //--------------------------------
 Help::~Help()
 {
+
 	//サウンドの削除
 	DeleteSoundMem(HelpBGM);
-	DeleteSoundMem(DecisionSE);
+	DeleteSoundMem(HelpSE);
 }
 
 //--------------------------------
@@ -63,16 +59,21 @@ AbstractScene* Help::Update()
 	//Bボタンでタイトルへ戻る
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B))
 	{
-		StopSoundMem(HelpBGM);
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new Title();
 	}
 	//Aボタンでゲームを始める
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		StopSoundMem(HelpBGM);
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new GameMain();
+	}
+
+	//画面切替時SE
+	if (CheckSoundMem(HelpSE) == 0)
+	{
+		if (SEflg++ == 1)
+		{
+			PlaySoundMem(HelpSE, DX_PLAYTYPE_BACK);
+		}
 	}
 	return this;
 }
@@ -82,12 +83,6 @@ AbstractScene* Help::Update()
 //--------------------------------
 void Help::Draw()const
 {
-	DrawGraph(0, 0, ForestImg, TRUE);
-	DrawGraph(420, 200, HelpImg, TRUE);
-
-	//DrawBox(700, 100, 1000, 620, 0xffffff, TRUE);
-
-	//SetFontSize(90);
-	DrawStringToHandle(450, 50,"操作説明" ,0xffffff,HelpFont);
+	DrawGraph(0, 0, HelpImg, TRUE);
 
 }

@@ -5,13 +5,9 @@ class Help :
 {
 private:
     int HelpImg;     //ヘルプ画像
-    int ForestImg;
     int HelpBGM;      //タイトルと同じBGM
-    int DecisionSE;    //ketteibotann
-
-    int HelpFont;
-    int HelpFont1;
-
+    int HelpSE;    //ketteibotann
+    int SEflg;
 
 public:
     //コンストラクタ

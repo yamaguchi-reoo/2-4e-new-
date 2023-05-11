@@ -47,7 +47,7 @@ Title::Title()
 		throw "Resource/sounds/SE/select01.wav";
 	}
 	//SEÇÃâπó ïœçX
-	ChangeVolumeSoundMem(100, MenuSE);
+	ChangeVolumeSoundMem(75, MenuSE);
 
 	//BGM
 	if (CheckSoundMem(TitleBGM) == 0)

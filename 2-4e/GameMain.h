@@ -28,7 +28,7 @@ private:
     int StartSE;
     int AppleSE;
     int ToxicAppleSE;
-    int Soundflg;
+    int SEflg;
 
     int GetTxAppleTime; //毒リンゴを取ってからの経過時間
     bool PlayerDispFlg; //点滅用フラグ
