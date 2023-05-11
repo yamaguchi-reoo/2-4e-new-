@@ -12,8 +12,8 @@ GameMain::GameMain()
 	TotalScore = 0;
 	PauseFlg = FALSE;
 	PauseFlash = 0;
-	Time = 599;
-	GetTxAppleTime = 0;
+	Time = 3599;
+	GetPsAppleTime = 0;
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
 	Soundflg = 0;
@@ -49,14 +49,14 @@ GameMain::GameMain()
 	{
 		throw "Resource/sounds/SE/Apple.wav";
 	}
-	if ((ToxicAppleSE = LoadSoundMem("Resource/sounds/SE/ToxicApple.wav")) == -1) 
+	if ((PoisonAppleSE = LoadSoundMem("Resource/sounds/SE/ToxicApple.wav")) == -1) 
 	{
 		throw "Resource/sounds/SE/ToxicAplle.wav";
 	}
 	//SEの音量変更
 	ChangeVolumeSoundMem(70, StartSE);
 	ChangeVolumeSoundMem(100, AppleSE);
-	ChangeVolumeSoundMem(100, ToxicAppleSE);
+	ChangeVolumeSoundMem(100, PoisonAppleSE);
 
 
 }
@@ -70,7 +70,8 @@ GameMain::~GameMain()
 
 	//サウンド削除
 	DeleteSoundMem(StartSE);
-
+	DeleteSoundMem(AppleSE);
+	DeleteSoundMem(PoisonAppleSE);
 
 
 }
@@ -91,14 +92,14 @@ AbstractScene* GameMain::Update()
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
 			apple->SetLocation(i);
-			if (apple->HitBox(player) == true && GetTxAppleTime == 0)
+			if (apple->HitBox(player) == true && GetPsAppleTime == 0)
 			{
 				//もし取得したりんごが毒なら、
 				if (apple->AppleTypeGet(i) == 3)
 				{
 					//プレイヤーの点滅処理を開始する
-					GetTxAppleTime = 1;
-					PlaySoundMem(ToxicAppleSE, DX_PLAYTYPE_BACK);
+					GetPsAppleTime = 1;
+					PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
 
 				}
 				else
@@ -114,15 +115,15 @@ AbstractScene* GameMain::Update()
 			}
 		}
 		//点滅中の処理
-		if (GetTxAppleTime > 0)
+		if (GetPsAppleTime > 0)
 		{
-			if (++GetTxAppleTime % 20 == 0)
+			if (++GetPsAppleTime % 20 == 0)
 			{
 				PlayerDispFlg = !PlayerDispFlg;
 			}
-			if (GetTxAppleTime >= 120)
+			if (GetPsAppleTime >= 120)
 			{
-				GetTxAppleTime = 0;
+				GetPsAppleTime = 0;
 			}
 		}
 		//制限時間減少
