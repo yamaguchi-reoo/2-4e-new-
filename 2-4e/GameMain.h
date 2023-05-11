@@ -27,10 +27,10 @@ private:
     int MainBGM;
     int StartSE;
     int AppleSE;
-    int ToxicAppleSE;
+    int PoisonAppleSE;
     int Soundflg;
 
-    int GetTxAppleTime; //毒リンゴを取ってからの経過時間
+    int GetPsAppleTime; //毒リンゴを取ってからの経過時間
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
