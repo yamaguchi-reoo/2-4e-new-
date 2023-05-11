@@ -163,6 +163,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ranking.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Title.cpp" />

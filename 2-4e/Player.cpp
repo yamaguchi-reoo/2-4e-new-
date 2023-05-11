@@ -19,10 +19,18 @@ Player::Player()
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
 
+	cnt = 0;
+	cnt_wait = 0;
+	
+
 	PlayerState = PLAYER_STATE::IDOL;
 
-	LoadDivGraph("imgaes/147431.png", 10, 2, 5, 50,50,image);
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, gh)) == -1)
+	{
+		throw "Resource/Images/147431.png";
+	}
 
+	
 }
 
 Player::~Player()
@@ -101,10 +109,42 @@ void Player::UpDate()
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
 	}
+
+	//ˆÚ“®‚·‚éÛ‚É‰æ‘œ‚Ìcnt‚ð‘‚â‚·
+	if (AccelerationLeft >= 5) {
+		if (++cnt_wait >= 6) {
+			cnt++;
+			cnt_wait = 0;
+			if (cnt >= 9) {
+				cnt = 0;
+			}
+		}
+	}
+	else if (AccelerationRight >= 5) {
+		{
+			if (++cnt_wait >= 6) {
+				cnt++;
+				cnt_wait = 0;
+				if (cnt >= 9) {
+					cnt = 0;
+				}
+			}
+		}
+
+	}
 }
 
 void Player::Draw() const
 {
-	DrawBox(location.x, location.y, location.x + PLAYER_WIDTH, location.y + PLAYER_HEIGHT, 0x00ff00, TRUE);
-	DrawFormatString(location.x, location.y,0x000000,"%d",PlayerState);
+	//DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+
+	if (AccelerationLeft) {
+		DrawGraph(location.x, location.y, gh[cnt], TRUE);
+	}
+	else if(AccelerationRight) {
+		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+	}
+	else {
+		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+	}
 }
