@@ -8,6 +8,7 @@
 #include"End.h"
 #include"Result.h"
 
+
 #define TIME_LIMIT 2000;
 
 // --------------------------------
@@ -19,10 +20,13 @@ Result::Result()
 	WaitTime = TIME_LIMIT;
 
 
+
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
+
+
 
 }
 
@@ -52,8 +56,13 @@ void Result::Draw()const
 	//ゲーム終了画面
 	DrawGraph(0, 0, ForestImg, TRUE);
 
-	SetFontSize(30);
-	DrawString(1105, 450, "得点", 0x000000);
-	DrawFormatString(1095, 500, 0x000000, "%.5d", GameMain::getScore);
+	// スコアの描画
+	DrawBox(256, 144, 1024, 576, 0xffffff, TRUE);
+	SetFontSize(50);
+	DrawFormatString(270, 200, 0x000000, "赤りんご：%.2d", GameMain::R_Apple[0]);
+	DrawFormatString(270, 260, 0x000000, "青りんご：%.2d", GameMain::R_Apple[1]);
+	DrawFormatString(270, 320, 0x000000, "金りんご：%.2d", GameMain::R_Apple[2]);
+	DrawFormatString(270, 380, 0x000000, "毒りんご：%.2d", GameMain::R_Apple[3]);
+	DrawFormatString(270, 440, 0x000000, "スコア：%.5d", GameMain::getScore);
 	SetFontSize(24);
 }

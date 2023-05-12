@@ -28,6 +28,7 @@ private:
 	int gh[9];
 	int cnt;
 	int cnt_wait;
+	int vector;
 
 public:
 	//コンストラクタ

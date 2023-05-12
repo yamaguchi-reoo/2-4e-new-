@@ -10,9 +10,9 @@ class GameMain :
     public AbstractScene,Apple
 {
 private:	
-    int a_Count;	//同時にスポーンしているりんごの数
+    float a_Count;	//同時にスポーンしているりんごの数
     int frame;	    //フレーム
-    int Count;	    //一度にスポーンしたリンゴの計測
+    int SpawnCount;	    //一度にスポーンしたリンゴの計測
 
     int gGetApple[4];	//どのりんごを何個取ったか集計用
     int gGetAppleType;	//どのりんごを取ったか格納用
@@ -46,7 +46,7 @@ private:
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
-    
+    static int R_Apple[4];
     static int getScore;
     //コンストラクタ
     GameMain();
@@ -59,6 +59,13 @@ public:
 
     //描画に関することを実装
     void Draw() const override;
+
+    //りんご取得処理
+    void AppleGet(int i);
+
+    //りんごスポーン処理
+    void AppleSpawn();
+
 };
 
 
