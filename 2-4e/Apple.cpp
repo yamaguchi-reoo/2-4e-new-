@@ -21,21 +21,21 @@ Apple::Apple()
 	span = 0;			//各りんごが被らないようにするための待ち時間
 
 	//りんご画像の読み込み
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/Apple Red.png")) == -1)
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/Apple_Red.png")) == -1)
 	{
-		throw "Resource/Images/Apple Red.png";
+		throw "Resource/Images/Apple_Red.png";
 	}
-	if ((gAppleImg[1] = LoadGraph("Resource/Images/Apple Blue.png")) == -1)
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/Apple_Blue.png")) == -1)
 	{
-		throw "Resource/Images/Apple Blue.png";
+		throw "Resource/Images/Apple_Blue.png";
 	}
-	if ((gAppleImg[2] = LoadGraph("Resource/Images/Apple Gold.png")) == -1)
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/Apple_Gold.png")) == -1)
 	{
-		throw "Resource/Images/Apple Gold.png";
+		throw "Resource/Images/Apple_Gold.png";
 	}
-	if ((gAppleImg[3] = LoadGraph("Resource/Images/Apple Poison.png")) == -1)
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/Apple_Poison.png")) == -1)
 	{
-		throw "Resource/Images/Apple Poison.png";
+		throw "Resource/Images/Apple_Poison.png";
 	}
 }
 //デストラクタ
