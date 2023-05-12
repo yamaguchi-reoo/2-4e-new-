@@ -64,7 +64,7 @@ GameMain::GameMain()
 	//BGMの音量変更
 	ChangeVolumeSoundMem(90, MainBGM);
 
-	//サウンド読込
+	//SEの読込
 	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) 
 	{
 		throw "Resource/sounds/SE/Start.wav";

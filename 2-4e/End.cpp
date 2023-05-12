@@ -14,11 +14,33 @@ End::End() {
 	MoveString = 0;
 	BackTitle = FALSE; //TRUEにしたらBボタンでタイトルへ戻れるようになる
 
+	SEflg = 0;
+
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
+	//BGMの読み込み
+	if ((EndBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
+	{
+		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
+	}
+	//BGMの音量変更
+	ChangeVolumeSoundMem(70, EndBGM);
 
+	//SEの読み込み
+	if ((EndSE = LoadSoundMem("Resource/sounds/SE/End.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/End.wav";
+	}
+	//SEの音量変更
+	ChangeVolumeSoundMem(70, EndSE);
+
+	//BGMの再生
+	if (CheckSoundMem(EndBGM) == 0)
+	{
+		PlaySoundMem(EndBGM, DX_PLAYTYPE_BACK);
+	}
 }
 
 //--------------------------------
@@ -26,7 +48,9 @@ End::End() {
 //--------------------------------
 End::~End()
 {
-
+	//サウンドの削除
+	DeleteSoundMem(EndBGM);
+	DeleteSoundMem(EndSE);
 }
 //--------------------------------
 // 更新
@@ -41,6 +65,14 @@ AbstractScene* End::Update() {
 	if (BackTitle==TRUE && PAD_INPUT::OnButton(XINPUT_BUTTON_B))
 	{
 		return new Title();
+	}
+	//画面切替時SE
+	if (CheckSoundMem(EndSE) == 0)
+	{
+		if (SEflg++ == 1)
+		{
+			PlaySoundMem(EndSE, DX_PLAYTYPE_BACK);
+		}
 	}
 	return this;
 }
@@ -78,7 +110,11 @@ void End::Draw()const {
 	}*/
 
 	SetFontSize(70);
+	SetFontThickness(3);                         //太さを3に変更
+	ChangeFont("HGS創英角ﾎﾟｯﾌﾟ体");              //HGS創英角ﾎﾟｯﾌﾟ体に変更
+	ChangeFontType(DX_FONTTYPE_ANTIALIASING);
 	DrawString(500, 780 - MoveString * 2, "SE & BGM", 0x0000ff);
+
 	SetFontSize(50);
 	DrawString(540, 880 - MoveString * 2, "OtoLogic", 0x000000);
 	DrawString(515, 940 - MoveString * 2, "無料効果音", 0x000000);
@@ -86,6 +122,7 @@ void End::Draw()const {
 
 	SetFontSize(70);
 	DrawString(505, 1200 - MoveString * 2, "画像素材", 0xff0000);
+
 	SetFontSize(50);
 	DrawString(510, 1300 - MoveString * 2, "イラスト屋", 0x000000);
 

@@ -21,7 +21,7 @@ Title::Title()
 	//初期化
 	Select = 0;
 
-	MenuFont = CreateFontToHandle("HeadLine", 80, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
+	MenuFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 
 	//タイトル画像の読み込み
 	if ((TitleImg = LoadGraph("Resource/Images/mori.png")) == -1)
@@ -29,7 +29,7 @@ Title::Title()
 		throw "Resource/Images/mori.png";
 	}
 	// カーソル画像の読み込み
-	if ((CursorImg = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((CursorImg = LoadGraph("Resource/Images/apple red.png")) == -1)
 	{
 		throw "Resource/Images/apple.png";
 	}
@@ -49,7 +49,7 @@ Title::Title()
 	//SEの音量変更
 	ChangeVolumeSoundMem(75, MenuSE);
 
-	//BGM
+	//BGMの再生
 	if (CheckSoundMem(TitleBGM) == 0)
 	{
 		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK);
@@ -141,8 +141,7 @@ void Title::Draw()const
 {
 	// ステージの描画
 	SetFontSize(64);                             //サイズを64に変更
-	SetFontThickness(8);                         //太さを8に変更
-
+	//SetFontThickness(8);                         //太さを8に変更
 
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);
@@ -155,6 +154,6 @@ void Title::Draw()const
 	DrawStringToHandle(730, 480, "えんど", 0xffffff, MenuFont);
 
 	//カーソルの描画
-	int select_y = 240 + Select * 80;
+	int select_y = 230 + Select * 80;
 	DrawGraph(650, select_y, CursorImg, TRUE);
 }
