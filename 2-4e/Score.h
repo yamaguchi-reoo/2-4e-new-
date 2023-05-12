@@ -13,4 +13,5 @@ public:
 	void UpDate();
 
 	void Draw() const;
+	void Draw(int x, int y)const;
 };

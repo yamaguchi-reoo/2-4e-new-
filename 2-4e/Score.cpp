@@ -33,9 +33,14 @@ void Score::UpDate()
 }
 void Score::Draw() const
 {
-	DrawBox(1000, 0, 1280, 720, 0xffffff, TRUE);
+	
 	DrawRotaGraph(1080, 370, 0.5f, 0, gAppleImg[0], TRUE, FALSE);
 	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
 	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
 
+}
+
+void Score::Draw(int x, int y) const
+{
+	DrawBox(x, y, 1280, 720, 0xffffff, TRUE);
 }
