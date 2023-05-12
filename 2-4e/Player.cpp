@@ -21,6 +21,8 @@ Player::Player()
 
 	cnt = 0;
 	cnt_wait = 0;
+
+	vector = 1;
 	
 
 	PlayerState = PLAYER_STATE::IDOL;
@@ -48,6 +50,7 @@ void Player::UpDate()
 		if (AccelerationLeft <= 30) //ç∂à⁄ìÆéûÇÃê®Ç¢
 		{
 			AccelerationLeft++;
+			vector = 0;
 		}
 		if (AccelerationRight > 0)  //âEÇ…ìÆÇ¢ÇƒÇ¢ÇΩéûÇÃê®Ç¢ÇéEÇ∑èàóù
 		{
@@ -64,6 +67,7 @@ void Player::UpDate()
 		if (AccelerationRight <= 30)	//âEà⁄ìÆéûÇÃê®Ç¢
 		{
 			AccelerationRight++;
+			vector = 1;
 		}
 		if (AccelerationLeft > 0)		//ç∂Ç…ìÆÇ¢ÇƒÇ¢ÇΩéûÇÃê®Ç¢ÇéEÇ∑èàóù
 		{
@@ -94,9 +98,9 @@ void Player::UpDate()
 		}
 	}
 	//ï«Ç…Ç‘Ç¬Ç©ÇÈ
-	if (location.x > 950)
+	if (location.x > 910)
 	{
-		location.x = 950;
+		location.x = 910;
 		PlayerState = PLAYER_STATE::IDOL;
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
@@ -135,13 +139,13 @@ void Player::Draw() const
 {
 	//DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 
-	if (AccelerationLeft) {
+	
+
+	if (vector ==0) {
 		DrawGraph(location.x, location.y, gh[cnt], TRUE);
 	}
-	else if(AccelerationRight) {
+	else if(vector==1) {
 		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 	}
-	else {
-		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
-	}
+	
 }
