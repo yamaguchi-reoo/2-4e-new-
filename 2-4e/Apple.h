@@ -21,6 +21,13 @@ private:
 		int point;			//スコア加算ポイント
 		int time;			//りんごが出現してからの経過時間
 		int span;			//各りんごが被らないようにするための待ち時間
+
+		//点数取得エフェクト用
+		bool e_flg;			//エフェクト表示フラグ
+		int e_type;			//
+		int e_point;
+		int e_time;
+		int e_limit;
 public:
 
 	//コンストラクタ

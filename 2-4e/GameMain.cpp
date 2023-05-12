@@ -164,8 +164,6 @@ AbstractScene* GameMain::Update()
 			{
 				//生成処理
 				AppleSpawn();
-				//画面にあるりんごの個数を後で増加させるために数えておく
-				SpawnCount++;
 			}
 			//画面にあるりんごの個数を増加
 			a_Count+=SpawnCount;
@@ -265,6 +263,8 @@ void GameMain::Draw()const
 	for (int i = 0; i < 7; i++) {
 		DrawFormatString(0 + i * 150, 320, 0x000000, "%.2d", CheckSpawn[i]);
 	}
+
+	DrawFormatString(1100, 600, 0x000000, "%f", a_Count);
 	//一時停止中の描画
 	if (PauseFlg == TRUE)
 	{
@@ -351,6 +351,8 @@ void GameMain::AppleSpawn()
 			apple[SpawnApple]->SetLocation(SpawnPos * 150);
 			//りんご生成済チェックをいれる
 			CheckSpawn[SpawnPos] = TRUE;
+			//画面にあるりんごの個数を後で増加させるために数えておく
+			SpawnCount++;
 		}
 	}
 }
