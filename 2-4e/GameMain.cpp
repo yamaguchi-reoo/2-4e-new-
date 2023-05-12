@@ -292,6 +292,7 @@ void GameMain::AppleGet(int i)
 	gGetApple[gGetAppleType]++;
 	//取ったりんごの得点を取得
 	TotalScore += apple[i]->GetApplePoint();
+	apple[i]->EffectSet();
 	//りんごリセット
 	apple[i]->AppleReset();
 	//もし取得したりんごが毒なら、
