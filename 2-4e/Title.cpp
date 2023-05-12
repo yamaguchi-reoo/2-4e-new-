@@ -4,6 +4,7 @@
 #include "DrawRanking.h"
 #include"PadInput.h"
 #include"Credit.h"
+#include"Help.h"
 #include"End.h"
 
 //タイトルメニュー
@@ -46,7 +47,13 @@ Title::Title()
 		throw "Resource/sounds/SE/select01.wav";
 	}
 	//SEの音量変更
-	ChangeVolumeSoundMem(100, MenuSE);
+	ChangeVolumeSoundMem(75, MenuSE);
+
+	//BGM
+	if (CheckSoundMem(TitleBGM) == 0)
+	{
+		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK);
+	}
 
 }
 
@@ -114,6 +121,10 @@ AbstractScene* Title::Update()
 		case TITLE_MENU::GAME_RANKING:
 			return new DrawRanking();
 			break;
+			//ヘルプ画面
+		case TITLE_MENU::GAME_HELP:
+			return new Help();
+			break;
 			//エンド画面へ
 		case TITLE_MENU::GAME_END:
 			return new End();
@@ -121,11 +132,6 @@ AbstractScene* Title::Update()
 		default:
 			break;
 		}
-	}
-	//BGM
-	if (CheckSoundMem(TitleBGM) == 0)
-	{
-		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK);
 	}
 	return this;
 }
