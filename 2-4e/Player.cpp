@@ -139,8 +139,6 @@ void Player::Draw() const
 {
 	//DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 
-	
-
 	if (vector ==0) {
 		DrawGraph(location.x, location.y, gh[cnt], TRUE);
 	}
