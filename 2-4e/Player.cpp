@@ -121,16 +121,13 @@ void Player::UpDate()
 		}
 	}
 	else if (AccelerationRight >= 5) {
-		{
-			if (++cnt_wait >= 6) {
-				cnt++;
-				cnt_wait = 0;
-				if (cnt >= 9) {
-					cnt = 0;
-				}
+		if (++cnt_wait >= 6) {
+			cnt++;
+			cnt_wait = 0;
+			if (cnt >= 9) {
+				cnt = 0;
 			}
 		}
-
 	}
 }
 
