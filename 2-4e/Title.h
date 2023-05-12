@@ -6,7 +6,7 @@ class Title :
 
 {
 private:
-    int Select;         //選択数
+    int Select;     //選択数
     int OldKey;		//前の入力キー
     int NowKey;		//今の入力キー
     int KeyFlg;		//入力キー情報

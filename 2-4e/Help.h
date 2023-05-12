@@ -4,10 +4,10 @@ class Help :
     public AbstractScene
 {
 private:
-    int HelpImg;     //ヘルプ画像
-    int HelpBGM;      //タイトルと同じBGM
-    int HelpSE;    //ketteibotann
-    int SEflg;
+    int HelpImg;    //ヘルプ画像
+    int HelpBGM;    //タイトルと同じBGM
+    int HelpSE;     //SE
+    int SEflg;      //SE用フラグ
 
 public:
     //コンストラクタ
