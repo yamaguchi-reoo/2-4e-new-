@@ -71,8 +71,6 @@ void Apple::Draw() const
 //スポーン処理
 void Apple::Spawn()
 {
-	if (flg == FALSE)
-	{
 		//りんごの種類を抽選する
 		switch (Rand())
 		{
@@ -96,7 +94,7 @@ void Apple::Spawn()
 				speed = 2;						//移動速度
 				point = 200;						//スコア加算ポイント
 				time = 0;						//りんごが出現してからの経過時間
-				span = 100;						//各りんごが被らないようにするための待ち時間
+				span = 50;						//各りんごが被らないようにするための待ち時間
 				break;
 			case 2:
 				flg = TRUE;
@@ -107,7 +105,7 @@ void Apple::Spawn()
 				speed = 3.5;						//移動速度
 				point = 500;						//スコア加算ポイント
 				time = 0;						//りんごが出現してからの経過時間
-				span = 100;						//各りんごが被らないようにするための待ち時間
+				span = 25;						//各りんごが被らないようにするための待ち時間
 				break;
 			case 3:
 				flg = TRUE;
@@ -118,10 +116,9 @@ void Apple::Spawn()
 				speed = 0.5;						//移動速度
 				point = -750;						//スコア加算ポイント
 				time = 0;						//りんごが出現してからの経過時間
-				span = 100;						//各りんごが被らないようにするための待ち時間
+				span = 150;						//各りんごが被らないようにするための待ち時間
 				break;
 		}
-	}
 }
 //スポーンするりんごの種類の抽選
 int Apple::Rand()
@@ -188,6 +185,12 @@ int Apple::GetApplePoint()
 int Apple::GetAppleTime()
 {
 	return time;
+}
+
+//各りんごのスポーン待機時間取得
+int Apple::GetAppleSpan()
+{
+	return span;
 }
 
 //りんごリセット
