@@ -4,17 +4,22 @@
 Score::Score() 
 {
 
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	//ÇËÇÒÇ≤âÊëúÇÃì«Ç›çûÇ›
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple red.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/apple red.png";
 	}
-	if ((gAppleImg[1] = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/BlueApple.png";
 	}
-	if ((gAppleImg[2] = LoadGraph("Resource/Images/apple.png")) == -1)
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/applegold.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/applegold.png";
+	}
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/applepoison.png")) == -1)
+	{
+		throw "Resource/Images/applepoison.png";
 	}
 }
 Score::~Score()

@@ -9,6 +9,14 @@ GameMain::GameMain()
 {
 	
 	//初期化
+	frame = 0;
+	for (int i = 0; i < 4; i++) {
+		gGetApple[i] = 0;
+	}
+	for (int i = 0; i < 7; i++) {
+		CheckSpawn[i] = FALSE;
+	}
+	gGetAppleType = 0;
 	TotalScore = 0;
 	PauseFlg = FALSE;
 	PauseFlash = 0;
@@ -20,7 +28,9 @@ GameMain::GameMain()
 
 	//オブジェクト化
 	player = new Player();
-	apple = new Apple();
+	for (int i = 0; i < MAX_APPLE; i++) {
+		apple[i] = new Apple();
+	}
 	score = new Score();
 
 	//画像の読み込み
@@ -28,10 +38,24 @@ GameMain::GameMain()
 	{
 		throw "Resource/Images/mori.png";
 	}
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple.png")) == -1)
+	//りんご画像の読み込み
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple red.png")) == -1)
 	{
-		throw "Resource/Images/apple.png";
+		throw "Resource/Images/apple red.png";
 	}
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
+	{
+		throw "Resource/Images/BlueApple.png";
+	}
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/applegold.png")) == -1)
+	{
+		throw "Resource/Images/applegold.png";
+	}
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/applepoison.png")) == -1)
+	{
+		throw "Resource/Images/applepoison.png";
+	}
+
 	//BGMの読み込み
 	if ((MainBGM = LoadSoundMem("Resource/sounds/BGM/seiya.wav")) == -1)
 	{
@@ -70,7 +94,10 @@ GameMain::~GameMain()
 {
 	//オブジェクトの削除
 	delete player;
-	delete apple;
+	for (int i = 0; i < MAX_APPLE; i++) {
+		delete apple[i];
+	}
+	delete score;
 	
 
 	//サウンド削除
@@ -92,36 +119,100 @@ AbstractScene* GameMain::Update()
 	if (PauseFlg == FALSE) {
 		//処理の更新
 		player->UpDate();
-		apple->UpDate();
-
+		for (int i = 0; i < 10; i++) {
+			apple[i]->UpDate();
+		}
 		//BGM
 		if (CheckSoundMem(MainBGM) == 0)
 		{
 			PlaySoundMem(MainBGM, DX_PLAYTYPE_LOOP,FALSE);
 		}
 
+		//りんごの画面上限分繰り返す
 		for (int i = 0; i < MAX_APPLE; i++)
 		{
-			apple->SetLocation(i);
-			if (apple->HitBox(player) == true && GetPsAppleTime == 0)
+			//りんごがスポーンしてから一定時間立っていれば
+			if (apple[i]->GetAppleTime() == 100)
 			{
+				//スポーン可能に
+				CheckSpawn[apple[i]->GetAppleLocationX()/150] = FALSE;
+			}
+			//りんごとプレイヤーが接触して、プレイヤーが点滅状態でないならりんご取得処理へ
+			if (apple[i]->HitBox(player) == true && GetPsAppleTime == 0)
+			{
+				//取ったりんごの種類を取得して対応する値を加算する
+				gGetAppleType = apple[i]->GetAppleType();
+				gGetApple[gGetAppleType]++;
+				//取ったりんごの得点を取得
+				TotalScore += apple[i]->GetApplePoint();
+				//りんごリセット
+				apple[i]->AppleReset();
 				//もし取得したりんごが毒なら、
-				if (apple->AppleTypeGet(i) == 3)
+				if (gGetAppleType == 3)
 				{
 					//プレイヤーの点滅処理を開始する
 					GetPsAppleTime = 1;
 					PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
-
 				}
 				else
 				{
 					PlaySoundMem(AppleSE, DX_PLAYTYPE_BACK);
 				}
-				TotalScore += apple->AppleGet(i);
 				//得点の下限を０にする
 				if (TotalScore < 0)
 				{
 					TotalScore = 0;
+				}
+			}
+			//りんごのYが1000以上なら削除（リセット）
+			if (apple[i]->GetAppleLocationY() >= 1000)
+			{
+				//りんごをリセット
+				apple[i]->AppleReset();
+			}
+
+		}
+		//25フレーム毎にりんご生成処理
+		if (++frame >= 25)
+		{
+			//スポーンできる場所があるかチェック
+			SpawnFlg = FALSE;
+			for (int i = 0; i < 7; i++)
+			{
+				if (CheckSpawn[i] == FALSE)
+				{
+					SpawnFlg = TRUE;
+				}
+			}
+			//一つでもスポーンできる場所があるなら
+			if (SpawnFlg == TRUE)
+			{
+				SpawnApple = -1;
+				//スポーンできるりんごがあるかチェック
+				for (int i = 0; i < MAX_APPLE; i++)
+				{
+					//スポーンできるりんごが見つかったら
+					if (apple[i]->GetAppleFlg() == FALSE)
+					{
+						//格納してforを抜ける
+						SpawnApple = i;
+						break;
+					}
+				}
+				//スポーン出来るりんごがあれば
+				if (SpawnApple != -1) {
+					//スポーンできる場所が見つかるまでRandを繰り返す
+					do {
+						SpawnPos = GetRand(6);
+					} while (CheckSpawn[SpawnPos] == TRUE);
+					//りんご生成
+					apple[SpawnApple]->Spawn();
+					//りんごの座標決定
+					apple[SpawnApple]->SetLocation(SpawnPos * 150);
+					//りんご生成済チェックをいれる
+					CheckSpawn[SpawnPos] = TRUE;
+					//25フレーム数えなおし
+					frame = 0;
 				}
 			}
 		}
@@ -141,6 +232,7 @@ AbstractScene* GameMain::Update()
 		Time--;
 	}
 
+	//一時停止中
 	if (PauseFlg == TRUE)
 	{
 		PauseFlash++;
@@ -149,6 +241,7 @@ AbstractScene* GameMain::Update()
 			PauseFlash = 0;
 		}
 	}
+
 	if (Time <= 0)
 	{
 		return new Result();//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
@@ -175,18 +268,17 @@ void GameMain::Draw()const
 {
 	// 背景の描画
 	DrawGraph(0, 0, ForestImg, TRUE);
-
-	//プレイヤーの描画
-	if (PlayerDispFlg == TRUE) {
-		player->Draw();
+	// スコアの描画
+	DrawBox(1000, 0, 1280, 720, 0xffffff, TRUE);
+	DrawRotaGraph(1080, 370, 0.5f, 0, gAppleImg[0], TRUE, FALSE);
+	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
+	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
+	for (int i = 0; i < 3; i++) {
+		DrawFormatString(1067 + i * 60, 320, 0x000000, "%.2d", gGetApple[i]);
 	}
-
-	//スコアの描画
-	score->Draw();
-	//仮のスコア描画
 	SetFontSize(30);
 	DrawString(1105, 450, "得点", 0x000000);
-	DrawFormatString(1095, 500, 0x000000, "%.5d",TotalScore);
+	DrawFormatString(1095, 500, 0x000000, "%.5d", TotalScore);
 	SetFontSize(24);
 
 	//制限時間
@@ -202,9 +294,19 @@ void GameMain::Draw()const
 	}
 	SetFontSize(24);
 
-	//リンゴの描画
-	apple->Draw();
+	//プレイヤーの描画
+	if (PlayerDispFlg == TRUE) {
+		player->Draw();
+	}
 
+	//リンゴの描画
+	for (int i = 0; i < 10; i++) {
+		apple[i]->Draw();
+	}
+
+	for (int i = 0; i < 7; i++) {
+		DrawFormatString(0 + i * 150, 320, 0x000000, "%.2d", CheckSpawn[i]);
+	}
 	//一時停止中の描画
 	if (PauseFlg == TRUE)
 	{
