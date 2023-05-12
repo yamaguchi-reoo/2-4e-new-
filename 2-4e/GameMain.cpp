@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include <math.h>
 #include "GameMain.h"
 #include "Result.h"
 #include "Score.h"
@@ -25,6 +26,8 @@ GameMain::GameMain()
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
 	SEflg = 0;
+	a_Count = 0;
+	SpawnCount = 0;
 
 	//オブジェクト化
 	player = new Player();
@@ -77,6 +80,7 @@ GameMain::GameMain()
 	{
 		throw "Resource/sounds/SE/ToxicAplle.wav";
 	}
+
 	//SEの音量変更
 	ChangeVolumeSoundMem(70, StartSE);
 	ChangeVolumeSoundMem(100, AppleSE);
@@ -115,24 +119,21 @@ AbstractScene* GameMain::Update()
 		PauseFlg = !PauseFlg;
 		StopSoundMem(MainBGM);
 	}
+
 	//ポーズ中でないなら
 	if (PauseFlg == FALSE) {
-		//処理の更新
-		player->UpDate();
-		for (int i = 0; i < 10; i++) {
-			apple[i]->UpDate();
-		}
 		//BGM
 		if (CheckSoundMem(MainBGM) == 0)
 		{
-			PlaySoundMem(MainBGM, DX_PLAYTYPE_LOOP,FALSE);
+			PlaySoundMem(MainBGM, DX_PLAYTYPE_LOOP, FALSE);
 		}
-
-		//りんごの画面上限分繰り返す
-		for (int i = 0; i < MAX_APPLE; i++)
+		//処理の更新
+		player->UpDate();
+		for (int i = 0; i < MAX_APPLE; i++) 
 		{
+			apple[i]->UpDate();
 			//りんごがスポーンしてから一定時間立っていれば
-			if (apple[i]->GetAppleTime() == 100)
+			if (apple[i]->GetAppleFlg() == TRUE && apple[i]->GetAppleTime() == apple[i]->GetAppleSpan())
 			{
 				//スポーン可能に
 				CheckSpawn[apple[i]->GetAppleLocationX()/150] = FALSE;
@@ -140,81 +141,36 @@ AbstractScene* GameMain::Update()
 			//りんごとプレイヤーが接触して、プレイヤーが点滅状態でないならりんご取得処理へ
 			if (apple[i]->HitBox(player) == true && GetPsAppleTime == 0)
 			{
-				//取ったりんごの種類を取得して対応する値を加算する
-				gGetAppleType = apple[i]->GetAppleType();
-				gGetApple[gGetAppleType]++;
-				//取ったりんごの得点を取得
-				TotalScore += apple[i]->GetApplePoint();
-				//りんごリセット
-				apple[i]->AppleReset();
-				//もし取得したりんごが毒なら、
-				if (gGetAppleType == 3)
-				{
-					//プレイヤーの点滅処理を開始する
-					GetPsAppleTime = 1;
-					PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
-				}
-				else
-				{
-					PlaySoundMem(AppleSE, DX_PLAYTYPE_BACK);
-				}
-				//得点の下限を０にする
-				if (TotalScore < 0)
-				{
-					TotalScore = 0;
-				}
+				AppleGet(i);
+				//画面にあるりんごの個数を減少
+				a_Count--;
 			}
 			//りんごのYが1000以上なら削除（リセット）
 			if (apple[i]->GetAppleLocationY() >= 1000)
 			{
 				//りんごをリセット
 				apple[i]->AppleReset();
+				//画面にあるりんごの個数を減少
+				a_Count--;
 			}
 
 		}
 		//25フレーム毎にりんご生成処理
 		if (++frame >= 25)
 		{
-			//スポーンできる場所があるかチェック
-			SpawnFlg = FALSE;
-			for (int i = 0; i < 7; i++)
+			SpawnCount = 0;
+			//一回にスポーン出来るりんごの数だけ繰り返し
+			for (int i = 0; i < ceil((MAX_APPLE-a_Count)/2); i++)
 			{
-				if (CheckSpawn[i] == FALSE)
-				{
-					SpawnFlg = TRUE;
-				}
+				//生成処理
+				AppleSpawn();
+				//画面にあるりんごの個数を後で増加させるために数えておく
+				SpawnCount++;
 			}
-			//一つでもスポーンできる場所があるなら
-			if (SpawnFlg == TRUE)
-			{
-				SpawnApple = -1;
-				//スポーンできるりんごがあるかチェック
-				for (int i = 0; i < MAX_APPLE; i++)
-				{
-					//スポーンできるりんごが見つかったら
-					if (apple[i]->GetAppleFlg() == FALSE)
-					{
-						//格納してforを抜ける
-						SpawnApple = i;
-						break;
-					}
-				}
-				//スポーン出来るりんごがあれば
-				if (SpawnApple != -1) {
-					//スポーンできる場所が見つかるまでRandを繰り返す
-					do {
-						SpawnPos = GetRand(6);
-					} while (CheckSpawn[SpawnPos] == TRUE);
-					//りんご生成
-					apple[SpawnApple]->Spawn();
-					//りんごの座標決定
-					apple[SpawnApple]->SetLocation(SpawnPos * 150);
-					//りんご生成済チェックをいれる
-					CheckSpawn[SpawnPos] = TRUE;
-					//25フレーム数えなおし
-					frame = 0;
-				}
-			}
+			//画面にあるりんごの個数を増加
+			a_Count+=SpawnCount;
+			//25フレーム数えなおし
+			frame = 0;
 		}
 		//点滅中の処理
 		if (GetPsAppleTime > 0)
@@ -259,7 +215,9 @@ AbstractScene* GameMain::Update()
 			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
 		}
 	}
+
 	GameMain::getScore = TotalScore;
+
 	return this;
 	
 }
@@ -326,4 +284,74 @@ void GameMain::Draw()const
 	}
 }
 
+//りんご取得処理
+void GameMain::AppleGet(int i)
+{
+	//取ったりんごの種類を取得して対応する値を加算する
+	gGetAppleType = apple[i]->GetAppleType();
+	gGetApple[gGetAppleType]++;
+	//取ったりんごの得点を取得
+	TotalScore += apple[i]->GetApplePoint();
+	//りんごリセット
+	apple[i]->AppleReset();
+	//もし取得したりんごが毒なら、
+	if (gGetAppleType == 3)
+	{
+		//プレイヤーの点滅処理を開始する
+		GetPsAppleTime = 1;
+		PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
+	}
+	else
+	{
+		PlaySoundMem(AppleSE, DX_PLAYTYPE_BACK);
+	}
+	//得点の下限を０にする
+	if (TotalScore < 0)
+	{
+		TotalScore = 0;
+	}
+}
+
+//りんごスポーン処理
+void GameMain::AppleSpawn()
+{
+	//スポーンできる場所があるかチェック
+	SpawnFlg = FALSE;
+	for (int i = 0; i < 7; i++)
+	{
+		if (CheckSpawn[i] == FALSE)
+		{
+			SpawnFlg = TRUE;
+		}
+	}
+	//一つでもスポーンできる場所があるなら
+	if (SpawnFlg == TRUE)
+	{
+		SpawnApple = -1;
+		//スポーンできるりんごがあるかチェック
+		for (int i = 0; i < MAX_APPLE; i++)
+		{
+			//スポーンできるりんごが見つかったら
+			if (apple[i]->GetAppleFlg() == FALSE)
+			{
+				//格納してforを抜ける
+				SpawnApple = i;
+				break;
+			}
+		}
+		//スポーン出来るりんごがあれば
+		if (SpawnApple != -1) {
+			//スポーンできる場所が見つかるまでRandを繰り返す
+			do {
+				SpawnPos = GetRand(6);
+			} while (CheckSpawn[SpawnPos] == TRUE);
+			//りんご生成
+			apple[SpawnApple]->Spawn();
+			//りんごの座標決定
+			apple[SpawnApple]->SetLocation(SpawnPos * 150);
+			//りんご生成済チェックをいれる
+			CheckSpawn[SpawnPos] = TRUE;
+		}
+	}
+}
 

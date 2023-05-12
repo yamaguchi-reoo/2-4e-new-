@@ -61,6 +61,10 @@ public:
 
 	//りんごがスポーンしてからの経過時間取得
 	int GetAppleTime();
+
+	//各りんごのスポーン待機時間取得
+	int GetAppleSpan();
+
 	//りんごリセット
 	void AppleReset();
 };
