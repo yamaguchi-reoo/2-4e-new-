@@ -22,21 +22,21 @@ Apple::Apple()
 	}
 
 	//りんご画像の読み込み
-	if ((gAppleImg[0] = LoadGraph("Resource/Images/apple red.png")) == -1)
+	if ((gAppleImg[0] = LoadGraph("Resource/Images/Apple Red.png")) == -1)
 	{
-		throw "Resource/Images/apple red.png";
+		throw "Resource/Images/Apple Red.png";
 	}
-	if ((gAppleImg[1] = LoadGraph("Resource/Images/BlueApple.png")) == -1)
+	if ((gAppleImg[1] = LoadGraph("Resource/Images/Apple Blue.png")) == -1)
 	{
-		throw "Resource/Images/BlueApple.png";
+		throw "Resource/Images/Apple Blue.png";
 	}
-	if ((gAppleImg[2] = LoadGraph("Resource/Images/applegold.png")) == -1)
+	if ((gAppleImg[2] = LoadGraph("Resource/Images/Apple Gold.png")) == -1)
 	{
-		throw "Resource/Images/applegold.png";
+		throw "Resource/Images/Apple Gold.png";
 	}
-	if ((gAppleImg[3] = LoadGraph("Resource/Images/applepoison.png")) == -1)
+	if ((gAppleImg[3] = LoadGraph("Resource/Images/Apple Poison.png")) == -1)
 	{
-		throw "Resource/Images/applepoison.png";
+		throw "Resource/Images/Apple Poison.png";
 	}
 }
 //デストラクタ
