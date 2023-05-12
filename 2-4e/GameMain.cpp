@@ -4,7 +4,7 @@
 #include "Result.h"
 #include "Score.h"
 #include "PadInput.h"
-
+int GameMain::R_Apple[4] = { 0 };
 int GameMain::getScore = 0;
 GameMain::GameMain()
 {
@@ -21,7 +21,7 @@ GameMain::GameMain()
 	TotalScore = 0;
 	PauseFlg = FALSE;
 	PauseFlash = 0;
-	Time = 3599;
+	Time = 599;
 	GetPsAppleTime = 0;
 	PlayerDispFlg = TRUE;
 	TimerColor = GetColor(0,0,0);
@@ -217,7 +217,9 @@ AbstractScene* GameMain::Update()
 	}
 
 	GameMain::getScore = TotalScore;
-
+	for (int i=0; i < 4; i++) {
+		GameMain::R_Apple[i] = gGetApple[i];
+	}
 	return this;
 	
 }

@@ -30,4 +30,13 @@
 2023年 05月 12日 10時 47分 32秒 : Resource/Images/BlueApple.pngがありません。
 2023年 05月 12日 10時 48分 17秒 : Resource/Images/BlueApple.pngがありません。
 2023年 05月 12日 10時 53分 54秒 : Resource/Images/BlueApple.pngがありません。
+<<<<<<< HEAD
 2023年 05月 12日 11時 10分 34秒 : Resource/Images/apple red.pngがありません。
+=======
+2023年 05月 12日 10時 55分 47秒 : Resource/Images/BlueApple.pngがありません。
+2023年 05月 12日 10時 57分 28秒 : Resource/Images/apple red.pngがありません。
+2023年 05月 12日 11時 00分 15秒 : Resource/Images/apple red.pngがありません。
+2023年 05月 12日 11時 00分 55秒 : Resource/Images/apple red.pngがありません。
+2023年 05月 12日 11時 01分 15秒 : Resource/Images/apple red.pngがありません。
+2023年 05月 12日 11時 03分 37秒 : Resource/Images/apple red.pngがありません。
+>>>>>>> main
