@@ -262,11 +262,6 @@ void GameMain::Draw()const
 		apple[i]->Draw();
 	}
 
-	for (int i = 0; i < 7; i++) {
-		DrawFormatString(0 + i * 150, 320, 0x000000, "%.2d", CheckSpawn[i]);
-	}
-
-	DrawFormatString(1100, 600, 0x000000, "%f", a_Count);
 	//ˆêŽž’âŽ~’†‚Ì•`‰æ
 	if (PauseFlg == TRUE)
 	{
