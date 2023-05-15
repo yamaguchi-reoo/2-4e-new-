@@ -40,9 +40,4 @@
 2023年 05月 12日 11時 01分 15秒 : Resource/Images/apple red.pngがありません。
 2023年 05月 12日 11時 03分 37秒 : Resource/Images/apple red.pngがありません。
 >>>>>>> main
-2023年 05月 15日 09時 43分 01秒 : Resource/Images/apple.pngがありません。
-2023年 05月 15日 09時 43分 13秒 : Resource/Images/apple.pngがありません。
-2023年 05月 15日 09時 43分 18秒 : Resource/Images/apple.pngがありません。
-2023年 05月 15日 09時 43分 35秒 : Resource/Images/apple.pngがありません。
-2023年 05月 15日 09時 43分 40秒 : Resource/Images/apple.pngがありません。
-2023年 05月 15日 09時 44分 44秒 : Resource/Images/apple.pngがありません。
+2023年 05月 15日 09時 57分 19秒 : Resource/Images/apple.pngがありません。

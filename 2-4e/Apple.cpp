@@ -106,6 +106,8 @@ void Apple::Draw() const
 void Apple::Spawn()
 {
 	int GetRand = Rand();			//りんご種類抽選
+
+	//どのりんごでも変わらない項目はここで初期化
 	flg = TRUE;						//フラグ
 	type = GetRand;					//タイプ
 	img = gAppleImg[type];			//画像
@@ -151,23 +153,23 @@ int Apple::Rand()
 		return 0;
 	}
 	//randが12～16なら青色（２５％）
-	else if (rand > 11 && rand <= 16)
+	else if (rand >= 12 && rand <= 16)
 	{
 		return 1;
 	}
 	//randが17～18なら金色（１０％）
-	else if (rand > 16 && rand <= 18)
+	else if (rand >= 17 && rand <= 18)
 	{
 		return 2;
 	}
 	//randが19なら紫色（毒）（５％）
-	else if (rand > 18)
+	else if (rand == 19)
 	{
 		return 3;
 	}
 }
 
-//りんごのY座標設定
+//りんごのX座標設定
 void Apple::SetLocation(int x)
 {
 	location.x = x;
@@ -218,13 +220,13 @@ int Apple::GetAppleSpan()
 //りんごリセット
 void Apple::AppleReset()
 {
-	flg = FALSE;
+	flg = FALSE;		//フラグ
 	type = 0;			//タイプ
 	img = 0;			//画像
-	location.x = 0;
-	location.y = 0;			//座標
-	erea.rate = 0;			//大きさ（当たり判定用）
-	speed = 0;		//移動速度
+	location.x = 0;		//X座標
+	location.y = 0;		//Y座標
+	erea.rate = 0;		//大きさ（当たり判定用）
+	speed = 0;			//移動速度
 	point = 0;			//スコア加算ポイント
 	time = 0;			//りんごが出現してからの経過時間
 	span = 0;			//各りんごが被らないようにするための待ち時間
