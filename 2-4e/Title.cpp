@@ -29,7 +29,7 @@ Title::Title()
 		throw "Resource/Images/mori.png";
 	}
 	// ƒJ[ƒ\ƒ‹‰æ‘œ‚Ì“Ç‚İ‚İ
-	if ((CursorImg = LoadGraph("Resource/Images/apple red.png")) == -1)
+	if ((CursorImg = LoadGraph("Resource/Images/Apple_Red.png")) == -1)
 	{
 		throw "Resource/Images/apple.png";
 	}
