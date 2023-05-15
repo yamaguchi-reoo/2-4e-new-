@@ -138,6 +138,7 @@ AbstractScene* GameMain::Update()
 				//スポーン可能に
 				CheckSpawn[apple[i]->GetAppleLocationX()/150] = FALSE;
 			}
+
 			//りんごとプレイヤーが接触して、プレイヤーが点滅状態でないならりんご取得処理へ
 			if (apple[i]->HitBox(player) == true && GetPsAppleTime == 0)
 			{
