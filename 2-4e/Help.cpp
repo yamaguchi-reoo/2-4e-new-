@@ -83,6 +83,7 @@ AbstractScene* Help::Update()
 //--------------------------------
 void Help::Draw()const
 {
+	//‰æ‘œ‚Ì•`‰æ
 	DrawGraph(0, 0, HelpImg, TRUE);
 
 }

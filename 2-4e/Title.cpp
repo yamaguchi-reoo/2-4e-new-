@@ -83,7 +83,6 @@ AbstractScene* Title::Update()
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select++;
 		if (Select > 3)Select = 0;
-
 	}
 
 	{
@@ -141,7 +140,7 @@ void Title::Draw()const
 {
 	// ステージの描画
 	SetFontSize(64);                             //サイズを64に変更
-	//SetFontThickness(8);                         //太さを8に変更
+	//SetFontThickness(8);                        //太さを8に変更
 
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);

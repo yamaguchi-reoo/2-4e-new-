@@ -109,24 +109,24 @@ void End::Draw()const {
 		if (i % 128==0)DrawLine(i, 0, i, 780, 0x000000, TRUE);
 	}*/
 
-	SetFontSize(70);
+	SetFontSize(70);							 //大きさ70に変更
 	SetFontThickness(3);                         //太さを3に変更
 	ChangeFont("HGS創英角ﾎﾟｯﾌﾟ体");              //HGS創英角ﾎﾟｯﾌﾟ体に変更
 	ChangeFontType(DX_FONTTYPE_ANTIALIASING);
 	DrawString(500, 780 - MoveString * 2, "SE & BGM", 0x0000ff);
 
-	SetFontSize(50);
+	SetFontSize(50);							//大きさ50に変更
 	DrawString(540, 880 - MoveString * 2, "OtoLogic", 0x000000);
 	DrawString(515, 940 - MoveString * 2, "無料効果音", 0x000000);
 	DrawString(470, 1000 - MoveString * 2, "甘茶の音楽工房", 0x000000);
 
-	SetFontSize(70);
+	SetFontSize(70);							//大きさ70に変更
 	DrawString(505, 1200 - MoveString * 2, "画像素材", 0xff0000);
 
-	SetFontSize(50);
+	SetFontSize(50);							//大きさ50に変更
 	DrawString(510, 1300 - MoveString * 2, "イラスト屋", 0x000000);
 
-	SetFontSize(90);
+	SetFontSize(90);							//大きさ90に変更
 	DrawString(340, 2000 - MoveString * 2.5, "Thank You For ", 0x000000);
 	DrawString(310, 2100 - MoveString * 2.5, "Playing Game !!", 0x000000);
 }

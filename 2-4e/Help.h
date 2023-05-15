@@ -6,7 +6,7 @@ class Help :
 private:
     int HelpImg;    //ヘルプ画像
     int HelpBGM;    //タイトルと同じBGM
-    int HelpSE;     //SE
+    int HelpSE;     //SE用
     int SEflg;      //SE用フラグ
 
 public:

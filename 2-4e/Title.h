@@ -13,8 +13,8 @@ private:
 
     int MenuFont; //メニュー用のフォント
 
-    int TitleBGM;     //BGM
-    int MenuSE;       //選択SE
+    int TitleBGM;     //BGM用
+    int MenuSE;       //選択SE用
     int TitleImg;     //タイトル画像
     int CursorImg;    //カーソル画像
 
