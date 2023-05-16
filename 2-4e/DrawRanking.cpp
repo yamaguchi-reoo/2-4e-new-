@@ -6,9 +6,9 @@
 DrawRanking::DrawRanking()
 {
 	//背景画像の読み込み
-	if ((Image = LoadGraph("Resource/Images/End.png")) == -1)
+	if ((Image = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
-		throw "Resource/Images/End.png";
+		throw "Resource/Images/mori.png";
 	}
 
 	//フォントの追加
@@ -19,21 +19,21 @@ DrawRanking::DrawRanking()
 	//ランキングデータの読み込み
 	RANKING::ReadRanking();
 
-	//BGM読み込み
-	if ((RankingBGM = LoadSoundMem("Resource/sounds/BGM/Sick_Red_Girl.mp3")) == -1)
+	//BGMの読み込み
+	if ((RankingBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
 	{
-		throw "Resource/sounds/BGM/Sick_Red_Girl.mp3";
+		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
 	}
 	//BGMの音量変更
-	ChangeVolumeSoundMem(125, RankingBGM);
-
-	//決定ボタンのSE
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision.wav")) == -1)
+	ChangeVolumeSoundMem(70, RankingBGM);
+	//SEの読み込み
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //選択SE
 	{
-		throw "Resource/sounds/SE/Decision.wav";
+		throw "Resource/sounds/SE/select01.wav";
 	}
 	//SEの音量変更
-	ChangeVolumeSoundMem(200, DecisionSE);
+	ChangeVolumeSoundMem(75, DecisionSE);
+
 
 	//BGMの再生
 	if (CheckSoundMem(RankingBGM) == 0)

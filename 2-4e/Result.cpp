@@ -9,7 +9,7 @@
 #include"Result.h"
 
 
-#define TIME_LIMIT 2000;
+#define TIME_LIMIT 100;
 
 // --------------------------------
 // コンストラクタ
@@ -42,7 +42,7 @@ Result::~Result()
 //--------------------------------
 AbstractScene* Result::Update() {
 	if (WaitTime-- < 0) {
-		return new Title;
+		return new DrawRanking;
 	}
 	return this;
 }
