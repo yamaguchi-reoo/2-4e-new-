@@ -7,9 +7,11 @@ class Result :
     public AbstractScene
 {
 private:
+    int ResultImg;
     int ForestImg; //背景画像
     int WaitTime; //次のシーンに移るまでの時間
-    int ResultFont;
+    int ResultFont1;
+    int ResultFont2;
 public:
     //コンストラクタ
     Result();

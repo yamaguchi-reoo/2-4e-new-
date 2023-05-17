@@ -5,7 +5,7 @@ class DrawRanking :
 	public AbstractScene
 {
 private:
-	int Image; //背景画像
+	int ForestImg; //背景画像
 	int RankingFont; //見出し用のフォント
 	int NomalFont; //通常時用のフォント
 	int GuideFont; //ボタン指示用のフォント

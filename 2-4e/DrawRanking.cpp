@@ -6,7 +6,7 @@
 DrawRanking::DrawRanking()
 {
 	//”wŒi‰æ‘œ‚Ì“Ç‚İ‚İ
-	if ((Image = LoadGraph("Resource/Images/mori.png")) == -1)
+	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
@@ -67,7 +67,7 @@ AbstractScene* DrawRanking::Update()
 
 void DrawRanking::Draw() const
 {
-	DrawGraph(0, 0, Image, TRUE);
+	DrawGraph(0, 0, ForestImg, TRUE);
 	DrawStringToHandle(470, 75, "ƒ‰ƒ“ƒLƒ“ƒO", 0xffd800, RankingFont);
 
 	int color = 0xffffff;
