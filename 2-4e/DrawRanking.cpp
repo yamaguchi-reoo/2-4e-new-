@@ -50,8 +50,6 @@ DrawRanking::~DrawRanking()
 
 AbstractScene* DrawRanking::Update()
 {
-
-
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
@@ -87,10 +85,8 @@ void DrawRanking::Draw() const
 			break;
 		}
 		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%d位", Ranking::GetData(i).no);
-		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", Ranking::GetData(i).score);
-
+		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%6dpt", Ranking::GetData(i).score);
 	}
-	//DrawCircle(554, 666, 20, 0xffffff, TRUE);
 	DrawStringToHandle(455, 650, "A でタイトル", 0xff0000, RankingFont);
 
 }
