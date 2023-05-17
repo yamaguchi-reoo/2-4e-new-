@@ -25,7 +25,8 @@ private:
 
     int TotalScore;         //合計点
     bool PauseFlg;          //一時停止中か判断
-    int PauseFlash;         //ポーズ中の文字点滅用
+    int PauseFlashTime;         //ポーズ中の文字点滅用
+    bool PauseFlashFlg;      //ポーズ中の文字点滅用
     int Time;               //制限時間用
     int TimerColor;         //文字色変更用
 
@@ -40,9 +41,9 @@ private:
     int StartSE;
     int AppleSE;
     int PoisonAppleSE;
-    int SEflg;
 
-    int GetPsAppleTime; //毒リンゴを取ってからの経過時間
+    int GetPsAppleTime; //毒りんごを取ってからの経過時間
+    bool GetPsAppleFlg; //毒りんご取得判断用フラグ
     bool PlayerDispFlg; //点滅用フラグ
 
 public:

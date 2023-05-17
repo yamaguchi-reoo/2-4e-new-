@@ -16,7 +16,7 @@ DrawRanking::DrawRanking()
 	NomalFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 	GuideFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 	//ランキングデータの読み込み
-	RANKING::ReadRanking();
+	Ranking::ReadRanking();
 
 	//BGMの読み込み
 	if ((RankingBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
@@ -46,9 +46,6 @@ DrawRanking::~DrawRanking()
 	//フォントの削除
 	DeleteFontToHandle(RankingFont);
 
-	//サウンドの削除
-	DeleteSoundMem(DecisionSE);
-	DeleteSoundMem(RankingBGM);
 }
 
 AbstractScene* DrawRanking::Update()
@@ -58,8 +55,6 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK, TRUE);
-		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;
@@ -73,7 +68,7 @@ void DrawRanking::Draw() const
 	int color = 0xffffff;
 	for (int i = 0; i < RANK; i++)
 	{
-		switch (RANKING::GetData(i).no)
+		switch (Ranking::GetData(i).no)
 		{
 		case 1:
 			color = 0xffd700;
@@ -91,8 +86,8 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%d位", RANKING::GetData(i).no);
-		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", RANKING::GetData(i).score);
+		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%d位", Ranking::GetData(i).no);
+		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", Ranking::GetData(i).score);
 
 	}
 	//DrawCircle(554, 666, 20, 0xffffff, TRUE);

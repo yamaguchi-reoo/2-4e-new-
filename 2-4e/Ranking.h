@@ -8,13 +8,13 @@ struct RankingData
 	int score;
 };
 
-class RANKING
+class Ranking
 {
 private:
 	static RankingData data[RANK];
 private:
 	//コンストラクタ
-	RANKING() = default;
+	Ranking() = default;
 
 	//ランキングの並べ替え
 	static void SortRanking();

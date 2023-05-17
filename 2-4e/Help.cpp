@@ -9,7 +9,6 @@
 //--------------------------------
 Help::Help() 
 {
-	SEflg = 0;
 	//ヘルプ画面読み込み
 	if ((HelpImg = LoadGraph("Resource/Images/Help.png")) == -1)
 	{
@@ -36,6 +35,11 @@ Help::Help()
 	if (CheckSoundMem(HelpBGM) == 0) {
 		PlaySoundMem(HelpBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
+	//画面切替時SE
+	if (CheckSoundMem(HelpSE) == 0)
+	{
+		PlaySoundMem(HelpSE, DX_PLAYTYPE_BACK);
+	}
 }
 
 //--------------------------------
@@ -54,8 +58,6 @@ Help::~Help()
 //--------------------------------
 AbstractScene* Help::Update()
 {
-
-
 	//Bボタンでタイトルへ戻る
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B))
 	{
@@ -65,15 +67,6 @@ AbstractScene* Help::Update()
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
 		return new GameMain();
-	}
-
-	//画面切替時SE
-	if (CheckSoundMem(HelpSE) == 0)
-	{
-		if (SEflg++ == 1)
-		{
-			PlaySoundMem(HelpSE, DX_PLAYTYPE_BACK);
-		}
 	}
 	return this;
 }
