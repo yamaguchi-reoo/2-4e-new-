@@ -16,7 +16,7 @@ DrawRanking::DrawRanking()
 	NomalFont = CreateFontToHandle("HGSënâpäpŒﬂØÃﬂëÃ", 64, 8, DX_FONTTYPE_ANTIALIASING);
 	GuideFont = CreateFontToHandle("HGSënâpäpŒﬂØÃﬂëÃ", 64, 8, DX_FONTTYPE_ANTIALIASING);
 	//ÉâÉìÉLÉìÉOÉfÅ[É^ÇÃì«Ç›çûÇ›
-	RANKING::ReadRanking();
+	Ranking::ReadRanking();
 
 	//BGMÇÃì«Ç›çûÇ›
 	if ((RankingBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
@@ -86,8 +86,8 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%dà ", RANKING::GetData(i).no);
-		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", RANKING::GetData(i).score);
+		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%dà ", Ranking::GetData(i).no);
+		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", Ranking::GetData(i).score);
 
 	}
 	//DrawCircle(554, 666, 20, 0xffffff, TRUE);
