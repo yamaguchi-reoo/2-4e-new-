@@ -93,8 +93,8 @@ AbstractScene* InputRankingScene::Update()
 //ƒV[ƒ“‚Ì•ÏXˆ—
 AbstractScene* InputRankingScene::ChangeScene()
 {
-	if (PAD_INPUT::OnButton(PAD_INPUT_B)) {
-		return new DrawRanking( score);
+	if (PAD_INPUT::OnButton(PAD_INPUT_A)) {
+		return new DrawRanking(score);
 	}
 
 	return this;

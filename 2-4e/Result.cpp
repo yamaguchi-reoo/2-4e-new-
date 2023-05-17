@@ -7,6 +7,7 @@
 #include"Credit.h"
 #include"End.h"
 #include"Result.h"
+#include"InputRankingScene.h"
 
 
 #define TIME_LIMIT 2000;
@@ -46,6 +47,15 @@ AbstractScene* Result::Update() {
 	}
 	return this;
 }
+AbstractScene* Result::ChangeScene()
+{
+	if (PAD_INPUT::OnButton(PAD_INPUT_A)) {
+		return new InputRankingScene();
+	}
+
+	return this;
+}
+
 
 
 //--------------------------------

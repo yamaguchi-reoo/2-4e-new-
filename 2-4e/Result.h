@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractScene.h"
+#include"InputRankingScene.h"
 #include "Define.h"
 
 #define WAIT_TIME 360
@@ -21,4 +22,7 @@ public:
 
     //•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
     void Draw() const override;
+
+    //ƒV[ƒ“‚Ì•ÏXˆ—
+    AbstractScene* ChangeScene()override;
 };

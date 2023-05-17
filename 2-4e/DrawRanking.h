@@ -25,5 +25,8 @@ public:
 
 	//•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
 	void Draw() const override;
+
+	//ƒV[ƒ“‚Ì•ÏXˆ—
+	AbstractScene* ChangeScene()override;
 };
 
