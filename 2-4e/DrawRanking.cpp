@@ -95,3 +95,8 @@ void DrawRanking::Draw() const
 	DrawStringToHandle(455, 650, "A ‚Åƒ^ƒCƒgƒ‹", 0xff0000, RankingFont);
 
 }
+
+AbstractScene* DrawRanking::ChangeScene()
+{
+	return nullptr;
+}

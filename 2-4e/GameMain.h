@@ -67,6 +67,9 @@ public:
     //りんごスポーン処理
     void AppleSpawn();
 
+    //シーンの変更処理
+    AbstractScene* ChangeScene()override;
+
 };
 
 
