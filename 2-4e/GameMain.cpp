@@ -199,8 +199,11 @@ AbstractScene* GameMain::Update()
 
 	if (Time <= 0)
 	{
-		return new Result();//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
-		
+		GameMain::getScore = TotalScore;
+		for (int i = 0; i < 4; i++) {
+			GameMain::R_Apple[i] = gGetApple[i];
+		}
+		return new Result();
 	}
 	if (Time <= 600) {
 		TimerColor = GetColor(255-Time/3,0,0);
@@ -213,11 +216,6 @@ AbstractScene* GameMain::Update()
 		{
 			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
 		}
-	}
-
-	GameMain::getScore = TotalScore;
-	for (int i=0; i < 4; i++) {
-		GameMain::R_Apple[i] = gGetApple[i];
 	}
 	return this;
 	

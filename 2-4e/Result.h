@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractScene.h"
 #include "Define.h"
+#include "Ranking.h"
 
 #define WAIT_TIME 360
 class Result :

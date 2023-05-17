@@ -6,9 +6,9 @@
 DrawRanking::DrawRanking()
 {
 	//背景画像の読み込み
-	if ((Image = LoadGraph("Resource/Images/End.png")) == -1)
+	if ((Image = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
-		throw "Resource/Images/End.png";
+		throw "Resource/Images/mori.png";
 	}
 
 	//フォントの追加
@@ -17,29 +17,7 @@ DrawRanking::DrawRanking()
 	GuideFont = CreateFontToHandle("Guide", 32, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
 
 	//ランキングデータの読み込み
-	RANKING::ReadRanking();
-
-	//BGM読み込み
-	if ((RankingBGM = LoadSoundMem("Resource/sounds/BGM/Sick_Red_Girl.mp3")) == -1)
-	{
-		throw "Resource/sounds/BGM/Sick_Red_Girl.mp3";
-	}
-	//BGMの音量変更
-	ChangeVolumeSoundMem(125, RankingBGM);
-
-	//決定ボタンのSE
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision.wav")) == -1)
-	{
-		throw "Resource/sounds/SE/Decision.wav";
-	}
-	//SEの音量変更
-	ChangeVolumeSoundMem(200, DecisionSE);
-
-	//BGMの再生
-	if (CheckSoundMem(RankingBGM) == 0)
-	{
-		PlaySoundMem(RankingBGM, DX_PLAYTYPE_LOOP, TRUE);
-	}
+	Ranking::ReadRanking();
 }
 
 DrawRanking::~DrawRanking()
@@ -49,9 +27,6 @@ DrawRanking::~DrawRanking()
 	DeleteFontToHandle(NomalFont);
 	DeleteFontToHandle(GuideFont);
 
-	//サウンドの削除
-	DeleteSoundMem(DecisionSE);
-	DeleteSoundMem(RankingBGM);
 }
 
 AbstractScene* DrawRanking::Update()
@@ -61,8 +36,6 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK, TRUE);
-		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;
@@ -76,7 +49,7 @@ void DrawRanking::Draw() const
 	int color = 0xffffff;
 	for (int i = 0; i < RANK; i++)
 	{
-		switch (RANKING::GetData(i).no)
+		switch (Ranking::GetData(i).no)
 		{
 		case 1:
 			color = 0xffd700;
@@ -94,8 +67,8 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(490, 250 + (70 * i), color, NomalFont, "%d位", RANKING::GetData(i).no);
-		DrawFormatStringToHandle(590, 250 + (70 * i), color, NomalFont, "%5dpt", RANKING::GetData(i).score);
+		DrawFormatStringToHandle(490, 250 + (70 * i), color, NomalFont, "%d位", Ranking::GetData(i).no);
+		DrawFormatStringToHandle(590, 250 + (70 * i), color, NomalFont, "%5dpt", Ranking::GetData(i).score);
 
 	}
 	DrawCircle(554, 666, 20, 0xffffff, TRUE);

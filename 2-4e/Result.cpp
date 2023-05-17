@@ -3,13 +3,13 @@
 #include "Title.h"
 #include "GameMain.h"
 #include "DrawRanking.h"
-#include"PadInput.h"
-#include"Credit.h"
-#include"End.h"
-#include"Result.h"
+#include "PadInput.h"
+#include "End.h"
+#include "Result.h"
+#include "Ranking.h"
 
 
-#define TIME_LIMIT 2000;
+#define TIME_LIMIT 200;
 
 // --------------------------------
 // コンストラクタ
@@ -19,15 +19,10 @@ Result::Result()
 	//初期化
 	WaitTime = TIME_LIMIT;
 
-
-
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
-
-
-
 }
 
 //--------------------------------
@@ -41,8 +36,18 @@ Result::~Result()
 // 更新
 //--------------------------------
 AbstractScene* Result::Update() {
-	if (WaitTime-- < 0) {
-		return new Title;
+	if (WaitTime-- < 0)
+	{
+		if (GameMain::getScore > Ranking::GetData(4).score)
+		{
+			//名前入力処理へ移行
+			return new Title();
+		}
+		else
+		{
+			//ランキング描画処理へ移行
+			return new DrawRanking();
+		}
 	}
 	return this;
 }
