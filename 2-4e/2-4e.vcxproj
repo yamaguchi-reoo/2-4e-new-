@@ -159,6 +159,7 @@
     <ClCompile Include="FpsController.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="InputRankingScene.cpp" />
     <ClCompile Include="PadInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="End.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="Help.h" />
+    <ClInclude Include="InputRankingScene.h" />
     <ClInclude Include="PadInput.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ranking.h" />

@@ -93,7 +93,7 @@ AbstractScene* Title::Update()
 		KeyFlg = NowKey & ~OldKey;
 
 		//Lスティック上入力
-		if (KeyFlg & NowKey / (-20923) < 0)
+		if (KeyFlg && NowKey / (-20923) < 0)
 		{
 			PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 			Select--;
@@ -101,7 +101,7 @@ AbstractScene* Title::Update()
 		}
 
 		//Lスティック下入力
-		if (KeyFlg & NowKey / 20923 < 0)
+		if (KeyFlg && NowKey / 20923 < 0)
 		{
 			PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 			Select++;
