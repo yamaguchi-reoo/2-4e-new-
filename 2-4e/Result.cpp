@@ -18,7 +18,7 @@ Result::Result()
 {
 	//初期化
 	WaitTime = TIME_LIMIT;
-
+	Ranking::ReadRanking();
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
@@ -41,12 +41,12 @@ AbstractScene* Result::Update() {
 		if (GameMain::getScore > Ranking::GetData(4).score)
 		{
 			//名前入力処理へ移行
-			return new Title();
+			return new Title;
 		}
 		else
 		{
 			//ランキング描画処理へ移行
-			return new DrawRanking();
+			return new DrawRanking;
 		}
 	}
 	return this;
