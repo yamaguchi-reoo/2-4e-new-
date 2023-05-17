@@ -21,7 +21,7 @@ Title::Title()
 	//初期化
 	Select = 0;
 
-	MenuFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING_EDGE_16X16);
+	MenuFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 
 	//タイトル画像の読み込み
 	if ((TitleImg = LoadGraph("Resource/Images/mori.png")) == -1)
@@ -83,6 +83,31 @@ AbstractScene* Title::Update()
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select++;
 		if (Select > 3)Select = 0;
+
+	}
+
+	{
+		//入力キー情報
+		OldKey = NowKey;
+		NowKey = PAD_INPUT::GetLStick().ThumbY;
+		KeyFlg = NowKey & ~OldKey;
+
+		//Lスティック上入力
+		if (KeyFlg && NowKey / (-20923) < 0)
+		{
+			PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
+			Select--;
+			if (Select < 0)Select = 3;
+		}
+
+		//Lスティック下入力
+		if (KeyFlg && NowKey / 20923 < 0)
+		{
+			PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
+			Select++;
+			if (Select > 3)Select = 0;
+		}
+
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
@@ -116,7 +141,7 @@ void Title::Draw()const
 {
 	// ステージの描画
 	SetFontSize(64);                             //サイズを64に変更
-	//SetFontThickness(8);                        //太さを8に変更
+	//SetFontThickness(8);                         //太さを8に変更
 
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);

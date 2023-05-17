@@ -11,4 +11,5 @@ public:
 
 	//•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ðŽÀ‘•
 	virtual void Draw() const = 0;
+
 };

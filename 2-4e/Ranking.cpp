@@ -81,3 +81,7 @@ void Ranking::ReadRanking(void) {
 	//ファイルクローズ
 	fclose(fp);
 }
+
+//void RANKING::WriteRanking(std::string _name, long int _score)
+//{
+//}

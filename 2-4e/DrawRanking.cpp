@@ -41,6 +41,11 @@ DrawRanking::DrawRanking()
 	}
 }
 
+
+DrawRanking::DrawRanking(int score)
+{
+}
+
 DrawRanking::~DrawRanking()
 {
 	//ƒtƒHƒ“ƒg‚Ìíœ
