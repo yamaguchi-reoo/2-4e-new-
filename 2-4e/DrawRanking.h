@@ -6,12 +6,12 @@ class DrawRanking :
 {
 private:
 	int Image; //背景画像
-	int HeadLineFont; //見出し用のフォント
+	int RankingFont; //見出し用のフォント
 	int NomalFont; //通常時用のフォント
 	int GuideFont; //ボタン指示用のフォント
 
 	int RankingBGM; //BGM
-	int DecisionSE; //選択SE
+	int DecisionSE;
 public:
 	//コンストラクタ
 	DrawRanking();

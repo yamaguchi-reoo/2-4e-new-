@@ -21,7 +21,7 @@ Title::Title()
 	//‰Šú‰»
 	Select = 0;
 
-	MenuFont = CreateFontToHandle("HG‘n‰pŠpÎß¯Ìß‘Ì", 64, 8, DX_FONTTYPE_ANTIALIASING);
+	MenuFont = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 64, 8, DX_FONTTYPE_ANTIALIASING_EDGE_16X16);
 
 	//ƒ^ƒCƒgƒ‹‰æ‘œ‚Ì“Ç‚İ‚İ
 	if ((TitleImg = LoadGraph("Resource/Images/mori.png")) == -1)

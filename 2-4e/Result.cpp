@@ -18,8 +18,7 @@ Result::Result()
 {
 	//初期化
 	WaitTime = TIME_LIMIT;
-
-
+	ResultFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 50, 8, DX_FONTTYPE_ANTIALIASING);
 
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
@@ -59,10 +58,10 @@ void Result::Draw()const
 	// スコアの描画
 	DrawBox(256, 144, 1024, 576, 0xffffff, TRUE);
 	SetFontSize(50);
-	DrawFormatString(270, 200, 0x000000, "赤りんご：%.2d", GameMain::R_Apple[0]);
-	DrawFormatString(270, 260, 0x000000, "青りんご：%.2d", GameMain::R_Apple[1]);
-	DrawFormatString(270, 320, 0x000000, "金りんご：%.2d", GameMain::R_Apple[2]);
-	DrawFormatString(270, 380, 0x000000, "毒りんご：%.2d", GameMain::R_Apple[3]);
-	DrawFormatString(270, 440, 0x000000, "スコア：%.5d", GameMain::getScore);
+	DrawFormatStringToHandle(270, 200, 0xff0000, ResultFont, "赤りんご：%.2d", GameMain::R_Apple[0]);
+	DrawFormatStringToHandle(270, 260, 0x0000ff, ResultFont, "青りんご：%.2d", GameMain::R_Apple[1]);
+	DrawFormatStringToHandle(270, 320, 0xffff00, ResultFont, "金りんご：%.2d", GameMain::R_Apple[2]);
+	DrawFormatStringToHandle(270, 380, 0xff00ff, ResultFont, "毒りんご：%.2d", GameMain::R_Apple[3]);
+	DrawFormatStringToHandle(270, 440, 0x000000, ResultFont, "スコア：%.5d", GameMain::getScore);
 	SetFontSize(24);
 }

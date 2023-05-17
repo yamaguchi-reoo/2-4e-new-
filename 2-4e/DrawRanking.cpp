@@ -12,10 +12,9 @@ DrawRanking::DrawRanking()
 	}
 
 	//フォントの追加
-	HeadLineFont = CreateFontToHandle("HeadLine", 80, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
-	NomalFont = CreateFontToHandle("Nomal", 64, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
-	GuideFont = CreateFontToHandle("Guide", 32, 8, DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
-
+	RankingFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
+	NomalFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
+	GuideFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 	//ランキングデータの読み込み
 	RANKING::ReadRanking();
 
@@ -45,9 +44,7 @@ DrawRanking::DrawRanking()
 DrawRanking::~DrawRanking()
 {
 	//フォントの削除
-	DeleteFontToHandle(HeadLineFont);
-	DeleteFontToHandle(NomalFont);
-	DeleteFontToHandle(GuideFont);
+	DeleteFontToHandle(RankingFont);
 
 	//サウンドの削除
 	DeleteSoundMem(DecisionSE);
@@ -71,7 +68,7 @@ AbstractScene* DrawRanking::Update()
 void DrawRanking::Draw() const
 {
 	DrawGraph(0, 0, Image, TRUE);
-	DrawStringToHandle(440, 75, "ランキング", 0xffd800, HeadLineFont);
+	DrawStringToHandle(470, 75, "ランキング", 0xffd800, RankingFont);
 
 	int color = 0xffffff;
 	for (int i = 0; i < RANK; i++)
@@ -94,11 +91,11 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(490, 250 + (70 * i), color, NomalFont, "%d位", RANKING::GetData(i).no);
-		DrawFormatStringToHandle(590, 250 + (70 * i), color, NomalFont, "%5dpt", RANKING::GetData(i).score);
+		DrawFormatStringToHandle(470, 220 + (70 * i), color, RankingFont, "%d位", RANKING::GetData(i).no);
+		DrawFormatStringToHandle(570, 220 + (70 * i), color, RankingFont, "%5dpt", RANKING::GetData(i).score);
 
 	}
-	DrawCircle(554, 666, 20, 0xffffff, TRUE);
-	DrawStringToHandle(545, 650, "A でタイトル", 0xff0000, GuideFont);
+	//DrawCircle(554, 666, 20, 0xffffff, TRUE);
+	DrawStringToHandle(455, 650, "A でタイトル", 0xff0000, RankingFont);
 
 }

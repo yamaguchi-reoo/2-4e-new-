@@ -9,6 +9,7 @@ class Result :
 private:
     int ForestImg; //背景画像
     int WaitTime; //次のシーンに移るまでの時間
+    int ResultFont;
 public:
     //コンストラクタ
     Result();

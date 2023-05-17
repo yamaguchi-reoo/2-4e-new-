@@ -112,7 +112,7 @@ void End::Draw()const {
 	SetFontSize(70);							 //大きさ70に変更
 	SetFontThickness(3);                         //太さを3に変更
 	ChangeFont("HGS創英角ﾎﾟｯﾌﾟ体");              //HGS創英角ﾎﾟｯﾌﾟ体に変更
-	ChangeFontType(DX_FONTTYPE_ANTIALIASING);
+	ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_16X16);	 //アンチエイリアシング エッジ付き16x16
 	DrawString(500, 780 - MoveString * 2, "SE & BGM", 0x0000ff);
 
 	SetFontSize(50);							//大きさ50に変更
