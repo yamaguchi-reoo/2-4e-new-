@@ -10,7 +10,7 @@ Apple::Apple()
 {
 	//初期化
 	flg = FALSE;
-	type = -1;			//タイプ
+	type = -1;			//タイプ(0は赤りんごなので-1に初期化)
 	img = 0;			//画像
 	location.x = 0;		//x座標
 	location.y = 0;		//y座標
@@ -22,12 +22,12 @@ Apple::Apple()
 
 	e_flg = FALSE;				//エフェクト表示フラグ
 	e_type = 0;					//りんご種類
-	e_x = 0;					//りんごX座標
-	e_y = 0;					//りんごY
+	e_x = 0;					//りんごX座標保存用
+	e_y = 0;					//りんごY座標保存用
 	e_color = GetColor(0,0,0);	//文字色
 	e_speed = 0.0;				//移動速度
-	e_point = 0;				//得点数
-	e_time = 0;					//エフェクトを開始してからの時間
+	e_point = 0;				//表示する得点数
+	e_time = 0;					//エフェクトを開始してからの経過時間
 	e_limit = 0;				//エフェクトを表示しておく時間
 
 	//りんご画像の読み込み
@@ -91,10 +91,12 @@ void Apple::Draw() const
 	//エフェクトの描画
 	if (e_flg == TRUE)
 	{
+		//赤、青、金りんご取得エフェクト描画
 		if (e_type != 3)
 		{
 			DrawFormatString(e_x, e_y, e_color, "+%d", e_point);
 		}
+		//毒りんご取得エフェクト描画
 		else
 		{
 			DrawFormatString(e_x + GetRand(10)-5, e_y + GetRand(10)-5 , e_color, "%d", e_point);
@@ -139,7 +141,7 @@ void Apple::Spawn()
 		erea.rate = -0.1;				//大きさ（当たり判定用）
 		speed = 0.5;					//移動速度
 		point = -750;					//スコア加算ポイント
-		span = 150;						//各りんごが被らないようにするための待ち時間
+		span = 200;						//各りんごが被らないようにするための待ち時間
 		break;
 	}
 }
@@ -221,7 +223,7 @@ int Apple::GetAppleSpan()
 void Apple::AppleReset()
 {
 	flg = FALSE;		//フラグ
-	type = 0;			//タイプ
+	type = -1;			//タイプ
 	img = 0;			//画像
 	location.x = 0;		//X座標
 	location.y = 0;		//Y座標
@@ -240,8 +242,8 @@ void Apple::EffectSet()
 	e_x = location.x;					
 	e_y = location.y;					
 	e_color = gAppleColor[type];
-	e_speed = speed;
-	if (type == 3)e_speed = -1;
+	if (type != 3) { e_speed = speed; }
+	else { e_speed = -1; }
 	e_point = point;
 	e_time = 0;	
 	e_limit = 50;

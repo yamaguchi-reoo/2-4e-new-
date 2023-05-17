@@ -38,7 +38,7 @@ Result::~Result()
 AbstractScene* Result::Update() {
 	if (WaitTime-- < 0)
 	{
-		if (GameMain::getScore > Ranking::GetData(4).score)
+		if (GameMain::getScore > Ranking::GetData(RANK - 1).score)
 		{
 			//–¼‘O“ü—Íˆ—‚ÖˆÚs
 			return new Title;
