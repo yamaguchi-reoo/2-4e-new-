@@ -4,10 +4,8 @@
 
 #define MAX_APPLE		 10			//りんごスポーン上限
 #define APPLE_SIZE		 85			//りんごの大きさ
-#define APPLE_RED		 255,0,0	//赤りんごの色情報
-#define APPLE_BLUE		 0,255,0	//青りんごの色情報
-#define APPLE_GOLD		 255,255,0  //金りんごの色情報
-#define APPLE_POISON	 255,0,255  //毒りんごの色情報
+#define APPLE_DISTANCE	150			//りんご同士の間隔
+
 
 class Apple :public BoxCollider
 {
@@ -41,10 +39,10 @@ public:
 	//デストラクタ
 	~Apple();
 
-	//更新
+	//描画以外の更新を実行
 	void UpDate();
 
-	//描画
+	//描画に関することを実装
 	void Draw() const;
 
 	//スポーン処理

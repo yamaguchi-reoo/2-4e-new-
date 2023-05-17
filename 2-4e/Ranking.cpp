@@ -3,9 +3,9 @@
 
 #define FILEPATH "Resource/Ranking/Ranking.txt"
 
-RankingData RANKING::data[RANK];
+RankingData Ranking::data[RANK];
 
-void RANKING::Insert(int score)
+void Ranking::Insert(int score)
 {
 	ReadRanking();
 	if (data[RANK - 1].score < score)
@@ -16,7 +16,7 @@ void RANKING::Insert(int score)
 	}
 }
 
-void RANKING::SortRanking()
+void Ranking::SortRanking()
 {
 	RankingData work;	//並び替えようの変数
 
@@ -46,7 +46,7 @@ void RANKING::SortRanking()
 		}
 	}
 }
-void RANKING::SaveRanking(void) {
+void Ranking::SaveRanking(void) {
 	FILE* fp = NULL;
 
 	//ファイルオープン
@@ -64,7 +64,7 @@ void RANKING::SaveRanking(void) {
 }
 
 
-void RANKING::ReadRanking(void) {
+void Ranking::ReadRanking(void) {
 	FILE* fp = NULL;
 
 	//ファイルオープン

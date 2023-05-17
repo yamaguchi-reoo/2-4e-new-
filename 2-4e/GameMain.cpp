@@ -11,23 +11,28 @@ GameMain::GameMain()
 	
 	//初期化
 	frame = 0;
+	Time = 3599;
+	TotalScore = 0;
+
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
 	}
 	for (int i = 0; i < 7; i++) {
 		CheckSpawn[i] = FALSE;
 	}
+
 	gGetAppleType = 0;
-	TotalScore = 0;
-	PauseFlg = FALSE;
-	PauseFlash = 0;
-	Time = 599;
+	PauseFlashTime = 0;
 	GetPsAppleTime = 0;
-	PlayerDispFlg = TRUE;
-	TimerColor = GetColor(0,0,0);
-	SEflg = 0;
 	a_Count = 0;
 	SpawnCount = 0;
+
+	PauseFlashFlg = FALSE;
+	GetPsAppleFlg = FALSE;
+	PlayerDispFlg = TRUE;
+	PauseFlg = FALSE;
+
+	TimerColor = GetColor(0, 0, 0);
 
 	//オブジェクト化
 	player = new Player();
@@ -86,12 +91,11 @@ GameMain::GameMain()
 	ChangeVolumeSoundMem(100, AppleSE);
 	ChangeVolumeSoundMem(100, PoisonAppleSE);
 
-	//BGM
-	//if (CheckSoundMem(MainBGM) == 0)
-	//{
-		//PlaySoundMem(MainBGM, DX_PLAYTYPE_BACK);
-	//}
-
+	//画面切替時SE
+	if (CheckSoundMem(StartSE) == 0)
+	{
+		PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
+	}
 }
 
 GameMain::~GameMain()
@@ -127,6 +131,7 @@ AbstractScene* GameMain::Update()
 		{
 			PlaySoundMem(MainBGM, DX_PLAYTYPE_LOOP, FALSE);
 		}
+
 		//処理の更新
 		player->UpDate();
 		for (int i = 0; i < MAX_APPLE; i++) 
@@ -136,7 +141,7 @@ AbstractScene* GameMain::Update()
 			if (apple[i]->GetAppleFlg() == TRUE && apple[i]->GetAppleTime() == apple[i]->GetAppleSpan())
 			{
 				//スポーン可能に
-				CheckSpawn[apple[i]->GetAppleLocationX()/150] = FALSE;
+				CheckSpawn[apple[i]->GetAppleLocationX()/ APPLE_DISTANCE] = FALSE;
 			}
 
 			//りんごとプレイヤーが接触して、プレイヤーが点滅状態でないならりんご取得処理へ
@@ -172,7 +177,7 @@ AbstractScene* GameMain::Update()
 			frame = 0;
 		}
 		//点滅中の処理
-		if (GetPsAppleTime > 0)
+		if (GetPsAppleFlg == TRUE)
 		{
 			if (++GetPsAppleTime % 20 == 0)
 			{
@@ -180,6 +185,7 @@ AbstractScene* GameMain::Update()
 			}
 			if (GetPsAppleTime >= 120)
 			{
+				GetPsAppleFlg = FALSE;
 				GetPsAppleTime = 0;
 			}
 		}
@@ -190,35 +196,28 @@ AbstractScene* GameMain::Update()
 	//一時停止中
 	if (PauseFlg == TRUE)
 	{
-		PauseFlash++;
-		if (PauseFlash > 20)
+		if (++PauseFlashTime >= 10)
 		{
-			PauseFlash = 0;
+			PauseFlashFlg = !PauseFlashFlg;
+			PauseFlashTime = 0;
 		}
 	}
-
+	//時間切れ後のリザルト移行処理
 	if (Time <= 0)
 	{
-		return new Result();//ここでリザルト画面へ移行（スコアはTotalScoreに、どのりんごをいくつ取得したかの内訳はGetApple[]に入っている）
-		
+		//スコア、獲得りんごの内訳を格納
+		GameMain::getScore = TotalScore;
+		for (int i = 0; i < 4; i++) {
+			GameMain::R_Apple[i] = gGetApple[i];
+		}
+		//リザルト画面に移行
+		return new Result();
 	}
+	//制限時間が１０秒を切ったら残り時間に応じて文字色を変えていく
 	if (Time <= 600) {
 		TimerColor = GetColor(255-Time/3,0,0);
 	}
 
-	//画面切替時SE
-	if (CheckSoundMem(StartSE) == 0)
-	{
-		if (SEflg++ == 1)
-		{
-			PlaySoundMem(StartSE, DX_PLAYTYPE_BACK);
-		}
-	}
-
-	GameMain::getScore = TotalScore;
-	for (int i=0; i < 4; i++) {
-		GameMain::R_Apple[i] = gGetApple[i];
-	}
 	return this;
 	
 }
@@ -229,10 +228,8 @@ void GameMain::Draw()const
 	DrawGraph(0, 0, ForestImg, TRUE);
 	// スコアの描画
 	DrawBox(1000, 0, 1280, 720, 0xffffff, TRUE);
-	DrawRotaGraph(1080, 370, 0.5f, 0, gAppleImg[0], TRUE, FALSE);
-	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
-	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
 	for (int i = 0; i < 3; i++) {
+		DrawRotaGraph(1080 + i * 60, 370, 0.5f, 0, gAppleImg[i], TRUE, FALSE);
 		DrawFormatString(1067 + i * 60, 320, 0x000000, "%.2d", gGetApple[i]);
 	}
 	SetFontSize(30);
@@ -270,10 +267,10 @@ void GameMain::Draw()const
 		DrawBox(0, 0, 1000, 780, 0x000000, TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 		SetFontSize(30);
-		if (PauseFlash <= 10) {
+		if (PauseFlashFlg == TRUE) {
 			DrawString(370, 370, "---ポーズ中---", 0x000000, TRUE);
 		}
-		else if (PauseFlash > 10) {
+		else{
 			DrawString(370, 370, "---ポーズ中---", 0xffffff, TRUE);
 		}
 		SetFontSize(20);
@@ -297,7 +294,7 @@ void GameMain::AppleGet(int i)
 	if (gGetAppleType == 3)
 	{
 		//プレイヤーの点滅処理を開始する
-		GetPsAppleTime = 1;
+		GetPsAppleFlg = TRUE;
 		PlaySoundMem(PoisonAppleSE, DX_PLAYTYPE_BACK);
 	}
 	else
@@ -347,7 +344,7 @@ void GameMain::AppleSpawn()
 			//りんご生成
 			apple[SpawnApple]->Spawn();
 			//りんごの座標決定
-			apple[SpawnApple]->SetLocation(SpawnPos * 150);
+			apple[SpawnApple]->SetLocation(SpawnPos * APPLE_DISTANCE);
 			//りんご生成済チェックをいれる
 			CheckSpawn[SpawnPos] = TRUE;
 			//画面にあるりんごの個数を後で増加させるために数えておく

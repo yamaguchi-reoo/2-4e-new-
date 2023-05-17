@@ -46,9 +46,6 @@ DrawRanking::~DrawRanking()
 	//フォントの削除
 	DeleteFontToHandle(RankingFont);
 
-	//サウンドの削除
-	DeleteSoundMem(DecisionSE);
-	DeleteSoundMem(RankingBGM);
 }
 
 AbstractScene* DrawRanking::Update()
@@ -58,8 +55,6 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK, TRUE);
-		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;
@@ -73,7 +68,7 @@ void DrawRanking::Draw() const
 	int color = 0xffffff;
 	for (int i = 0; i < RANK; i++)
 	{
-		switch (RANKING::GetData(i).no)
+		switch (Ranking::GetData(i).no)
 		{
 		case 1:
 			color = 0xffd700;
