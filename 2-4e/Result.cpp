@@ -37,6 +37,9 @@ Result::Result()
 //--------------------------------
 Result::~Result()
 {
+	// ƒtƒHƒ“ƒgíœ
+	DeleteFontToHandle(ResultFont1);
+	DeleteFontToHandle(ResultFont2);
 
 }
 //--------------------------------
