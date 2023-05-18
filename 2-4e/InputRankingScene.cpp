@@ -88,18 +88,3 @@ AbstractScene* InputRankingScene::Update()
 	}
 	return this;
 }
-
-//void RANKING::WriteRanking(std::string _name, long int _score)
-//{
-//}
-
-//ƒV[ƒ“‚Ì•ÏXˆ—
-AbstractScene* InputRankingScene::ChangeScene()
-{
-	if (PAD_INPUT::OnButton(PAD_INPUT_A)) {
-		return new DrawRanking(score);
-	}
-
-	return this;
-
-}

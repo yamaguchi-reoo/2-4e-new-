@@ -3,6 +3,7 @@
 #include "Ranking.h"
 #include "DxLib.h"
 #include "PadInput.h"
+#include<string>
 
 class InputRankingScene : public AbstractScene
 {

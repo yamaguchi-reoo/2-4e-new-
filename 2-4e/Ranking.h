@@ -1,5 +1,4 @@
 #pragma once
-
 #define RANK 5
 
 struct RankingData
@@ -11,20 +10,15 @@ struct RankingData
 class Ranking
 {
 private:
-	static RankingData data[RANK];
-private:
-	//コンストラクタ
-	Ranking() = default;
 
 	static RankingData data[RANK];
-
-	Ranking() = default;
 
 	//ランキングの並べ替え
 	static void SortRanking();
 
 	//ランキングデータの保存
 	static void SaveRanking();
+
 public:
 
 	//ランキングデータの更新
