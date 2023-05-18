@@ -41,6 +41,11 @@ DrawRanking::DrawRanking()
 	}
 }
 
+
+DrawRanking::DrawRanking(int score)
+{
+}
+
 DrawRanking::~DrawRanking()
 {
 	//フォントの削除
@@ -89,4 +94,9 @@ void DrawRanking::Draw() const
 	}
 	DrawStringToHandle(455, 650, "A でタイトル", 0xff0000, RankingFont);
 
+}
+
+AbstractScene* DrawRanking::ChangeScene()
+{
+	return nullptr;
 }
