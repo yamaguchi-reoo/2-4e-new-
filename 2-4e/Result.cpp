@@ -7,9 +7,9 @@
 #include "End.h"
 #include "Result.h"
 #include "Ranking.h"
+#include "InputRankingScene.h"
 
-
-#define TIME_LIMIT 200;
+#define TIME_LIMIT 1;
 
 // --------------------------------
 // コンストラクタ
@@ -49,7 +49,7 @@ AbstractScene* Result::Update() {
 		if (GameMain::getScore > Ranking::GetData(RANK - 1).score)
 		{
 			//名前入力処理へ移行
-			return new Title;
+			return new InputRankingScene(GameMain::getScore);
 		}
 		else
 		{

@@ -5,13 +5,13 @@ class DrawRanking :
 	public AbstractScene
 {
 private:
-	int Image = 0; //背景画像
-	int HeadLineFont = 0; //見出し用のフォント
-	int NomalFont = 0; //通常時用のフォント
-	int GuideFont = 0; //ボタン指示用のフォント
+	int Image; //背景画像
+	int HeadLineFont; //見出し用のフォント
+	int NomalFont; //通常時用のフォント
+	int GuideFont; //ボタン指示用のフォント
 
-	int RankingBGM = 0; //BGM
-	int DecisionSE = 0; //選択SE
+	int RankingBGM; //BGM
+	int DecisionSE; //選択SE
 public:
 	DrawRanking();
 	//コンストラクタ

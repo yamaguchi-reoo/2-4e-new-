@@ -10,7 +10,7 @@ typedef struct
 	int score;
 }RankingData;
 
-class RANKING
+class Ranking
 {	
 
 public:
@@ -18,7 +18,7 @@ public:
 
 	static RankingData data[RANK];
 
-	RANKING() = default;
+	Ranking() = default;
 
 	//ƒ‰ƒ“ƒLƒ“ƒO‚Ì•À‚×‘Ö‚¦
 	static void SortRanking();

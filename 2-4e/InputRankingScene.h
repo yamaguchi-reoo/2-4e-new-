@@ -7,7 +7,7 @@
 class InputRankingScene : public AbstractScene
 {
 private:
-	RANKING ranking;
+	Ranking ranking;
 	RankingData RankingData[5];
 
 	int image;
@@ -18,7 +18,7 @@ private:
 	int img;
 
 	POINT cursorPoint;
-	const char keyboard[5][14] = { "ABCDEFGHIJKLM" ,"NOPQRSTUVWXYZ" ,"abcdefghijklm" ,"nopqrstuvwxyz" ,"0123456789<" };
+	const char keyboard[5][14] = { "ABCDEFGHIJKLM" ,"NOPQRSTUVWXYZ" ,"abcdefghijklm" ,"nopqrstuvwxyz" ,"0123456789" };
 
 
 public:
