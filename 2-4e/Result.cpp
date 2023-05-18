@@ -47,14 +47,14 @@ AbstractScene* Result::Update() {
 	}
 	return this;
 }
-AbstractScene* Result::ChangeScene()
-{
-	if (PAD_INPUT::OnButton(PAD_INPUT_A)) {
-		return new InputRankingScene();
-	}
-
-	return this;
-}
+//AbstractScene* Result::ChangeScene()
+//{
+//	if (PAD_INPUT::OnButton(PAD_INPUT_A)) {
+//		return new InputRankingScene();
+//	}
+//
+//	return this;
+//}
 
 
 

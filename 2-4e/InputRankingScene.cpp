@@ -98,4 +98,5 @@ AbstractScene* InputRankingScene::ChangeScene()
 	}
 
 	return this;
+
 }
