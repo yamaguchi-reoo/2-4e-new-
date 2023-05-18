@@ -10,7 +10,7 @@ GameMain::GameMain()
 {
 	//‰Šú‰»
 	frame = 0;
-	Time = 1;
+	Time = 300;
 	TotalScore = 5000;
 
 	for (int i = 0; i < 4; i++) {
@@ -209,6 +209,7 @@ AbstractScene* GameMain::Update()
 		for (int i = 0; i < 4; i++) {
 			GameMain::R_Apple[i] = gGetApple[i];
 		}
+		StopSoundMem(MainBGM);
 		//ƒŠƒUƒ‹ƒg‰æ–Ê‚ÉˆÚs
 		return new Result();
 	}

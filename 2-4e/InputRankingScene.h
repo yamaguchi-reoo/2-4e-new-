@@ -9,7 +9,6 @@ class InputRankingScene : public AbstractScene
 {
 private:
 	Ranking ranking;
-	RankingData RankingData[5];
 
 	int image;
 	int score;

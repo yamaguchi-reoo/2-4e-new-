@@ -8,9 +8,6 @@ InputRankingScene::InputRankingScene(int _score)
 	score = _score;
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
-	for (int i = 0; i < 5; i++) {
-		RankingData[i] = ranking.GetData(i);
-	}
 
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
@@ -83,7 +80,8 @@ AbstractScene* InputRankingScene::Update()
 			name.erase(name.begin() + (name.size() - 1));
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
-		Ranking::Insert(score);
+		//ここで名前をchar型にしてscoreと一緒にランキング更新画面に送りたい
+		Ranking::Insert(score,);
 		return new DrawRanking;
 	}
 	return this;

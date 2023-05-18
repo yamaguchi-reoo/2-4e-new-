@@ -5,12 +5,17 @@
 
 RankingData Ranking::data[RANK];
 
-void Ranking::Insert(int score)
+void Ranking::Insert(int score,char name[10])
 {
 	ReadRanking();
 	if (data[RANK - 1].score < score)
 	{
 		data[RANK - 1].score = score;
+		//data[].nameを新しい名前に更新したい
+		for (int i = 0; i < 10; i++)
+		{
+			data[RANK - 1].name[i] = name[i];
+		}
 		SortRanking();
 		SaveRanking();
 	}
@@ -57,7 +62,7 @@ void Ranking::SaveRanking(void) {
 
 	//ランキングデータを書き込む
 	for (int i = 0; i < RANK; i++) {
-		fprintf_s(fp, "%1d %10d\n", data[i].no, data[i].score);
+		fprintf_s(fp, "%1d%10d%10s\n", data[i].no, data[i].score, data[i].name);
 	}
 
 	fclose(fp);
@@ -75,7 +80,7 @@ void Ranking::ReadRanking(void) {
 
 	//ランキングデータ配分列データを読み込む
 	for (int i = 0; i < RANK; i++) {
-		fscanf_s(fp, "%1d %10s %10d", &data[i].no, data[i].name ,&data[i].score,10);
+		fscanf_s(fp, "%1d%10d%10s", &data[i].no, &data[i].score,data[i].name,9);
 	}
 
 	//ファイルクローズ

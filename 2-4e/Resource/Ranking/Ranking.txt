@@ -1,5 +1,5 @@
-1   matuda    1000
-1   matuda    1000
-1   matuda    1000
-1   matuda    1000
-1   matuda    1000
+1      6200   aaaaaaa
+2      5900   ddddddd
+3      5700   eeeeeee
+3      5700   bbbbbbb
+5      5200   ccccccc

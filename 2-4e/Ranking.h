@@ -4,7 +4,7 @@
 struct RankingData
 {
 	int no;
-	char name[11];
+	char name[10];
 	int score;
 };
 
@@ -23,7 +23,7 @@ private:
 public:
 
 	//ランキングデータの更新
-	static void Insert(int score);
+	static void Insert(int score,char name[10]);
 
 	//ランキングデータ読み込み
 	static void ReadRanking();

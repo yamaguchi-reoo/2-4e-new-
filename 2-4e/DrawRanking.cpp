@@ -44,7 +44,7 @@ DrawRanking::~DrawRanking()
 {
 	//フォントの削除
 	DeleteFontToHandle(HeadLineFont);
-
+	DeleteSoundMem(RankingBGM);
 }
 
 AbstractScene* DrawRanking::Update()
@@ -52,6 +52,7 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
+		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;
@@ -83,8 +84,9 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(470, 220 + (70 * i), color, HeadLineFont, "%d位", Ranking::GetData(i).no);
-		DrawFormatStringToHandle(570, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
+		DrawFormatStringToHandle(170, 220 + (70 * i), color, HeadLineFont, "%d位", Ranking::GetData(i).no);
+		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%s", Ranking::GetData(i).name);
+		DrawFormatStringToHandle(670, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
 	}
 	DrawStringToHandle(455, 650, "A でタイトル", 0xff0000, HeadLineFont);
 
