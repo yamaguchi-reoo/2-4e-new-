@@ -21,6 +21,6 @@ public:
     //描画に関することを実装
     void Draw()const override;
 
-    //シーンの変更処理
-    AbstractScene* ChangeScene()override;
+    ////シーンの変更処理
+    //AbstractScene* ChangeScene()override;
 };

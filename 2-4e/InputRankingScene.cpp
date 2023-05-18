@@ -19,6 +19,7 @@ InputRankingScene::InputRankingScene(int _score)
 }
 
 void InputRankingScene::Draw() const {
+	DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
 	DrawGraph(0, 0, image, TRUE);
 		SetFontSize(80);
 		DrawString(120, 100, "INPUT RANKING", 0x000000);
@@ -42,9 +43,9 @@ void InputRankingScene::Draw() const {
 
 AbstractScene* InputRankingScene::Update()
 {
-	if (PAD_INPUT::OnButton(PAD_INPUT_UP)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
 		if (--cursorPoint.y < 0) {
-			if (cursorPoint.x > 10) {
+			if (cursorPoint.x > 9) {
 				cursorPoint.y = 3;
 			}
 			else {
@@ -52,22 +53,22 @@ AbstractScene* InputRankingScene::Update()
 			}
 		}
 	}
-	if (PAD_INPUT::OnButton(PAD_INPUT_DOWN)) {
-		if (++cursorPoint.y > 3 && cursorPoint.x > 10 || cursorPoint.y > 4) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
+		if (++cursorPoint.y > 3 && cursorPoint.x > 9 || cursorPoint.y > 4) {
 			cursorPoint.y = 0;
 		}
 	}
-	if (PAD_INPUT::OnButton(PAD_INPUT_RIGHT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
 	
-		if (++cursorPoint.x > 10 && cursorPoint.y > 3 || cursorPoint.x > 12) {
+		if (++cursorPoint.x > 9 && cursorPoint.y > 3 || cursorPoint.x > 12) {
 			cursorPoint.x = 0;
 		}
 	}
-	if (PAD_INPUT::OnButton(PAD_INPUT_LEFT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
 		
 		if (--cursorPoint.x < 0) {
 			if (cursorPoint.y > 3) {
-				cursorPoint.x = 10;
+				cursorPoint.x = 9;
 			}
 			else {
 				cursorPoint.x = 12;
@@ -75,13 +76,15 @@ AbstractScene* InputRankingScene::Update()
 		}
 	}
 
-	if (PAD_INPUT::OnButton(PAD_INPUT_A) && name.size() < 5) {
-		if (keyboard[cursorPoint.y][cursorPoint.x] == '<' && name.size() > 0) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 10) {
+		name += keyboard[cursorPoint.y][cursorPoint.x];
+	}
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
 			name.erase(name.begin() + (name.size() - 1));
-		}
-		else {
-			name += keyboard[cursorPoint.y][cursorPoint.x];
-		}
+	}
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
+		Ranking::Insert(score);
+		return new DrawRanking;
 	}
 	return this;
 }

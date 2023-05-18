@@ -12,7 +12,7 @@ public:
 	//描画に関することを実装
 	virtual void Draw() const = 0;
 
-	//シーンの変更処理
-	virtual AbstractScene* ChangeScene() = 0;
+	////シーンの変更処理
+	//virtual AbstractScene* ChangeScene() = 0;
 
 };

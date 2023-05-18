@@ -16,6 +16,10 @@ private:
 	//コンストラクタ
 	Ranking() = default;
 
+	static RankingData data[RANK];
+
+	Ranking() = default;
+
 	//ランキングの並べ替え
 	static void SortRanking();
 
