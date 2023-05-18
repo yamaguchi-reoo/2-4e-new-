@@ -4,6 +4,7 @@
 struct RankingData
 {
 	int no;
+	char name[11];
 	int score;
 };
 
