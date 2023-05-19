@@ -10,6 +10,10 @@ private:
     int ForestImg;  //画像用
     int EndBGM;     //BGM用
     int EndSE;      //SE用
+    int EndFont1;
+    int EndFont2;
+    int EndFont3;
+
 
 public:
     //コンストラクタ

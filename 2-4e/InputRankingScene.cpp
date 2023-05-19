@@ -11,7 +11,7 @@ InputRankingScene::InputRankingScene(int _score)
 	for (int i = 0; i < 5; i++) {
 		RankingData[i] = ranking.GetData(i);
 	}
-	
+	//ƒtƒHƒ“ƒg‚Ì’Ç‰Á
 	NameFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 80, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 32, 8, DX_FONTTYPE_ANTIALIASING);

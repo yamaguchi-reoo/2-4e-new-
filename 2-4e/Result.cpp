@@ -18,10 +18,13 @@ Result::Result()
 {
 	//‰Šú‰»
 	WaitTime = TIME_LIMIT;
+	//ƒtƒHƒ“ƒg‚Ì’Ç‰Á
 	ResultFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 70, 8, DX_FONTTYPE_ANTIALIASING);
 	ResultFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 50, 8, DX_FONTTYPE_ANTIALIASING);
 
 	Ranking::ReadRanking();
+
+	//‰æ‘œ“Ç‚İ‚İ
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";

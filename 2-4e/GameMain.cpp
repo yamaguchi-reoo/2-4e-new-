@@ -40,6 +40,7 @@ GameMain::GameMain()
 	}
 	score = new Score();
 
+	//ƒtƒHƒ“ƒg‚Ì’Ç‰Á
 	MainFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 30, 6, DX_FONTTYPE_ANTIALIASING);
 	MainFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 40, 6, DX_FONTTYPE_ANTIALIASING);
 	MainFont3 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 20, 6, DX_FONTTYPE_ANTIALIASING);

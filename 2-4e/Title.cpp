@@ -21,6 +21,7 @@ Title::Title()
 	//初期化
 	Select = 0;
 
+	//フォントの追加
 	MenuFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 
 	//タイトル画像の読み込み
