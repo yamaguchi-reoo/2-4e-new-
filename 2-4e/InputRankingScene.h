@@ -12,7 +12,9 @@ private:
 
 	int img;	//背景画像用
 	int score;	//スコア用
-	int MenuSE;	//SE用
+	//SE用
+	int SelectSE;	
+	int DecisionSE;
 	//フォント用変数
 	int NameFont1;
 	int NameFont2;

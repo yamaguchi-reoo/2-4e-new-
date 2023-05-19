@@ -17,12 +17,25 @@ InputRankingScene::InputRankingScene(int _score)
 	{
 		throw "Resource/Images/mori.png";
 	}
+
+	if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/select01.wav";
+	}
+
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/coin04.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/coin04.wav";
+	}
 }
 InputRankingScene::~InputRankingScene()
 {
 	DeleteFontToHandle(NameFont1);
 	DeleteFontToHandle(NameFont2);
 	DeleteFontToHandle(NameFont3);
+
+	DeleteSoundMem(SelectSE);
+	DeleteSoundMem(DecisionSE);
 }
 
 AbstractScene* InputRankingScene::Update()
@@ -74,34 +87,30 @@ AbstractScene* InputRankingScene::Update()
 		}
 	}
 	//Aボタンが押されて名前が9文字以上入力されていないなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < NAME_MAX-1) {
-
-		//名前に現在のカーソル上の文字を追加する
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 10) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < NAME_MAX - 1) {
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		name += keyboard[cursorPoint.y][cursorPoint.x];
 	}
-	//Bボタンが押されて名前が1文字以上入力されているなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
+		//Bボタンが押されて名前が1文字以上入力されているなら
+		if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
 
-		//名前を1文字消す
-		name.erase(name.begin() + (name.size() - 1));
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+			//名前を1文字消す
+			PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 			name.erase(name.begin() + (name.size() - 1));
-	}
-	//1文字以上入力されていてStartボタンが押されたなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
+		}
+		//1文字以上入力されていてStartボタンが押されたなら
+		if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
 
-		//ランキングを更新する
-		Ranking::Insert(score, const_cast<char*>(name.c_str()));
+			//ランキングを更新する
+			Ranking::Insert(score, const_cast<char*>(name.c_str()));
 
-		//ランキングを描画する
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
-		Ranking::Insert(score);
-		return new DrawRanking;
+			//ランキングを描画する
+			PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+			return new DrawRanking;
+		}
+		return this;
 	}
-	return this;
-}
+
 
 void InputRankingScene::Draw() const {
 	DrawGraph(0, 0, img, TRUE);
