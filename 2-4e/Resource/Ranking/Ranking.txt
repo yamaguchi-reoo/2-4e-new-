@@ -1,5 +1,5 @@
-1     10400      HINA
-2      9900 WWWWWWWWW
-3      9700         y
-3      9700  nopqrstu
-5      9200     ABCDE
+1     10000         A
+1     10000      zylm
+3      1000         A
+3      1000    MATUDA
+3      1000         1

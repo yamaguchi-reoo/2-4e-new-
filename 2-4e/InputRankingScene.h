@@ -24,8 +24,7 @@ private:
 	POINT cursorPoint;	//カーソルの座標用
 
 	//入力可能文字格納
-	const char keyboard[5][14] = { "ABCDEFGHIJKLM" ,"NOPQRSTUVWXYZ" ,"abcdefghijklm" ,"nopqrstuvwxyz" ,"0123456789" };
-
+	const char keyboard[5][14] = { "ABCDEFGHIJKLM" ,"NOPQRSTUVWXYZ" ,"abcdefghijklm" ,"nopqrstuvwxyz" ,"0123456789"};
 public:
 	//コンストラクタ
 	InputRankingScene(int score);
