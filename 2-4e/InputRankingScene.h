@@ -30,6 +30,6 @@ public:
 public:
 	void Draw()const override;
 	AbstractScene* Update()override;
-	AbstractScene* ChangeScene();
+	/*AbstractScene* ChangeScene();*/
 };
 

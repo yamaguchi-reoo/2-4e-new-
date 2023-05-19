@@ -13,6 +13,7 @@ InputRankingScene::InputRankingScene(int _score)
 	NameFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
+	//画像の表示
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
@@ -42,6 +43,7 @@ void InputRankingScene::Draw() const {
 
 AbstractScene* InputRankingScene::Update()
 {
+	//上方向にカーソルの移動
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
 		if (--cursorPoint.y < 0) {
 			if (cursorPoint.x > 9) {
@@ -52,17 +54,20 @@ AbstractScene* InputRankingScene::Update()
 			}
 		}
 	}
+	//下方向にカーソルの移動
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
 		if (++cursorPoint.y > 3 && cursorPoint.x > 9 || cursorPoint.y > 4) {
 			cursorPoint.y = 0;
 		}
 	}
+	//右方向にカーソルの移動
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
 	
 		if (++cursorPoint.x > 9 && cursorPoint.y > 3 || cursorPoint.x > 12) {
 			cursorPoint.x = 0;
 		}
 	}
+	//左方向にカーソルの移動
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
 		
 		if (--cursorPoint.x < 0) {
