@@ -59,13 +59,13 @@ Help::~Help()
 AbstractScene* Help::Update()
 {
 	//Bボタンでタイトルへ戻る
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B))
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
 		StopSoundMem(HelpBGM);
 		return new Title();
 	}
 	//Aボタンでゲームを始める
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B))
 	{
 		StopSoundMem(HelpBGM);
 		return new GameMain();

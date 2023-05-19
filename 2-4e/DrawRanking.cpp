@@ -35,7 +35,7 @@ DrawRanking::DrawRanking()
 	//BGMÇÃçƒê∂
 	if (CheckSoundMem(RankingBGM) == 0)
 	{
-		PlaySoundMem(RankingBGM, DX_PLAYTYPE_LOOP, TRUE);
+		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
 }
 

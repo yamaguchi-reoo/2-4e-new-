@@ -43,3 +43,4 @@
 2023年 05月 15日 09時 57分 19秒 : Resource/Images/apple.pngがありません。
 2023年 05月 17日 11時 17分 30秒 : Resource/Images/End.pngがありません。
 2023年 05月 17日 11時 17分 44秒 : Resource/Images/End.pngがありません。
+2023年 05月 19日 11時 21分 54秒 : Resource/sounds/SE/coin4.wavがありません。

@@ -10,7 +10,7 @@ GameMain::GameMain()
 {
 	//初期化
 	frame = 0;
-	Time = 10;
+	Time = 360;
 	TotalScore = 5000;
 
 	for (int i = 0; i < 4; i++) {
@@ -110,11 +110,16 @@ GameMain::~GameMain()
 	}
 	delete score;
 	
-
+	StopSoundMem(MainBGM);
 	//サウンド削除
 	DeleteSoundMem(StartSE);
 	DeleteSoundMem(AppleSE);
 	DeleteSoundMem(PoisonAppleSE);
+
+	//フォント削除
+	DeleteFontToHandle(MainFont1);
+	DeleteFontToHandle(MainFont2);
+	DeleteFontToHandle(MainFont3);
 
 }
 
@@ -214,7 +219,7 @@ AbstractScene* GameMain::Update()
 			GameMain::R_Apple[i] = gGetApple[i];
 		}
 		//リザルト画面に移行
-		StopSoundMem(MainBGM);
+		//StopSoundMem(MainBGM);
 		return new Result();
 	}
 	//制限時間が１０秒を切ったら残り時間に応じて文字色を変えていく

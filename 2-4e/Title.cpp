@@ -47,7 +47,7 @@ Title::Title()
 		throw "Resource/sounds/SE/select01.wav";
 	}
 	//SEの音量変更
-	ChangeVolumeSoundMem(75, MenuSE);
+	ChangeVolumeSoundMem(55, MenuSE);
 
 	//BGMの再生
 	if (CheckSoundMem(TitleBGM) == 0)
@@ -62,6 +62,7 @@ Title::~Title()
 	//フォントの削除
 	DeleteFontToHandle(MenuFont);
 
+	StopSoundMem(TitleBGM);
 	//サウンドの削除
 	DeleteSoundMem(TitleBGM);
 	DeleteSoundMem(MenuSE);
@@ -90,23 +91,23 @@ AbstractScene* Title::Update()
 		{
 			//ゲーム画面へ
 		case TITLE_MENU::GAME_START:
-			StopSoundMem(TitleBGM);
+	
 			return new GameMain();
 			break;
 			//ランキング画面へ
 		case TITLE_MENU::GAME_RANKING:
 			return new DrawRanking();
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			break;
 			//ヘルプ画面
 		case TITLE_MENU::GAME_HELP:
 			return new Help();
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			break;
 			//エンド画面へ
 		case TITLE_MENU::GAME_END:
 			return new End();
-			StopSoundMem(TitleBGM);
+			//StopSoundMem(TitleBGM);
 			break;
 		default:
 			break;
@@ -119,7 +120,7 @@ AbstractScene* Title::Update()
 void Title::Draw()const
 {
 	// ステージの描画
-	SetFontSize(64);                             //サイズを64に変更
+	//SetFontSize(64);                             //サイズを64に変更
 	//SetFontThickness(8);                         //太さを8に変更
 
 	//タイトルの描画

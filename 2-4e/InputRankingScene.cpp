@@ -20,13 +20,25 @@ InputRankingScene::InputRankingScene(int _score)
 	{
 		throw "Resource/Images/mori.png";
 	}
+	//SEの読み込み
+	if ((SelectSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //選択SE
+	{
+		throw "Resource/sounds/SE/select01.wav";
+	}
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/coin04.wav")) == -1) //選択SE
+	{
+		throw "Resource/sounds/SE/coin04.wav";
+	}
+	//SEの音量変更
+	ChangeVolumeSoundMem(55, SelectSE);
+	ChangeVolumeSoundMem(125, DecisionSE);
 }
 
 void InputRankingScene::Draw() const {
 	DrawGraph(0, 0, image, TRUE);
 	//DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
 	
-	DrawStringToHandle(120, 100, "名前入力", 0x000000,NameFont1);
+	DrawStringToHandle(470, 75, "名前入力", 0xffffff,NameFont1);
 
 	DrawBox(420, 240, 860, 300, 0xffffff, TRUE);
 	DrawFormatStringToHandle(420, 250, 0x000000, NameFont2, "%s", name.c_str());
@@ -46,6 +58,7 @@ void InputRankingScene::Draw() const {
 AbstractScene* InputRankingScene::Update()
 {
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (--cursorPoint.y < 0) {
 			if (cursorPoint.x > 9) {
 				cursorPoint.y = 3;
@@ -56,18 +69,19 @@ AbstractScene* InputRankingScene::Update()
 		}
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (++cursorPoint.y > 3 && cursorPoint.x > 9 || cursorPoint.y > 4) {
 			cursorPoint.y = 0;
 		}
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
-	
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (++cursorPoint.x > 9 && cursorPoint.y > 3 || cursorPoint.x > 12) {
 			cursorPoint.x = 0;
 		}
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
-		
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (--cursorPoint.x < 0) {
 			if (cursorPoint.y > 3) {
 				cursorPoint.x = 9;
@@ -79,12 +93,15 @@ AbstractScene* InputRankingScene::Update()
 	}
 
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 10) {
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		name += keyboard[cursorPoint.y][cursorPoint.x];
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 			name.erase(name.begin() + (name.size() - 1));
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		Ranking::Insert(score);
 		return new DrawRanking;
 	}

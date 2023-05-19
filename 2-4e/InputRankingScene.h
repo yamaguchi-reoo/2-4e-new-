@@ -13,7 +13,8 @@ private:
 
 	int image;
 	int score;
-	int MenuSE;
+	int SelectSE;
+	int DecisionSE;
 	int NameFont1;
 	int NameFont2;
 	int NameFont3;
