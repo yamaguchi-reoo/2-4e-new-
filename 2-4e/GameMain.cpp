@@ -10,8 +10,8 @@ GameMain::GameMain()
 {
 	//初期化
 	frame = 0;
-	Time = 300;
-	TotalScore = 9000;
+	Time = 3599;
+	TotalScore = 0;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -360,7 +360,7 @@ void GameMain::AppleSpawn()
 			//りんご生成
 			apple[SpawnApple]->Spawn();
 			//りんごの座標決定
-			apple[SpawnApple]->SetLocation(SpawnPos * APPLE_DISTANCE);
+			apple[SpawnApple]->SetLocation(SpawnPos * APPLE_DISTANCE+5);
 			//りんご生成済チェックをいれる
 			CheckSpawn[SpawnPos] = TRUE;
 			//画面にあるりんごの個数を後で増加させるために数えておく
