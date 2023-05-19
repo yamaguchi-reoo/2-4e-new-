@@ -75,7 +75,7 @@ AbstractScene* InputRankingScene::Update()
 		}
 	}
 
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 10) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 9) {
 		name += keyboard[cursorPoint.y][cursorPoint.x];
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {

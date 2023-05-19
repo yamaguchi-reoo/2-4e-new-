@@ -80,7 +80,7 @@ void Ranking::ReadRanking(void) {
 
 	//ランキングデータ配分列データを読み込む
 	for (int i = 0; i < RANK; i++) {
-		fscanf_s(fp, "%1d%10d%10s", &data[i].no, &data[i].score,data[i].name,9);
+		fscanf_s(fp, "%1d%10d%10s", &data[i].no, &data[i].score,data[i].name,10);
 	}
 
 	//ファイルクローズ
