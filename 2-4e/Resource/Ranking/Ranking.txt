@@ -1,5 +1,5 @@
-1      9200       ABC
-2      8900        TO
-3      8700       AAA
-3      8700        HI
-3      8700        MO
+1      9900 WWWWWWWWW
+2      9700  nopqrstu
+2      9700         y
+4      9200     ABCDE
+5      8900 WWWWWWWWW

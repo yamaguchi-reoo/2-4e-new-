@@ -10,26 +10,28 @@ class InputRankingScene : public AbstractScene
 private:
 	Ranking ranking;
 
-	int image;
-	int score;
-	int MenuSE;
+	int img;	//背景画像用
+	int score;	//スコア用
+	int MenuSE;	//SE用
+	//フォント用変数
 	int NameFont1;
 	int NameFont2;
 	int NameFont3;
-	std::string name;
+	std::string name;	//名前入力用
 
-	int img;
+	POINT cursorPoint;	//カーソルの座標用
 
-	POINT cursorPoint;
+	//入力可能文字格納
 	const char keyboard[5][14] = { "ABCDEFGHIJKLM" ,"NOPQRSTUVWXYZ" ,"abcdefghijklm" ,"nopqrstuvwxyz" ,"0123456789" };
 
-
 public:
-	InputRankingScene(int _score);
-
-public:
-	void Draw()const override;
+	//コンストラクタ
+	InputRankingScene(int score);
+	//デストラクタ
+	 ~InputRankingScene();
+	//描画以外の更新を実行
 	AbstractScene* Update()override;
-	AbstractScene* ChangeScene();
+	//描画に関することを実装
+	void Draw()const override;
 };
 
