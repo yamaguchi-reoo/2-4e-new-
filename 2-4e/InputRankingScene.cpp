@@ -8,16 +8,10 @@ InputRankingScene::InputRankingScene(int _score)
 	score = _score;
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
-<<<<<<< HEAD
-=======
-	for (int i = 0; i < 5; i++) {
-		RankingData[i] = ranking.GetData(i);
-	}
 	
 	NameFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 80, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 32, 8, DX_FONTTYPE_ANTIALIASING);
->>>>>>> main
 
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
@@ -89,7 +83,7 @@ AbstractScene* InputRankingScene::Update()
 	}
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
 		//‚±‚±‚Å–¼‘O‚ğcharŒ^‚É‚µ‚Äscore‚Æˆê‚Éƒ‰ƒ“ƒLƒ“ƒOXV‰æ–Ê‚É‘—‚è‚½‚¢
-		Ranking::Insert(score,);
+		Ranking::Insert(score, const_cast<char*>(name.c_str()));
 		return new DrawRanking;
 	}
 	return this;

@@ -87,7 +87,7 @@ void DrawRanking::Draw() const
 			break;
 		}
 		DrawFormatStringToHandle(170, 220 + (70 * i), color, HeadLineFont, "%dˆÊ", Ranking::GetData(i).no);
-		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%s", Ranking::GetData(i).name);
+		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%10s", Ranking::GetData(i).name);
 		DrawFormatStringToHandle(670, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
 	}
 	DrawStringToHandle(455, 650, "A ‚Åƒ^ƒCƒgƒ‹", 0xff0000, HeadLineFont);
