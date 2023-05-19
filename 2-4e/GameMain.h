@@ -41,6 +41,9 @@ private:
     int StartSE;
     int AppleSE;
     int PoisonAppleSE;
+    int MainFont1;
+    int MainFont2;
+    int MainFont3;
 
     int GetPsAppleTime; //毒りんごを取ってからの経過時間
     bool GetPsAppleFlg; //毒りんご取得判断用フラグ

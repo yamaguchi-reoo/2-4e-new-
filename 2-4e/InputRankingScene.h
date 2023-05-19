@@ -13,6 +13,9 @@ private:
 	int image;
 	int score;
 	int MenuSE;
+	int NameFont1;
+	int NameFont2;
+	int NameFont3;
 	std::string name;
 
 	int img;

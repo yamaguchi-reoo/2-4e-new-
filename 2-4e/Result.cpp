@@ -9,7 +9,11 @@
 #include "Ranking.h"
 #include "InputRankingScene.h"
 
+<<<<<<< HEAD
 #define TIME_LIMIT 200;
+=======
+#define TIME_LIMIT 100;
+>>>>>>> main
 
 // --------------------------------
 // コンストラクタ
@@ -38,6 +42,9 @@ Result::Result()
 //--------------------------------
 Result::~Result()
 {
+	// フォント削除
+	DeleteFontToHandle(ResultFont1);
+	DeleteFontToHandle(ResultFont2);
 
 }
 //--------------------------------

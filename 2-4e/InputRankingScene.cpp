@@ -8,6 +8,16 @@ InputRankingScene::InputRankingScene(int _score)
 	score = _score;
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
+<<<<<<< HEAD
+=======
+	for (int i = 0; i < 5; i++) {
+		RankingData[i] = ranking.GetData(i);
+	}
+	
+	NameFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 80, 8, DX_FONTTYPE_ANTIALIASING);
+	NameFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 48, 8, DX_FONTTYPE_ANTIALIASING);
+	NameFont3 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 32, 8, DX_FONTTYPE_ANTIALIASING);
+>>>>>>> main
 
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
@@ -16,26 +26,24 @@ InputRankingScene::InputRankingScene(int _score)
 }
 
 void InputRankingScene::Draw() const {
-	DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
 	DrawGraph(0, 0, image, TRUE);
-		SetFontSize(80);
-		DrawString(120, 100, "INPUT RANKING", 0x000000);
+	//DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
+	
+	DrawStringToHandle(120, 100, "–¼‘O“ü—Í", 0x000000,NameFont1);
 
-		SetFontSize(48);
-	DrawBox(420, 240, 860, 300, 0x000000, TRUE);
-	DrawFormatString(420, 250, 0xFFFFFF, "%s", name.c_str());
+	DrawBox(420, 240, 860, 300, 0xffffff, TRUE);
+	DrawFormatStringToHandle(420, 250, 0x000000, NameFont2, "%s", name.c_str());
 
-	DrawBox(318 + 50 * cursorPoint.x, 360 + 50 * cursorPoint.y,
-		368 + 50 * cursorPoint.x, 405 + 50 * cursorPoint.y, 0x808080, TRUE);
+	DrawBox(308 + 50 * cursorPoint.x, 350 + 50 * cursorPoint.y,
+		358 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 14; j++) {
-			DrawFormatString(j * 50 + 318, i * 50 + 355, 0x000000, "%c", keyboard[i][j]);
+			DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
 		}
 	}
 
-	SetFontSize(32);
-	DrawString(435, 640, "B BUTTON PUSH", 0x000000);
+	DrawStringToHandle(435, 640, "B BUTTON PUSH", 0x000000, NameFont3);
 }
 
 AbstractScene* InputRankingScene::Update()

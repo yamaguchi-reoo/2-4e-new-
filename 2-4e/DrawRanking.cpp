@@ -42,6 +42,8 @@ DrawRanking::DrawRanking()
 
 DrawRanking::~DrawRanking()
 {
+	//BGM‚Ìíœ
+	DeleteSoundMem(RankingBGM);
 	//ƒtƒHƒ“ƒg‚Ìíœ
 	DeleteFontToHandle(HeadLineFont);
 	DeleteSoundMem(RankingBGM);
