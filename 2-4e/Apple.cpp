@@ -85,12 +85,11 @@ void Apple::Draw() const
 	if (flg == TRUE)
 	{
 		DrawGraph(location.x, location.y,img, TRUE);
-		//当たり判定表示用
-		DrawBox(location.x - (APPLE_SIZE * erea.rate), location.y - (APPLE_SIZE * erea.rate), location.x + (APPLE_SIZE * erea.rate) + APPLE_SIZE, location.y + (APPLE_SIZE * erea.rate) + APPLE_SIZE, 0x000000, FALSE);
 	}
 	//エフェクトの描画
 	if (e_flg == TRUE)
 	{
+		SetFontSize(24);
 		//赤、青、金りんご取得エフェクト描画
 		if (e_type != 3)
 		{

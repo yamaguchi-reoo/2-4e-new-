@@ -1,5 +1,5 @@
-1       5400
-2       5200
-3       5000
-4       1000
-4       1000
+1      9900 WWWWWWWWW
+2      9700  nopqrstu
+2      9700         y
+4      9200     ABCDE
+5      8900 WWWWWWWWW

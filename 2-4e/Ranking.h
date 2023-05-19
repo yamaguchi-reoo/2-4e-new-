@@ -1,9 +1,11 @@
 #pragma once
 #define RANK 5
+#define NAME_MAX 10
 
 struct RankingData
 {
 	int no;
+	char name[10];
 	int score;
 };
 
@@ -22,7 +24,7 @@ private:
 public:
 
 	//ランキングデータの更新
-	static void Insert(int score);
+	static void Insert(int score,char name[NAME_MAX]);
 
 	//ランキングデータ読み込み
 	static void ReadRanking();

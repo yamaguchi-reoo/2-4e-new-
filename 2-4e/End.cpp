@@ -3,7 +3,8 @@
 #include"PadInput.h"
 #include"End.h"
 
-#define TIME_LIMIT 300;
+#define TIME_LIMIT 300
+#define MOVE_SPEED 7
 // --------------------------------
 // コンストラクタ
 //---------------------------------
@@ -69,8 +70,8 @@ AbstractScene* End::Update() {
 	if (WaitTime-- < 0) {
 		return nullptr;
 	}
-	if (++MoveString >= 700) { 
-		MoveString = 700; 
+	if (++MoveString >= 200) { 
+		MoveString = 200; 
 	}
 	return this;
 }
