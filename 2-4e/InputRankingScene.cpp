@@ -20,7 +20,7 @@ InputRankingScene::InputRankingScene(int _score)
 }
 
 void InputRankingScene::Draw() const {
-	DrawGraph(0, 0, image, TRUE);
+	DrawGraph(0, 0, img, TRUE);
 	//DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
 	
 	DrawStringToHandle(120, 100, "–¼‘O“ü—Í", 0x000000,NameFont1);
