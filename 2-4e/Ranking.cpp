@@ -18,7 +18,7 @@ void Ranking::Insert(int score)
 
 void Ranking::SortRanking()
 {
-	RankingData work;	//並び替えようの変数
+	RankingData work;	//並び替え用の変数
 
 	// 選択法ソート
 	for (int i = 0; i < RANK - 1; i++) {

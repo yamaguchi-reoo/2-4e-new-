@@ -67,6 +67,8 @@ public:
     //‚è‚ñ‚²ƒXƒ|[ƒ“ˆ—
     void AppleSpawn();
 
+
+
 };
 
 

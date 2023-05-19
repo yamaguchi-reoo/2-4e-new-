@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractScene.h"
+#include"InputRankingScene.h"
 #include "Define.h"
 #include "Ranking.h"
 
@@ -25,4 +26,7 @@ public:
 
     //•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
     void Draw() const override;
+
+    ////ƒV[ƒ“‚Ì•ÏXˆ—
+    //AbstractScene* ChangeScene()override;
 };

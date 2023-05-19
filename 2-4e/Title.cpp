@@ -21,7 +21,7 @@ Title::Title()
 	//初期化
 	Select = 0;
 
-	MenuFont = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING_EDGE_16X16);
+	MenuFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
 
 	//タイトル画像の読み込み
 	if ((TitleImg = LoadGraph("Resource/Images/mori.png")) == -1)
@@ -116,7 +116,7 @@ void Title::Draw()const
 {
 	// ステージの描画
 	SetFontSize(64);                             //サイズを64に変更
-	//SetFontThickness(8);                        //太さを8に変更
+	//SetFontThickness(8);                         //太さを8に変更
 
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);
