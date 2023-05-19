@@ -91,6 +91,7 @@ void Apple::Draw() const
 	//エフェクトの描画
 	if (e_flg == TRUE)
 	{
+		SetFontSize(24);
 		//赤、青、金りんご取得エフェクト描画
 		if (e_type != 3)
 		{
