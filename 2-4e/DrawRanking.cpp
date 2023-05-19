@@ -42,6 +42,8 @@ DrawRanking::DrawRanking()
 
 DrawRanking::~DrawRanking()
 {
+	//BGMの削除
+	DeleteSoundMem(RankingBGM);
 	//フォントの削除
 	DeleteFontToHandle(HeadLineFont);
 
@@ -52,6 +54,7 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
+		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;

@@ -90,19 +90,23 @@ AbstractScene* Title::Update()
 		{
 			//ゲーム画面へ
 		case TITLE_MENU::GAME_START:
+			StopSoundMem(TitleBGM);
 			return new GameMain();
 			break;
 			//ランキング画面へ
 		case TITLE_MENU::GAME_RANKING:
 			return new DrawRanking();
+			StopSoundMem(TitleBGM);
 			break;
 			//ヘルプ画面
 		case TITLE_MENU::GAME_HELP:
 			return new Help();
+			StopSoundMem(TitleBGM);
 			break;
 			//エンド画面へ
 		case TITLE_MENU::GAME_END:
 			return new End();
+			StopSoundMem(TitleBGM);
 			break;
 		default:
 			break;
