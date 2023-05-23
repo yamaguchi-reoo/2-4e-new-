@@ -2,10 +2,9 @@
 #include "Title.h"
 #include "GameMain.h"
 #include "DrawRanking.h"
-#include"PadInput.h"
-#include"Credit.h"
-#include"Help.h"
-#include"End.h"
+#include "PadInput.h"
+#include "Help.h"
+#include "End.h"
 
 //タイトルメニュー
 enum class TITLE_MENU

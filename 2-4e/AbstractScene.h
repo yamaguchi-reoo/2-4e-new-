@@ -12,7 +12,4 @@ public:
 	//•`‰æ‚ÉŠÖ‚·‚é‚±‚Æ‚ğÀ‘•
 	virtual void Draw() const = 0;
 
-	////ƒV[ƒ“‚Ì•ÏXˆ—
-	//virtual AbstractScene* ChangeScene() = 0;
-
 };

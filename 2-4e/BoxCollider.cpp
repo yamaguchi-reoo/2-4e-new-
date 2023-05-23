@@ -42,8 +42,3 @@ void BoxCollider::SetLocation(Location location)
 {
 	this->location = location;
 }
-
-void BoxCollider::Draw() const
-{
-	
-}

@@ -9,7 +9,7 @@ GameMain::GameMain()
 {
 	//‰Šú‰»
 	frame = 0;
-	Time =600;
+	Time = 600;
 	TotalScore = 10000;
 
 	for (int i = 0; i < 4; i++) {
