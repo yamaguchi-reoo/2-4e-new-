@@ -28,12 +28,11 @@ public:
 
 	//中心座標の取得
 	Location GetLocation()const;
+
 	//半径の取得
 	Erea GetErea()const;
 
 	//中心座標の設定
 	void SetLocation(Location location);
 
-	//当たり判定描画
-	void Draw()const;
 };
