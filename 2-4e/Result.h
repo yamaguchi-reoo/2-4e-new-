@@ -9,6 +9,10 @@ class Result :
     public AbstractScene
 {
 private:
+
+    int R_GetApple[4];  //りんご取得情報格納用
+    int R_Score;        //合計スコア格納用
+
     int ResultImg;
     int ForestImg; //背景画像
     int WaitTime; //次のシーンに移るまでの時間
@@ -16,7 +20,7 @@ private:
     int ResultFont2;
 public:
     //コンストラクタ
-    Result();
+    Result(int GetApple[4], int Score);
 
     //デストラクタ
     ~Result();
