@@ -18,7 +18,7 @@ private:
 
 public:
     //コンストラクタ
-    Result();
+    Result(int GetApple[4], int Score);
 
     //デストラクタ
     ~Result();

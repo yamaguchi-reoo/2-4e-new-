@@ -4,14 +4,13 @@
 #include "Result.h"
 #include "Score.h"
 #include "PadInput.h"
-int GameMain::R_Apple[4] = { 0 };
-int GameMain::getScore = 0;
+
 GameMain::GameMain()
 {
 	//初期化
 	frame = 0;
-	Time = 599;
-	TotalScore = 7000;
+	Time =600;
+	TotalScore = 10000;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -214,16 +213,9 @@ AbstractScene* GameMain::Update()
 	//時間切れ後のリザルト移行処理
 	if (Time <= 0)
 	{
-		//スコア、獲得りんごの内訳を格納
-		GameMain::getScore = TotalScore;
-		for (int i = 0; i < 4; i++) {
-			GameMain::R_Apple[i] = gGetApple[i];
-		}
-		StopSoundMem(MainBGM);
-		//リザルト画面に移行
-		//StopSoundMem(MainBGM);
-		return new Result();
+		return new Result(gGetApple,TotalScore);
 	}
+
 	//制限時間が１０秒を切ったら残り時間に応じて文字色を変えていく
 	if (Time <= 600) {
 		TimerColor = GetColor(255-Time/3,0,0);
