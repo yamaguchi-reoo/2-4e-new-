@@ -5,14 +5,14 @@
 
 RankingData Ranking::data[RANK];
 
-void Ranking::Insert(int score,char name[10])
+void Ranking::Insert(int score,char name[NAME_MAX])
 {
 	ReadRanking();
 	if (data[RANK - 1].score < score)
 	{
 		data[RANK - 1].score = score;
 		//data[].nameを新しい名前に更新したい
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < NAME_MAX; i++)
 		{
 			data[RANK - 1].name[i] = name[i];
 		}
@@ -80,7 +80,7 @@ void Ranking::ReadRanking(void) {
 
 	//ランキングデータ配分列データを読み込む
 	for (int i = 0; i < RANK; i++) {
-		fscanf_s(fp, "%1d%10d%10s", &data[i].no, &data[i].score,data[i].name,9);
+		fscanf_s(fp, "%1d%10d%10s", &data[i].no, &data[i].score,data[i].name, NAME_MAX);
 	}
 
 	//ファイルクローズ

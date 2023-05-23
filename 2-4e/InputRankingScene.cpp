@@ -13,83 +13,167 @@ InputRankingScene::InputRankingScene(int _score)
 	NameFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
-	//画像の表示
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
-}
 
-void InputRankingScene::Draw() const {
-	DrawGraph(0, 0, img, TRUE);
-	//DrawBox(0, 0, 1280, 720, 0xffffff, TRUE);
-	
-	DrawStringToHandle(120, 100, "名前入力", 0x000000,NameFont1);
-
-	DrawBox(420, 240, 860, 300, 0xffffff, TRUE);
-	DrawFormatStringToHandle(420, 250, 0x000000, NameFont2, "%s", name.c_str());
-
-	DrawBox(308 + 50 * cursorPoint.x, 350 + 50 * cursorPoint.y,
-		358 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
-
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 14; j++) {
-			DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
-		}
+	if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/select01.wav";
 	}
 
-	DrawStringToHandle(435, 640, "B BUTTON PUSH", 0x000000, NameFont3);
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/coin04.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/coin04.wav";
+	}
+}
+InputRankingScene::~InputRankingScene()
+{
+	DeleteFontToHandle(NameFont1);
+	DeleteFontToHandle(NameFont2);
+	DeleteFontToHandle(NameFont3);
+
+	DeleteSoundMem(SelectSE);
+	DeleteSoundMem(DecisionSE);
 }
 
 AbstractScene* InputRankingScene::Update()
 {
-	//上方向にカーソルの移動
+	//カーソルを上移動させる
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
+
+		//カーソルがはみ出ないように調整する
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (--cursorPoint.y < 0) {
-			if (cursorPoint.x > 9) {
+			if (cursorPoint.x == 10) {
 				cursorPoint.y = 3;
 			}
 			else {
 				cursorPoint.y = 4;
 			}
+			if (cursorPoint.x == 12) {
+				cursorPoint.x = 11;
+			}
 		}
 	}
-	//下方向にカーソルの移動
+	//カーソルを下移動させる
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
-		if (++cursorPoint.y > 3 && cursorPoint.x > 9 || cursorPoint.y > 4) {
+
+		//カーソルがはみ出ないように調整する
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
+		if (++cursorPoint.y > 3 && cursorPoint.x == 10 || cursorPoint.y > 4) {
 			cursorPoint.y = 0;
 		}
+		if (cursorPoint.y > 3 && cursorPoint.x == 12){
+			cursorPoint.x = 11;
+		}
 	}
-	//右方向にカーソルの移動
+	//カーソルを右移動させる
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
-	
-		if (++cursorPoint.x > 9 && cursorPoint.y > 3 || cursorPoint.x > 12) {
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
+
+		//カーソルがはみ出ないように調整する
+		if (++cursorPoint.x == 10 && cursorPoint.y > 3)
+		{
+			cursorPoint.x = 11;
+		}
+		if (cursorPoint.x > 11 && cursorPoint.y == 4) {
+			cursorPoint.x = 0;
+		}
+		if (cursorPoint.x > 12) {
 			cursorPoint.x = 0;
 		}
 	}
-	//左方向にカーソルの移動
+	//カーソルを左移動させる
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
-		
+
+		//カーソルがはみ出ないように調整する
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (--cursorPoint.x < 0) {
 			if (cursorPoint.y > 3) {
-				cursorPoint.x = 9;
+				cursorPoint.x = 11;
 			}
 			else {
 				cursorPoint.x = 12;
 			}
 		}
+		if (cursorPoint.x == 10 && cursorPoint.y == 4)
+		{
+			cursorPoint.x = 9;
+		}
 	}
+	//Aボタンが押されて名前が9文字以上入力されていないなら
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < NAME_MAX - 1) {
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+		if (cursorPoint.x != 11 || cursorPoint.y != 4)
+		{
+			name += keyboard[cursorPoint.y][cursorPoint.x];
+		}
+		else if (name.size() > 0)
+		{
+			//ランキングを更新する
+			Ranking::Insert(score, const_cast<char*>(name.c_str()));
 
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < 10) {
-		name += keyboard[cursorPoint.y][cursorPoint.x];
+			//ランキングを描画する
+			PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+			return new DrawRanking;
+		}
 	}
+	//Bボタンが押されて名前が1文字以上入力されているなら
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
-			name.erase(name.begin() + (name.size() - 1));
+		//名前を1文字消す
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+		name.erase(name.begin() + (name.size() - 1));
 	}
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START) && name.size() > 0) {
-		//ここで名前をchar型にしてscoreと一緒にランキング更新画面に送りたい
+	//1文字以上入力されていてStartボタンが押されたなら
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START)&& name.size() > 0) 
+	{
+		//ランキングを更新する
 		Ranking::Insert(score, const_cast<char*>(name.c_str()));
+
+		//ランキングを描画する
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new DrawRanking;
 	}
 	return this;
+}
+
+
+void InputRankingScene::Draw() const {
+	DrawGraph(0, 0, img, TRUE);
+
+	DrawStringToHandle(120, 100, "名前入力", 0xffffff, NameFont1);
+
+	DrawBox(470, 240, 820, 300, 0xffffff, TRUE);
+	DrawFormatStringToHandle(480, 250, 0x000000, NameFont2, "%s", name.c_str());
+
+	//確定のカーソルだけ大きくする
+	if (cursorPoint.x == 11 && cursorPoint.y == 4)
+	{
+		DrawBox(308 + 50 * cursorPoint.x, 355 + 50 * cursorPoint.y,
+			408 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
+		//”確定”の文字色を変える
+		DrawStringToHandle(858, 555, "確定", 0x000000,NameFont2);
+	}
+	else
+	{
+		DrawBox(308 + 50 * cursorPoint.x, 350 + 50 * cursorPoint.y,
+			358 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
+		//普通の文字色の”確定”を描画する
+		DrawStringToHandle(858, 555, "確定", 0xffffff, NameFont2);
+	}
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 14; j++) {
+			if (j == cursorPoint.x && i == cursorPoint.y) {
+				DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0x000000, NameFont2, "%c", keyboard[i][j]);
+			}
+			else
+			{
+				DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+			}
+		
+		}
+	}
+	DrawStringToHandle(390, 640, "STARTボタン or 確定で入力終了", 0xffffff, NameFont3);
 }

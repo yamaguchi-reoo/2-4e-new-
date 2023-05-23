@@ -9,7 +9,7 @@
 #include "Ranking.h"
 #include "InputRankingScene.h"
 
-#define TIME_LIMIT 200;
+#define TIME_LIMIT 1;
 
 // --------------------------------
 // コンストラクタ
@@ -18,10 +18,13 @@ Result::Result()
 {
 	//初期化
 	WaitTime = TIME_LIMIT;
+	//フォントの追加
 	ResultFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 70, 8, DX_FONTTYPE_ANTIALIASING);
 	ResultFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 50, 8, DX_FONTTYPE_ANTIALIASING);
 
 	Ranking::ReadRanking();
+
+	//画像読み込み
 	if ((ForestImg = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";

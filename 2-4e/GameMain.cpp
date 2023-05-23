@@ -10,8 +10,8 @@ GameMain::GameMain()
 {
 	//初期化
 	frame = 0;
-	Time = 300;
-	TotalScore = 8000;
+	Time = 1;
+	TotalScore = 10000;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -40,6 +40,7 @@ GameMain::GameMain()
 	}
 	score = new Score();
 
+	//フォントの追加
 	MainFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 30, 6, DX_FONTTYPE_ANTIALIASING);
 	MainFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 40, 6, DX_FONTTYPE_ANTIALIASING);
 	MainFont3 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 20, 6, DX_FONTTYPE_ANTIALIASING);
@@ -110,11 +111,16 @@ GameMain::~GameMain()
 	}
 	delete score;
 	
-
+	StopSoundMem(MainBGM);
 	//サウンド削除
 	DeleteSoundMem(StartSE);
 	DeleteSoundMem(AppleSE);
 	DeleteSoundMem(PoisonAppleSE);
+
+	//フォント削除
+	DeleteFontToHandle(MainFont1);
+	DeleteFontToHandle(MainFont2);
+	DeleteFontToHandle(MainFont3);
 
 }
 
@@ -215,7 +221,7 @@ AbstractScene* GameMain::Update()
 		}
 		StopSoundMem(MainBGM);
 		//リザルト画面に移行
-		StopSoundMem(MainBGM);
+		//StopSoundMem(MainBGM);
 		return new Result();
 	}
 	//制限時間が１０秒を切ったら残り時間に応じて文字色を変えていく
@@ -354,7 +360,7 @@ void GameMain::AppleSpawn()
 			//りんご生成
 			apple[SpawnApple]->Spawn();
 			//りんごの座標決定
-			apple[SpawnApple]->SetLocation(SpawnPos * APPLE_DISTANCE);
+			apple[SpawnApple]->SetLocation(SpawnPos * APPLE_DISTANCE+5);
 			//りんご生成済チェックをいれる
 			CheckSpawn[SpawnPos] = TRUE;
 			//画面にあるりんごの個数を後で増加させるために数えておく

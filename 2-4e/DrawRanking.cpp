@@ -35,7 +35,7 @@ DrawRanking::DrawRanking()
 	//BGMの再生
 	if (CheckSoundMem(RankingBGM) == 0)
 	{
-		PlaySoundMem(RankingBGM, DX_PLAYTYPE_LOOP, TRUE);
+		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
 	}
 }
 
@@ -68,6 +68,7 @@ void DrawRanking::Draw() const
 	int color = 0xffffff;
 	for (int i = 0; i < RANK; i++)
 	{
+		//順位に応じて文字色を変える(1位:金(黄色) 2位:銀(銀色) 3位:銅(茶色))
 		switch (Ranking::GetData(i).no)
 		{
 		case 1:
@@ -86,10 +87,9 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
-		DrawFormatStringToHandle(170, 220 + (70 * i), color, HeadLineFont, "%d位", Ranking::GetData(i).no);
-		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%10s", Ranking::GetData(i).name);
-		DrawFormatStringToHandle(670, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
+		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%d位", Ranking::GetData(i).no);
+		DrawFormatStringToHandle(400, 220 + (70 * i), color, HeadLineFont, "%.10s", Ranking::GetData(i).name);
+		DrawFormatStringToHandle(800, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
 	}
-	DrawStringToHandle(455, 650, "A でタイトル", 0xff0000, HeadLineFont);
-
+	DrawStringToHandle(425, 650, "A でタイトル", 0xff0000, HeadLineFont);
 }
