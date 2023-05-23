@@ -9,7 +9,7 @@
 Apple::Apple()
 {
 	//初期化
-	flg = FALSE;
+	flg = FALSE;		//フラグ
 	type = -1;			//タイプ(0は赤りんごなので-1に初期化)
 	img = 0;			//画像
 	location.x = 0;		//x座標

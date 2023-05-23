@@ -10,8 +10,9 @@ class GameMain :
     public AbstractScene,Apple
 {
 private:	
-    float a_Count;	//同時にスポーンしているりんごの数
     int frame;	    //フレーム
+
+    float a_Count;	//同時にスポーンしているりんごの数
     int SpawnCount;	    //一度にスポーンしたリンゴの計測
 
     int gGetApple[4];	//どのりんごを何個取ったか集計用
@@ -24,15 +25,16 @@ private:
     int SpawnApple;     //スポーンしていないりんごのオブジェクト探索用
 
     int TotalScore;         //合計点
+
     bool PauseFlg;          //一時停止中か判断
     int PauseFlashTime;        //ポーズ中の文字点滅用
     bool PauseFlashFlg;      //ポーズ中の文字点滅用
+
     int Time;               //制限時間用
     int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー
     Apple* apple[MAX_APPLE];   //リンゴ 
-    FpsController* fps;
     Score* score;
 
     int ForestImg;      //背景画像

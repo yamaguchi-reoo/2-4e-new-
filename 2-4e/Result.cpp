@@ -9,15 +9,20 @@
 #include "Ranking.h"
 #include "InputRankingScene.h"
 
-#define TIME_LIMIT 1;
+#define TIME_LIMIT 100;
 
 // --------------------------------
 // コンストラクタ
 //---------------------------------
-Result::Result()
+Result::Result(int *GetApple,int Score)
 {
 	//初期化
 	WaitTime = TIME_LIMIT;
+	for (int i = 0; i < 4; i++)
+	{
+		R_GetApple[i] = GetApple[i];
+	}
+	R_Score = Score;
 	//フォントの追加
 	ResultFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 70, 8, DX_FONTTYPE_ANTIALIASING);
 	ResultFont2 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 50, 8, DX_FONTTYPE_ANTIALIASING);
@@ -69,10 +74,10 @@ Result::~Result()
 AbstractScene* Result::Update() {
 	if (WaitTime-- < 0)
 	{
-		if (GameMain::getScore > Ranking::GetData(RANK - 1).score)
+		if (R_Score > Ranking::GetData(RANK - 1).score)
 		{
 			//名前入力処理へ移行
-			return new InputRankingScene(GameMain::getScore);
+			return new InputRankingScene(R_Score);
 		}
 		else
 		{
@@ -95,10 +100,10 @@ void Result::Draw()const
 
 	// スコアの描画
 	DrawStringToHandle(220,90,"りざると",0xffffff,ResultFont1);
-	DrawFormatStringToHandle(270, 200, 0xff0000, ResultFont2, "赤りんご：%.2d", GameMain::R_Apple[0]);
-	DrawFormatStringToHandle(270, 260, 0x0000ff, ResultFont2, "青りんご：%.2d", GameMain::R_Apple[1]);
-	DrawFormatStringToHandle(270, 320, 0xffff00, ResultFont2, "金りんご：%.2d", GameMain::R_Apple[2]);
-	DrawFormatStringToHandle(270, 380, 0xff00ff, ResultFont2, "毒りんご：%.2d", GameMain::R_Apple[3]);
-	DrawFormatStringToHandle(270, 440, 0xffffff, ResultFont2, "スコア：%.5d", GameMain::getScore);
+	DrawFormatStringToHandle(270, 200, 0xff0000, ResultFont2, "赤りんご：%.2d", R_GetApple[0]);
+	DrawFormatStringToHandle(270, 260, 0x0000ff, ResultFont2, "青りんご：%.2d", R_GetApple[1]);
+	DrawFormatStringToHandle(270, 320, 0xffff00, ResultFont2, "金りんご：%.2d", R_GetApple[2]);
+	DrawFormatStringToHandle(270, 380, 0xff00ff, ResultFont2, "毒りんご：%.2d", R_GetApple[3]);
+	DrawFormatStringToHandle(270, 440, 0xffffff, ResultFont2, "スコア：%.5d", R_Score);
 	//SetFontSize(24);
 }
