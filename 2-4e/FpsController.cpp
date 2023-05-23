@@ -11,6 +11,7 @@ void FpsController::Init(float RefreshRate, int UpdateTime) {
     fps = 0.0f;
     last_update = 0;
 }
+
 //‘Ò‚¿ŽžŠÔ‚ÌŒvŽZ
 void FpsController::Wait() {
     now_time = GetNowCount();

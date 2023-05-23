@@ -4,11 +4,13 @@
 #include "Result.h"
 #include "Score.h"
 #include "PadInput.h"
+#include "FpsController.h"
 
 GameMain::GameMain()
 {
 	//‰Šú‰»
 	frame = 0;
+	Fps = 0;
 	Time = 600;
 	TotalScore = 10000;
 
@@ -38,6 +40,7 @@ GameMain::GameMain()
 		apple[i] = new Apple();
 	}
 	score = new Score();
+	fps = new FpsController();
 
 	//ƒtƒHƒ“ƒg‚Ì’Ç‰Á
 	MainFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 30, 6, DX_FONTTYPE_ANTIALIASING);
@@ -142,6 +145,8 @@ AbstractScene* GameMain::Update()
 
 		//ˆ—‚ÌXV
 		player->UpDate();
+		Fps = fps->All();
+
 		for (int i = 0; i < MAX_APPLE; i++) 
 		{
 			apple[i]->UpDate();
@@ -248,6 +253,7 @@ void GameMain::Draw()const
 	//§ŒÀŠÔ
 	//SetFontSize(30);
 	DrawStringToHandle(1075, 150, "§ŒÀŠÔ", 0x000000,MainFont1);
+	DrawFormatString(10, 10, 0xffffff, "fps:%0.1f", Fps);
 	//SetFontSize(40);
 	//5•b‚ğØ‚é‚Æ•¶š‚ª—h‚ê‚é
 	if (Time <= 300) {
@@ -267,7 +273,6 @@ void GameMain::Draw()const
 	for (int i = 0; i < 10; i++) {
 		apple[i]->Draw();
 	}
-
 	//ˆê’â~’†‚Ì•`‰æ
 	if (PauseFlg == TRUE)
 	{
