@@ -1,5 +1,5 @@
-1     10400      HINA
-2      9900 WWWWWWWWW
-3      9700         y
-3      9700  nopqrstu
-5      9200     ABCDE
+1      8800      efgg
+2      7900         N
+3      7800         A
+4      7600       AAA
+5      7300         B

@@ -28,12 +28,17 @@ Help::Help()
 	{
 		throw "Resource/sounds/SE/Help.wav";
 	}
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision02.wav")) == -1) //選択SE
+	{
+		throw "Resource/sounds/SE/Decision02.wav";
+	}
 	//SEの音量変更
 	ChangeVolumeSoundMem(125, HelpSE);
+	ChangeVolumeSoundMem(90, DecisionSE);
 
 	//BGMの再生
 	if (CheckSoundMem(HelpBGM) == 0) {
-		PlaySoundMem(HelpBGM, DX_PLAYTYPE_BACK, TRUE);
+		PlaySoundMem(HelpBGM, DX_PLAYTYPE_LOOP);
 	}
 	//画面切替時SE
 	if (CheckSoundMem(HelpSE) == 0)
@@ -48,6 +53,7 @@ Help::Help()
 Help::~Help()
 {
 
+	StopSoundMem(HelpBGM);
 	//サウンドの削除
 	DeleteSoundMem(HelpBGM);
 	DeleteSoundMem(HelpSE);
@@ -61,13 +67,13 @@ AbstractScene* Help::Update()
 	//Bボタンでタイトルへ戻る
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		StopSoundMem(HelpBGM);
+		PlaySoundMem(DecisionSE,DX_PLAYTYPE_BACK);
 		return new Title();
 	}
 	//Aボタンでゲームを始める
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B))
 	{
-		StopSoundMem(HelpBGM);
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new GameMain();
 	}
 	return this;

@@ -23,19 +23,24 @@ DrawRanking::DrawRanking()
 	}
 	//BGMの音量変更
 	ChangeVolumeSoundMem(70, RankingBGM);
-	//SEの読み込み
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //選択SE
-	{
-		throw "Resource/sounds/SE/select01.wav";
-	}
-	//SEの音量変更
-	ChangeVolumeSoundMem(75, DecisionSE);
 
+	//SEの読み込み
+	if ((RankingSE = LoadSoundMem("Resource/sounds/SE/Shortbridge03-3.wav")) == -1)
+	{
+		throw "Resource/sounds/SEShortbridge03-3.wav";
+	}
+	//BGMの音量変更
+	ChangeVolumeSoundMem(70, RankingSE);
 
 	//BGMの再生
 	if (CheckSoundMem(RankingBGM) == 0)
 	{
 		PlaySoundMem(RankingBGM, DX_PLAYTYPE_BACK, TRUE);
+	}
+	//SEの再生
+	if (CheckSoundMem(RankingSE) == 0)
+	{
+		PlaySoundMem(RankingSE, DX_PLAYTYPE_BACK, TRUE);
 	}
 }
 
@@ -44,6 +49,9 @@ DrawRanking::~DrawRanking()
 {
 	//BGMの削除
 	DeleteSoundMem(RankingBGM);
+	DeleteSoundMem(RankingSE);
+
+	StopSoundMem(RankingBGM);
 	//フォントの削除
 	DeleteFontToHandle(HeadLineFont);
 	DeleteSoundMem(RankingBGM);
@@ -54,7 +62,6 @@ AbstractScene* DrawRanking::Update()
 	//Aボタンでタイトルへ
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
-		StopSoundMem(RankingBGM);
 		return new Title();
 	}
 	return this;

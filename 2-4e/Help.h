@@ -7,6 +7,7 @@ private:
     int HelpImg;    //ヘルプ画像
     int HelpBGM;    //タイトルと同じBGM
     int HelpSE;     //SE用
+    int DecisionSE;
 
 public:
     //コンストラクタ

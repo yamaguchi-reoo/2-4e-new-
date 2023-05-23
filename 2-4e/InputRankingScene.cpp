@@ -9,24 +9,28 @@ InputRankingScene::InputRankingScene(int _score)
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
 	
+	//ÉtÉHÉìÉgí«â¡
 	NameFont1 = CreateFontToHandle("HGSënâpäpŒﬂØÃﬂëÃ", 80, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont2 = CreateFontToHandle("HGSënâpäpŒﬂØÃﬂëÃ", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGSënâpäpŒﬂØÃﬂëÃ", 32, 8, DX_FONTTYPE_ANTIALIASING);
 
+	//âÊëúì«çû
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
-
+	//SEì«çû
 	if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
 	{
 		throw "Resource/sounds/SE/select01.wav";
 	}
-
-	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/coin04.wav")) == -1)
+	if ((DecisionSE = LoadSoundMem("Resource/sounds/SE/Decision01.wav")) == -1)
 	{
-		throw "Resource/sounds/SE/coin04.wav";
+		throw "Resource/sounds/SE/Decision01.wav";
 	}
+	//âπó í≤êÆ
+	ChangeVolumeSoundMem(70, SelectSE);
+	ChangeVolumeSoundMem(70, DecisionSE);
 }
 InputRankingScene::~InputRankingScene()
 {
@@ -36,6 +40,7 @@ InputRankingScene::~InputRankingScene()
 
 	DeleteSoundMem(SelectSE);
 	DeleteSoundMem(DecisionSE);
+
 }
 
 AbstractScene* InputRankingScene::Update()

@@ -33,6 +33,18 @@ Result::Result()
 	{
 		throw "Resource/Images/Result.png";
 	}
+	//BGMの読み込み
+	if ((ResultBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
+	{
+		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
+	}
+	//BGMの音量変更
+	ChangeVolumeSoundMem(70, ResultBGM);
+	//BGMの再生
+	if (CheckSoundMem(ResultBGM) == 0)
+	{
+		PlaySoundMem(ResultBGM, DX_PLAYTYPE_BACK);
+	}
 
 }
 
@@ -44,6 +56,11 @@ Result::~Result()
 	// フォント削除
 	DeleteFontToHandle(ResultFont1);
 	DeleteFontToHandle(ResultFont2);
+
+	//サウンド削除
+	DeleteSoundMem(ResultBGM);
+
+	StopSoundMem(ResultBGM);
 
 }
 //--------------------------------

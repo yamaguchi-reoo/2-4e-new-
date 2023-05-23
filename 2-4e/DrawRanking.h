@@ -11,6 +11,7 @@ private:
 	int GuideFont; //ボタン指示用のフォント
 
 	int RankingBGM; //BGM
+	int RankingSE; //BGM
 	int DecisionSE; //選択SE
 public:
 	//コンストラクタ

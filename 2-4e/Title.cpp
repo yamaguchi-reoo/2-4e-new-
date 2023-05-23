@@ -43,7 +43,7 @@ Title::Title()
 	ChangeVolumeSoundMem(70, TitleBGM);
 
 	//SE‚Ì“Ç‚İ‚İ
-	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/Select01.wav")) == -1) //‘I‘ğSE
+	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1) //‘I‘ğSE
 	{
 		throw "Resource/sounds/SE/select01.wav";
 	}
@@ -53,7 +53,7 @@ Title::Title()
 	//BGM‚ÌÄ¶
 	if (CheckSoundMem(TitleBGM) == 0)
 	{
-		PlaySoundMem(TitleBGM, DX_PLAYTYPE_BACK);
+		PlaySoundMem(TitleBGM, DX_PLAYTYPE_LOOP);
 	}
 
 }

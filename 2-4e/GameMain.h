@@ -25,7 +25,7 @@ private:
 
     int TotalScore;         //合計点
     bool PauseFlg;          //一時停止中か判断
-    int PauseFlashTime;         //ポーズ中の文字点滅用
+    int PauseFlashTime;        //ポーズ中の文字点滅用
     bool PauseFlashFlg;      //ポーズ中の文字点滅用
     int Time;               //制限時間用
     int TimerColor;         //文字色変更用
@@ -35,15 +35,15 @@ private:
     FpsController* fps;
     Score* score;
 
-    int ForestImg;
+    int ForestImg;      //背景画像
     int gAppleImg[4];	//画像用変数
-    int MainBGM;
-    int StartSE;
-    int AppleSE;
-    int PoisonAppleSE;
-    int MainFont1;
-    int MainFont2;
-    int MainFont3;
+    int MainBGM;        //BGM
+    int StartSE;        //SE
+    int AppleSE;        //りんご接触SE
+    int PoisonAppleSE;  //毒りんご接触SE
+    int MainFont1;      //フォント
+    int MainFont2;      //フォント
+    int MainFont3;      //フォント
 
     int GetPsAppleTime; //毒りんごを取ってからの経過時間
     bool GetPsAppleFlg; //毒りんご取得判断用フラグ
