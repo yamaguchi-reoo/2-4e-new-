@@ -41,6 +41,7 @@ InputRankingScene::~InputRankingScene()
 	DeleteSoundMem(SelectSE);
 	DeleteSoundMem(DecisionSE);
 
+
 }
 
 AbstractScene* InputRankingScene::Update()

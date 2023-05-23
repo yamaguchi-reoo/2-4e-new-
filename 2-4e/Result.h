@@ -12,7 +12,7 @@ private:
     int ResultImg;  //リザルト画像
     int ForestImg;  //背景画像
     int WaitTime;   //次のシーンに移るまでの時間
-    int ResultBGM;
+    int ResultBGM;  //BGM
     int ResultFont1;//フォント用
     int ResultFont2;//フォント用
 

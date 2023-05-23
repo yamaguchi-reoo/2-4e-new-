@@ -9,7 +9,7 @@
 #include "Ranking.h"
 #include "InputRankingScene.h"
 
-#define TIME_LIMIT 1;
+#define TIME_LIMIT 200;
 
 // --------------------------------
 // コンストラクタ
