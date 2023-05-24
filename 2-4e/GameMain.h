@@ -11,7 +11,6 @@ class GameMain :
 {
 private:	
     int frame;	    //フレーム
-    float Fps;
 
     float a_Count;	//同時にスポーンしているりんごの数
     int SpawnCount;	    //一度にスポーンしたリンゴの計測
@@ -37,7 +36,6 @@ private:
     Player* player; //プレイヤー
     Apple* apple[MAX_APPLE];   //リンゴ 
     Score* score;
-    FpsController* fps;
 
     int ForestImg;      //背景画像
     int gAppleImg[4];	//画像用変数

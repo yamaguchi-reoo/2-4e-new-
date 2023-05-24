@@ -10,9 +10,8 @@ GameMain::GameMain()
 {
 	//初期化
 	frame = 0;
-	Fps = 0;
-	Time = 600;
-	TotalScore = 10000;
+	Time =3599;
+	TotalScore = 0;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -40,7 +39,6 @@ GameMain::GameMain()
 		apple[i] = new Apple();
 	}
 	score = new Score();
-	fps = new FpsController();
 
 	//フォントの追加
 	MainFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 30, 6, DX_FONTTYPE_ANTIALIASING);
@@ -145,7 +143,6 @@ AbstractScene* GameMain::Update()
 
 		//処理の更新
 		player->UpDate();
-		Fps = fps->All();
 
 		for (int i = 0; i < MAX_APPLE; i++) 
 		{
@@ -234,27 +231,25 @@ void GameMain::Draw()const
 {
 	// 背景の描画
 	DrawGraph(0, 0, ForestImg, TRUE);
-	//DrawBox(1000, 0, 1280, 720, 0xffffff, TRUE);
+
 	// スコアの描画
 	DrawBox(1000, 0, 1280, 720, 0xffffff, TRUE);
 	for (int i = 0; i < 3; i++) {
 		DrawRotaGraph(1080 + i * 60, 370, 0.5f, 0, gAppleImg[i], TRUE, FALSE);
 		DrawFormatStringToHandle(1067 + i * 60, 320, 0x000000,MainFont3, "%.2d", gGetApple[i]);
 	}
-	//SetFontSize(30);
+
 	DrawStringToHandle(1105, 450, "得点", 0x000000,MainFont1);
 	DrawFormatStringToHandle(1095, 500, 0x000000, MainFont1,"%.5d", TotalScore);
-	//SetFontSize(24);
+
 	//取得りんご
 	DrawRotaGraph(1080, 370, 0.5f, 0, gAppleImg[0], TRUE, FALSE);
 	DrawRotaGraph(1140, 370, 0.5f, 0, gAppleImg[1], TRUE, FALSE);
 	DrawRotaGraph(1200, 370, 0.5f, 0, gAppleImg[2], TRUE, FALSE);
 
 	//制限時間
-	//SetFontSize(30);
 	DrawStringToHandle(1075, 150, "制限時間", 0x000000,MainFont1);
-	DrawFormatString(10, 10, 0xffffff, "fps:%0.1f", Fps);
-	//SetFontSize(40);
+
 	//5秒を切ると文字が揺れる
 	if (Time <= 300) {
 		DrawFormatStringToHandle(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), TimerColor,MainFont2, "%2.2d", Time / 60 + 1);
@@ -262,7 +257,6 @@ void GameMain::Draw()const
 	else {
 		DrawFormatStringToHandle(1120, 200, TimerColor, MainFont2, "%.2d", Time / 60 + 1);
 	}
-	//SetFontSize(24);
 
 	//プレイヤーの描画
 	if (PlayerDispFlg == TRUE) {
@@ -286,9 +280,7 @@ void GameMain::Draw()const
 		else{
 			DrawStringToHandle(370, 370, "---ポーズ中---", 0xffffff, MainFont1, TRUE);
 		}
-		//SetFontSize(30);
 		DrawStringToHandle(370, 520, "Startボタンで再開", 0xffffff, MainFont1,TRUE);
-		//SetFontSize(24);
 	}
 }
 
