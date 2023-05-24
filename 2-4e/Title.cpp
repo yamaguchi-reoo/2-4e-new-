@@ -85,6 +85,27 @@ AbstractScene* Title::Update()
 		Select++;
 		if (Select > 3)Select = 0;
 	}
+		//入力キー情報
+	OldKey = NowKey;
+	NowKey = PAD_INPUT::GetLStick().ThumbY;
+	KeyFlg = NowKey & ~OldKey;
+
+	//Lスティック上入力
+	if (KeyFlg & NowKey / (-20923) < 0)
+	{
+		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
+		Select--;
+		if (Select < 0)Select = 3;
+	}
+
+	//Lスティック下入力
+	if (KeyFlg & NowKey / 20923 < 0)
+	{
+		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
+		Select++;
+		if (Select > 3)Select = 0;
+	}
+
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
 	{
 		switch (static_cast<TITLE_MENU>(Select))

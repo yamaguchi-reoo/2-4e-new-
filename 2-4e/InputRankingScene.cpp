@@ -1,6 +1,7 @@
 #include "InputRankingScene.h"
 #include "DrawRanking.h"
 #include "PadInput.h"
+#include <DxLib.h>
 
 
 InputRankingScene::InputRankingScene(int _score)
@@ -8,11 +9,12 @@ InputRankingScene::InputRankingScene(int _score)
 	score = _score;
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
-	
+
 	//ƒtƒHƒ“ƒg’Ç‰Á
 	NameFont1 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 80, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont2 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 48, 8, DX_FONTTYPE_ANTIALIASING);
 	NameFont3 = CreateFontToHandle("HGS‘n‰pŠpÎß¯Ìß‘Ì", 32, 8, DX_FONTTYPE_ANTIALIASING);
+
 
 	//‰æ‘œ“Ç
 	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
@@ -74,6 +76,7 @@ AbstractScene* InputRankingScene::Update()
 		if (cursorPoint.y > 3 && cursorPoint.x == 12){
 			cursorPoint.x = 11;
 		}
+	
 	}
 	//ƒJ[ƒ\ƒ‹‚ğ‰EˆÚ“®‚³‚¹‚é
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
