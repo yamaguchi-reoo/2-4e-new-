@@ -5,7 +5,6 @@
 #include "define.h"
 #include "GameMain.h"
 
-//コンストラクタ
 Apple::Apple()
 {
 	//初期化
@@ -48,13 +47,12 @@ Apple::Apple()
 		throw "Resource/Images/Apple_Poison.png";
 	}
 }
-//デストラクタ
+
 Apple::~Apple()
 {
 
 }
 
-//更新
 void Apple::UpDate()
 {
 	//もしりんごがスポーン済なら
@@ -84,7 +82,6 @@ void Apple::UpDate()
 		}
 	}
 }
-//描画
 void Apple::Draw() const
 {
 	//りんごの描画
@@ -110,7 +107,6 @@ void Apple::Draw() const
 	}
 }
 
-//スポーン処理
 void Apple::Spawn()
 {
 	int GetRand = Rand();			//りんご種類抽選
@@ -151,7 +147,7 @@ void Apple::Spawn()
 		break;
 	}
 }
-//スポーンするりんごの種類の抽選
+
 int Apple::Rand()
 {
 	int rand = GetRand(19);
@@ -177,55 +173,46 @@ int Apple::Rand()
 	}
 }
 
-//りんごのX座標設定
 void Apple::SetLocation(int x)
 {
 	location.x = x;
 }
 
-//りんごが現在スポーン中か取得
 int Apple::GetAppleFlg()
 {
 	return flg;
 }
 
-//りんごの種類取得
 int Apple::GetAppleType()
 {
 	return type;
 }
 
-//りんごのX座標取得
 int Apple::GetAppleLocationX()
 {
 	return location.x;
 }
 
-//りんごのY座標取得
 int Apple::GetAppleLocationY()
 {
 	return location.y;
 }
 
-//りんごの点数取得
 int Apple::GetApplePoint()
 {
 	return point;
 }
 
-//りんごがスポーンしてからの経過時間取得
 int Apple::GetAppleTime()
 {
 	return time;
 }
 
-//各りんごのスポーン待機時間取得
 int Apple::GetAppleSpan()
 {
 	return span;
 }
 
-//りんごリセット
 void Apple::AppleReset()
 {
 	flg = FALSE;		//フラグ
@@ -240,7 +227,6 @@ void Apple::AppleReset()
 	span = 0;			//各りんごが被らないようにするための待ち時間
 }
 
-//エフェクト開始用設定
 void Apple::EffectSet()
 {
 	e_flg = TRUE;				//フラグ（エフェクト）
