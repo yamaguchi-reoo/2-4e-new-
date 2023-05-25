@@ -11,9 +11,6 @@
 
 #define TIME_LIMIT 200;
 
-// --------------------------------
-// コンストラクタ
-//---------------------------------
 Result::Result(int *GetApple,int Score)
 {
 	//初期化
@@ -53,9 +50,6 @@ Result::Result(int *GetApple,int Score)
 
 }
 
-//--------------------------------
-// デストラクタ
-//--------------------------------
 Result::~Result()
 {
 	// フォント削除
@@ -68,9 +62,7 @@ Result::~Result()
 	StopSoundMem(ResultBGM);
 
 }
-//--------------------------------
-// 更新
-//--------------------------------
+
 AbstractScene* Result::Update() {
 	if (WaitTime-- < 0)
 	{
@@ -88,10 +80,6 @@ AbstractScene* Result::Update() {
 	return this;
 }
 
-
-//--------------------------------
-// 描画
-//--------------------------------
 void Result::Draw()const
 {
 	//ゲーム終了画面

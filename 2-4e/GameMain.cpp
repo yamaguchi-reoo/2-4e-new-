@@ -2,7 +2,6 @@
 #include <math.h>
 #include "GameMain.h"
 #include "Result.h"
-#include "Score.h"
 #include "PadInput.h"
 #include "FpsController.h"
 
@@ -38,7 +37,7 @@ GameMain::GameMain()
 	for (int i = 0; i < MAX_APPLE; i++) {
 		apple[i] = new Apple();
 	}
-	score = new Score();
+	fps = new FpsController();
 
 	//フォントの追加
 	MainFont1 = CreateFontToHandle("HGS創英角ﾎﾟｯﾌﾟ体", 30, 6, DX_FONTTYPE_ANTIALIASING);
@@ -109,7 +108,6 @@ GameMain::~GameMain()
 	for (int i = 0; i < MAX_APPLE; i++) {
 		delete apple[i];
 	}
-	delete score;
 	
 	StopSoundMem(MainBGM);
 	//サウンド削除
@@ -267,13 +265,13 @@ void GameMain::Draw()const
 	for (int i = 0; i < 10; i++) {
 		apple[i]->Draw();
 	}
+
 	//一時停止中の描画
 	if (PauseFlg == TRUE)
 	{
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 200);
 		DrawBox(0, 0, 1000, 780, 0x000000, TRUE);
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-		//SetFontSize(30);
 		if (PauseFlashFlg == TRUE) {
 			DrawStringToHandle(370, 370, "---ポーズ中---", 0x000000, MainFont1, TRUE);
 		}
@@ -284,7 +282,6 @@ void GameMain::Draw()const
 	}
 }
 
-//りんご取得処理
 void GameMain::AppleGet(int i)
 {
 	//取ったりんごの種類を取得して対応する値を加算する
@@ -313,7 +310,6 @@ void GameMain::AppleGet(int i)
 	}
 }
 
-//りんごスポーン処理
 void GameMain::AppleSpawn()
 {
 	//スポーンできる場所があるかチェック

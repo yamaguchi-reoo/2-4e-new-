@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "Apple.h"
 #include "FpsController.h"
-#include "Score.h"
 
 class GameMain :
     public AbstractScene,Apple
@@ -35,7 +34,7 @@ private:
 
     Player* player; //プレイヤー
     Apple* apple[MAX_APPLE];   //リンゴ 
-    Score* score;
+    FpsController* fps;
 
     int ForestImg;      //背景画像
     int gAppleImg[4];	//画像用変数
