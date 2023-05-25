@@ -54,7 +54,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		PAD_INPUT::UpdateKey();
 		sceneMng->Draw();
 		FPSC.All();
-		FPSC.Disp();
+
 		//ã≠êßèIóπ
 		if (PAD_INPUT::OnButton(XINPUT_BUTTON_BACK))
 		{

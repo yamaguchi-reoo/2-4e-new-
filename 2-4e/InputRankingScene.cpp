@@ -208,8 +208,8 @@ void InputRankingScene::Draw() const {
 	}
 	else
 	{
-		DrawBox(308 + 50 * CursorPoint.x, 350 + 50 * CursorPoint.y,
-			358 + 50 * CursorPoint.x, 403 + 50 * CursorPoint.y, 0x808080, TRUE);
+		DrawBox(308 + 50 * CursorPoint.x, 353 + 50 * CursorPoint.y,
+			358 + 50 * CursorPoint.x, 405 + 50 * CursorPoint.y, 0x808080, TRUE);
 		//•’Ê‚Ì•¶šF‚ÌhŠm’èh‚ğ•`‰æ‚·‚é
 		DrawStringToHandle(858, 555, "Šm’è", 0xffffff, NameFont2);
 	}

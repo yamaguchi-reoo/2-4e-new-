@@ -9,9 +9,9 @@ GameMain::GameMain()
 {
 	//‰Šú‰»
 	frame = 0;
-	Time =  1;
+	Time = 60;
 	Timer = 0;
-	TotalScore = 12000;
+	TotalScore = 0;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
