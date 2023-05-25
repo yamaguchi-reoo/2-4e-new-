@@ -27,7 +27,7 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 100, 148, gh)) == -1)
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, gh)) == -1)
 	{
 		throw "Resource/Images/147431.png";
 	}
