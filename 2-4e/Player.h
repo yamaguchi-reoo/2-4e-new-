@@ -29,6 +29,7 @@ private:
 	int cnt;
 	int cnt_wait;
 	int vector;
+	int frontImg;
 
 public:
 	//コンストラクタ

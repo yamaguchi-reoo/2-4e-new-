@@ -19,6 +19,7 @@ private:
     int MenuSE;       //選択SE用
     int TitleImg;     //タイトル画像
     int CursorImg;    //カーソル画像
+  
 
 public:
     //コンストラクタ
