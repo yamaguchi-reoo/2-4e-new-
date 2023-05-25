@@ -51,6 +51,7 @@ void Ranking::SortRanking()
 		}
 	}
 }
+
 void Ranking::SaveRanking(void) {
 	FILE* fp = NULL;
 
@@ -67,7 +68,6 @@ void Ranking::SaveRanking(void) {
 
 	fclose(fp);
 }
-
 
 void Ranking::ReadRanking(void) {
 	FILE* fp = NULL;

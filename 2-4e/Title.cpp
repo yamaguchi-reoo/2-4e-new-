@@ -19,6 +19,7 @@ Title::Title()
 {
 	//初期化
 	Select = 0;
+	Once = TRUE;
 
 	//フォントの追加
 	MenuFont = CreateFontToHandle("HG創英角ﾎﾟｯﾌﾟ体", 64, 8, DX_FONTTYPE_ANTIALIASING);
@@ -68,7 +69,6 @@ Title::~Title()
 	DeleteSoundMem(MenuSE);
 }
 
-//更新
 AbstractScene* Title::Update()
 {
 	//十字キー↑入力
@@ -85,25 +85,29 @@ AbstractScene* Title::Update()
 		Select++;
 		if (Select > 3)Select = 0;
 	}
-		//入力キー情報
-	OldKey = NowKey;
-	NowKey = PAD_INPUT::GetLStick().ThumbY;
-	KeyFlg = NowKey & ~OldKey;
 
 	//Lスティック上入力
-	if (KeyFlg & NowKey / (-20923) < 0)
+	if (PAD_INPUT::GetLStick().ThumbY > 20923 && Once == TRUE)
 	{
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select--;
 		if (Select < 0)Select = 3;
+		Once = FALSE;
 	}
 
 	//Lスティック下入力
-	if (KeyFlg & NowKey / 20923 < 0)
+	if (PAD_INPUT::GetLStick().ThumbY < -20923 && Once == TRUE)
 	{
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select++;
 		if (Select > 3)Select = 0;
+		Once = FALSE;
+	}
+
+	//Lスティックが元に戻されたらOnceをリセット
+	if (Once == FALSE && PAD_INPUT::GetLStick().ThumbY < 20923 && PAD_INPUT::GetLStick().ThumbY > -20923)
+	{
+		Once = TRUE;
 	}
 
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A))
@@ -137,13 +141,8 @@ AbstractScene* Title::Update()
 	return this;
 }
 
-//画像描画
 void Title::Draw()const
 {
-	// ステージの描画
-	//SetFontSize(64);                             //サイズを64に変更
-	//SetFontThickness(8);                         //太さを8に変更
-
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);
 	DrawStringToHandle(150, 100, "りんごおとし", 0xffffff, MenuFont);

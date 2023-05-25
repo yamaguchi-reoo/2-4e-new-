@@ -3,7 +3,6 @@
 #include "PadInput.h"
 #include <DxLib.h>
 
-
 InputRankingScene::InputRankingScene(int _score)
 {
 	score = _score;
@@ -34,6 +33,7 @@ InputRankingScene::InputRankingScene(int _score)
 	ChangeVolumeSoundMem(140, SelectSE);
 	ChangeVolumeSoundMem(140, DecisionSE);
 }
+
 InputRankingScene::~InputRankingScene()
 {
 	DeleteFontToHandle(NameFont1);
@@ -147,7 +147,6 @@ AbstractScene* InputRankingScene::Update()
 	}
 	return this;
 }
-
 
 void InputRankingScene::Draw() const {
 	DrawGraph(0, 0, img, TRUE);
