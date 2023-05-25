@@ -4,6 +4,7 @@
 #include "DxLib.h"
 #include "PadInput.h"
 #include<string>
+#include "Result.h"
 
 class InputRankingScene : public AbstractScene
 {
@@ -12,7 +13,8 @@ private:
 
 	int img;	//背景画像用
 	int score;	//スコア用
-	//SE用
+	//BGM.SE用
+	int InputBGM;
 	int SelectSE;	
 	int DecisionSE;
 	//フォント用変数

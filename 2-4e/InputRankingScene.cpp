@@ -1,6 +1,7 @@
 #include "InputRankingScene.h"
 #include "DrawRanking.h"
 #include "PadInput.h"
+#include "Result.h"
 #include <DxLib.h>
 
 InputRankingScene::InputRankingScene(int _score)
@@ -20,6 +21,13 @@ InputRankingScene::InputRankingScene(int _score)
 	{
 		throw "Resource/Images/mori.png";
 	}
+	//BGMì«çû
+	if ((InputBGM = LoadSoundMem("Resource/sounds/BGM/yonhonnorecorder.wav")) == -1)
+	{
+		throw "Resource/sounds/SE/yonhonnorecorder.wav";
+	}
+	//âπó í≤êÆ
+	ChangeVolumeSoundMem(140, InputBGM);
 	//SEì«çû
 	if ((SelectSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1)
 	{
@@ -30,8 +38,13 @@ InputRankingScene::InputRankingScene(int _score)
 		throw "Resource/sounds/SE/Decision01.wav";
 	}
 	//âπó í≤êÆ
-	ChangeVolumeSoundMem(140, SelectSE);
-	ChangeVolumeSoundMem(140, DecisionSE);
+	ChangeVolumeSoundMem(100, SelectSE);
+	ChangeVolumeSoundMem(100, DecisionSE);
+
+	//BGMÇÃçƒê∂
+	if (CheckSoundMem(InputBGM) == 0) {
+		PlaySoundMem(InputBGM, DX_PLAYTYPE_LOOP);
+	}
 }
 
 InputRankingScene::~InputRankingScene()
@@ -40,10 +53,11 @@ InputRankingScene::~InputRankingScene()
 	DeleteFontToHandle(NameFont2);
 	DeleteFontToHandle(NameFont3);
 
+	DeleteSoundMem(InputBGM);
 	DeleteSoundMem(SelectSE);
 	DeleteSoundMem(DecisionSE);
 
-
+	StopSoundMem(InputBGM);
 }
 
 AbstractScene* InputRankingScene::Update()
