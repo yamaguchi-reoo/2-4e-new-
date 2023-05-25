@@ -39,7 +39,7 @@ Title::Title()
 		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
 	}
 	//BGM‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(70, TitleBGM);
+	ChangeVolumeSoundMem(140, TitleBGM);
 
 	//SE‚Ì“Ç‚İ‚İ
 	if ((MenuSE = LoadSoundMem("Resource/sounds/SE/select01.wav")) == -1) //‘I‘ğSE
@@ -47,7 +47,7 @@ Title::Title()
 		throw "Resource/sounds/SE/select01.wav";
 	}
 	//SE‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(55, MenuSE);
+	ChangeVolumeSoundMem(110, MenuSE);
 
 	//BGM‚ÌÄ¶
 	if (CheckSoundMem(TitleBGM) == 0)

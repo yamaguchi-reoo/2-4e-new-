@@ -33,8 +33,8 @@ Help::Help()
 		throw "Resource/sounds/SE/Decision02.wav";
 	}
 	//SEÇÃâπó ïœçX
-	ChangeVolumeSoundMem(125, HelpSE);
-	ChangeVolumeSoundMem(90, DecisionSE);
+	ChangeVolumeSoundMem(140, HelpSE);
+	ChangeVolumeSoundMem(140, DecisionSE);
 
 	//BGMÇÃçƒê∂
 	if (CheckSoundMem(HelpBGM) == 0) {

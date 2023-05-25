@@ -31,8 +31,8 @@ InputRankingScene::InputRankingScene(int _score)
 		throw "Resource/sounds/SE/Decision01.wav";
 	}
 	//âπó í≤êÆ
-	ChangeVolumeSoundMem(70, SelectSE);
-	ChangeVolumeSoundMem(70, DecisionSE);
+	ChangeVolumeSoundMem(140, SelectSE);
+	ChangeVolumeSoundMem(140, DecisionSE);
 }
 InputRankingScene::~InputRankingScene()
 {

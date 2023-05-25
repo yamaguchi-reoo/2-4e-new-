@@ -74,7 +74,7 @@ GameMain::GameMain()
 		throw "Resource/sounds/BGM/seiya.wav";
 	}
 	//BGM‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(90, MainBGM);
+	ChangeVolumeSoundMem(160, MainBGM);
 
 	//SE‚Ì“Ç
 	if ((StartSE = LoadSoundMem("Resource/sounds/SE/Start.wav")) == -1) 
@@ -91,9 +91,9 @@ GameMain::GameMain()
 	}
 
 	//SE‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(70, StartSE);
-	ChangeVolumeSoundMem(100, AppleSE);
-	ChangeVolumeSoundMem(100, PoisonAppleSE);
+	ChangeVolumeSoundMem(140, StartSE);
+	ChangeVolumeSoundMem(140, AppleSE);
+	ChangeVolumeSoundMem(140, PoisonAppleSE);
 
 	//‰æ–ÊØ‘ÖSE
 	if (CheckSoundMem(StartSE) == 0)
