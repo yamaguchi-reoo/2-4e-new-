@@ -12,6 +12,9 @@ private:
 
 	int img;	//背景画像用
 	int score;	//スコア用
+	bool x_once;	//コントローラー入力用
+	bool y_once;	//コントローラー入力用
+
 	//SE用
 	int SelectSE;	
 	int DecisionSE;

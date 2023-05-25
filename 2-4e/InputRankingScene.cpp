@@ -6,6 +6,8 @@
 InputRankingScene::InputRankingScene(int _score)
 {
 	score = _score;
+	x_once = TRUE;
+	y_once = TRUE;
 	cursorPoint = { 0, 0 };
 	ranking.ReadRanking();
 
@@ -49,10 +51,14 @@ InputRankingScene::~InputRankingScene()
 AbstractScene* InputRankingScene::Update()
 {
 	//カーソルを上移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP) || (PAD_INPUT::GetLStick().ThumbY > 10000 && y_once == TRUE)) {
+
+		//連続入力しないようにする
+		y_once = FALSE;
+
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
-		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (--cursorPoint.y < 0) {
 			if (cursorPoint.x == 10) {
 				cursorPoint.y = 3;
@@ -65,11 +71,16 @@ AbstractScene* InputRankingScene::Update()
 			}
 		}
 	}
+
 	//カーソルを下移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (PAD_INPUT::GetLStick().ThumbY < -10000 && y_once == TRUE)) {
+
+		//連続入力しないようにする
+		y_once = FALSE;
+
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
-		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 		if (++cursorPoint.y > 3 && cursorPoint.x == 10 || cursorPoint.y > 4) {
 			cursorPoint.y = 0;
 		}
@@ -78,8 +89,13 @@ AbstractScene* InputRankingScene::Update()
 		}
 	
 	}
+
 	//カーソルを右移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)|| (PAD_INPUT::GetLStick().ThumbX > 10000 && x_once == TRUE)) {
+
+		//連続入力しないようにする
+		x_once = FALSE;
+
 		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
@@ -94,8 +110,12 @@ AbstractScene* InputRankingScene::Update()
 			cursorPoint.x = 0;
 		}
 	}
+
 	//カーソルを左移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)|| (PAD_INPUT::GetLStick().ThumbX < -10000 && x_once == TRUE)) {
+
+		//連続入力しないようにする
+		x_once = FALSE;
 
 		//カーソルがはみ出ないように調整する
 		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
@@ -112,9 +132,12 @@ AbstractScene* InputRankingScene::Update()
 			cursorPoint.x = 9;
 		}
 	}
+
 	//Aボタンが押されて名前が9文字以上入力されていないなら
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < NAME_MAX - 1) {
+
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+
 		if (cursorPoint.x != 11 || cursorPoint.y != 4)
 		{
 			name += keyboard[cursorPoint.y][cursorPoint.x];
@@ -129,12 +152,14 @@ AbstractScene* InputRankingScene::Update()
 			return new DrawRanking;
 		}
 	}
+
 	//Bボタンが押されて名前が1文字以上入力されているなら
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
 		//名前を1文字消す
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		name.erase(name.begin() + (name.size() - 1));
 	}
+
 	//1文字以上入力されていてStartボタンが押されたなら
 	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START)&& name.size() > 0) 
 	{
@@ -144,6 +169,15 @@ AbstractScene* InputRankingScene::Update()
 		//ランキングを描画する
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new DrawRanking;
+	}
+
+	//LスティックのX座標が元の位置に戻ったらフラグをリセットする
+	if (PAD_INPUT::GetLStick().ThumbX < 10000 && PAD_INPUT::GetLStick().ThumbX > -10000 && x_once == FALSE) {
+		x_once = TRUE;
+	}	
+	//LスティックのY座標が元の位置に戻ったらフラグをリセットする
+	if (PAD_INPUT::GetLStick().ThumbY < 10000 && PAD_INPUT::GetLStick().ThumbY > -10000 && y_once == FALSE) {
+		y_once = TRUE;
 	}
 	return this;
 }
