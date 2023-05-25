@@ -82,15 +82,18 @@ AbstractScene* End::Update() {
 void End::Draw()const {
 	//ゲーム終了画面
 	DrawGraph(0, 0, ForestImg, TRUE);
-	DrawStringToHandle(500, 780 - MoveString * MOVE_SPEED, "SE & BGM", 0x0000ff,EndFont1);
+	DrawStringToHandle(500, 680 - MoveString * MOVE_SPEED, "SE & BGM", 0x0000ff,EndFont1);
 
-	DrawStringToHandle(540, 880 - MoveString * MOVE_SPEED, "OtoLogic", 0x000000, EndFont2);
-	DrawStringToHandle(515, 940 - MoveString * MOVE_SPEED, "無料効果音", 0x000000, EndFont2);
-	DrawStringToHandle(470, 1000 - MoveString * MOVE_SPEED, "甘茶の音楽工房", 0x000000,EndFont2);
+	DrawStringToHandle(540, 780 - MoveString * MOVE_SPEED, "OtoLogic", 0x000000, EndFont2);
+	DrawStringToHandle(515, 840 - MoveString * MOVE_SPEED, "無料効果音", 0x000000, EndFont2);
+	DrawStringToHandle(470, 900 - MoveString * MOVE_SPEED, "甘茶の音楽工房", 0x000000,EndFont2);
 
-	DrawStringToHandle(505, 1200 - MoveString * MOVE_SPEED, "画像素材", 0xff0000, EndFont1);
+	DrawStringToHandle(505, 1050 - MoveString * MOVE_SPEED, "画像素材", 0xff0000, EndFont1);
 
-	DrawStringToHandle(510, 1300 - MoveString * MOVE_SPEED, "イラスト屋", 0x000000, EndFont2);
+	DrawStringToHandle(510, 1150 - MoveString * MOVE_SPEED, "イラスト屋", 0x000000, EndFont2);
+	DrawStringToHandle(545, 1210 - MoveString * MOVE_SPEED, "illustAC", 0x000000, EndFont2);
+	DrawStringToHandle(560, 1270 - MoveString * MOVE_SPEED, "illust8", 0x000000, EndFont2);
+	DrawStringToHandle(545, 1330 - MoveString * MOVE_SPEED, "SVG Silh", 0x000000, EndFont2);
 
 	DrawStringToHandle(340, 2000 - MoveString * (MOVE_SPEED+1.5), "Thank You For ", 0x000000, EndFont3);
 	DrawStringToHandle(310, 2100 - MoveString * (MOVE_SPEED+1.5), "Playing Game !!", 0x000000, EndFont3);
