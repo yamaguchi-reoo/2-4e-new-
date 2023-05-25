@@ -1,5 +1,5 @@
-1     10000    MATUDA
-2      7550      HINA
-3      7500        TO
-4      5650 nnnnnnnnn
-5      5000        MO
+1     1000    MATUDA
+2      750      HINA
+3      700        TO
+4      550 nnnnnnnnn
+5      500        MO
