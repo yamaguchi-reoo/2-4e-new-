@@ -5,9 +5,7 @@
 
 #define TIME_LIMIT 300
 #define MOVE_SPEED 7
-// --------------------------------
-// コンストラクタ
-//---------------------------------
+
 End::End() {
 	//初期化
 	WaitTime = TIME_LIMIT;
@@ -51,9 +49,6 @@ End::End() {
 
 }
 
-//--------------------------------
-// デストラクタ
-//--------------------------------
 End::~End()
 {
 	DeleteFontToHandle(EndFont1);
@@ -63,9 +58,7 @@ End::~End()
 	DeleteSoundMem(EndBGM);
 	DeleteSoundMem(EndSE);
 }
-//--------------------------------
-// 更新
-//--------------------------------
+
 AbstractScene* End::Update() {
 	if (WaitTime-- < 0) {
 		return nullptr;
@@ -76,9 +69,6 @@ AbstractScene* End::Update() {
 	return this;
 }
 
-//--------------------------------
-// 描画
-//--------------------------------
 void End::Draw()const {
 	//ゲーム終了画面
 	DrawGraph(0, 0, ForestImg, TRUE);

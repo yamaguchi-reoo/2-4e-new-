@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "Apple.h"
 #include "FpsController.h"
-#include "Score.h"
 
 class GameMain :
     public AbstractScene,Apple
@@ -36,7 +35,6 @@ private:
 
     Player* player; //ƒvƒŒƒCƒ„[
     Apple* apple[MAX_APPLE];   //ƒŠƒ“ƒS 
-    Score* score;
     FpsController* fps;
 
     int ForestImg;      //”wŒi‰æ‘œ

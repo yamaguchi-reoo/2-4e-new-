@@ -2,7 +2,6 @@
 #include "DrawRanking.h"
 #include "PadInput.h"
 
-
 InputRankingScene::InputRankingScene(int _score)
 {
 	score = _score;
@@ -32,6 +31,7 @@ InputRankingScene::InputRankingScene(int _score)
 	ChangeVolumeSoundMem(70, SelectSE);
 	ChangeVolumeSoundMem(70, DecisionSE);
 }
+
 InputRankingScene::~InputRankingScene()
 {
 	DeleteFontToHandle(NameFont1);
@@ -144,7 +144,6 @@ AbstractScene* InputRankingScene::Update()
 	}
 	return this;
 }
-
 
 void InputRankingScene::Draw() const {
 	DrawGraph(0, 0, img, TRUE);

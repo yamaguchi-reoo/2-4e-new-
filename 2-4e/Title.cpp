@@ -68,7 +68,6 @@ Title::~Title()
 	DeleteSoundMem(MenuSE);
 }
 
-//更新
 AbstractScene* Title::Update()
 {
 	//十字キー↑入力
@@ -116,13 +115,8 @@ AbstractScene* Title::Update()
 	return this;
 }
 
-//画像描画
 void Title::Draw()const
 {
-	// ステージの描画
-	//SetFontSize(64);                             //サイズを64に変更
-	//SetFontThickness(8);                         //太さを8に変更
-
 	//タイトルの描画
 	DrawGraph(0, 0, TitleImg, FALSE);
 	DrawStringToHandle(150, 100, "りんごおとし", 0xffffff, MenuFont);

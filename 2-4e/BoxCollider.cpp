@@ -1,7 +1,6 @@
 #include "BoxCollider.h"
 #include "Apple.h"
 
-//BoxColliderとの当たり判定
 int BoxCollider::HitBox(BoxCollider* bCollider)
 {
 	int ret = false; //返り値
@@ -25,19 +24,16 @@ int BoxCollider::HitBox(BoxCollider* bCollider)
 	return ret;
 }
 
-//中心座標の取得
 Location BoxCollider::GetLocation()const
 {
 	return location;
 }
 
-//半径の取得
 Erea BoxCollider::GetErea()const
 {
 	return erea;
 }
 
-//中心座標の設定
 void BoxCollider::SetLocation(Location location)
 {
 	this->location = location;

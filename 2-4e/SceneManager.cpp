@@ -33,6 +33,7 @@ AbstractScene* SceneManager::Update()
 	}
 	return mScene;
 }
+
 void SceneManager::Draw() const
 {
 	mScene->Draw();

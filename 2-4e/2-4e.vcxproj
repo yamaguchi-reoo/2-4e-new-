@@ -165,7 +165,6 @@
     <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
