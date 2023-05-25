@@ -141,15 +141,16 @@ void Player::UpDate()
 
 void Player::Draw() const
 {
-
-	if (PlayerState == PLAYER_STATE::WALK_LEFT) {
+	switch (PlayerState)
+	{
+	case PLAYER_STATE::WALK_LEFT:
 		DrawGraph(location.x, location.y, gh[cnt], TRUE);
-	}
-	else if(PlayerState == PLAYER_STATE::WALK_RIGHT) {
+		break;
+	case PLAYER_STATE::WALK_RIGHT:
 		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+		break;
+	case PLAYER_STATE::IDOL:
+		DrawRotaGraph(location.x+50, location.y+50, 1.2, 0, frontImg, TRUE);
+		break;
 	}
-	else if (PlayerState == PLAYER_STATE::IDOL) {
-		DrawRotaGraph(location.x, location.y,2.0,0,0,0,frontImg, TRUE);
-	}
-	
 }
