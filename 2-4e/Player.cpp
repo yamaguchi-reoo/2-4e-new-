@@ -71,11 +71,11 @@ void Player::UpDate()
 		}
 		if (AccelerationLeft > 0)		//¶‚É“®‚¢‚Ä‚¢‚½‚Ì¨‚¢‚ğE‚·ˆ—
 		{
-			location.x -= (AccelerationLeft / 5);
+			location.x -= (AccelerationLeft / 10);
 			AccelerationLeft--;
 
 		}
-		location.x = location.x + Speed + (AccelerationRight / 5);
+		location.x = location.x + Speed + (AccelerationRight / 10);
 	}
 	//‰Á‘¬“x‚É‰‚¶‚ÄŠµ«‚ª“­‚­
 	else
