@@ -27,7 +27,7 @@ Player::Player()
 
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, gh)) == -1)
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 100, 148, gh)) == -1)
 	{
 		throw "Resource/Images/147431.png";
 	}
@@ -71,11 +71,11 @@ void Player::UpDate()
 		}
 		if (AccelerationLeft > 0)		//¶‚É“®‚¢‚Ä‚¢‚½Žž‚Ì¨‚¢‚ðŽE‚·ˆ—
 		{
-			location.x -= (AccelerationLeft / 10);
+			location.x -= (AccelerationLeft / 5);
 			AccelerationLeft--;
 
 		}
-		location.x = location.x + Speed + (AccelerationRight / 10);
+		location.x = location.x + Speed + (AccelerationRight / 5);
 	}
 	//‰Á‘¬“x‚É‰ž‚¶‚ÄŠµ«‚ª“­‚­
 	else
@@ -98,9 +98,9 @@ void Player::UpDate()
 		}
 	}
 	//•Ç‚É‚Ô‚Â‚©‚é
-	if (location.x > 910)
+	if (location.x > 895)
 	{
-		location.x = 910;
+		location.x = 895;
 		PlayerState = PLAYER_STATE::IDOL;
 		AccelerationRight = 0;
 		AccelerationLeft = 0;
