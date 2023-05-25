@@ -11,6 +11,8 @@ private:
     int NowKey;		//今の入力キー
     int KeyFlg;		//入力キー情報
 
+    bool Once;      //Lスティックでカーソルを動かす用
+
     int MenuFont; //メニュー用のフォント
 
     int TitleBGM;     //BGM用

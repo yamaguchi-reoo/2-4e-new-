@@ -41,7 +41,7 @@ Result::Result(int *GetApple,int Score)
 		throw "Resource/sounds/BGM/yonhonnorecorder.wav";
 	}
 	//BGM‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(70, ResultBGM);
+	ChangeVolumeSoundMem(140, ResultBGM);
 	//BGM‚ÌÄ¶
 	if (CheckSoundMem(ResultBGM) == 0)
 	{

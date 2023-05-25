@@ -35,8 +35,8 @@ DrawRanking::DrawRanking()
 		throw "Resource/sounds/SE/Decision02.wav";
 	}
 	//SE‚Ì‰¹—Ê•ÏX
-	ChangeVolumeSoundMem(70, RankingSE);
-	ChangeVolumeSoundMem(70, DecisionSE);
+	ChangeVolumeSoundMem(140, RankingSE);
+	ChangeVolumeSoundMem(140, DecisionSE);
 
 	//BGM‚ÌÄ¶
 	if (CheckSoundMem(RankingBGM) == 0)

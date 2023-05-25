@@ -30,8 +30,8 @@ InputRankingScene::InputRankingScene(int _score)
 		throw "Resource/sounds/SE/Decision01.wav";
 	}
 	//音量調整
-	ChangeVolumeSoundMem(70, SelectSE);
-	ChangeVolumeSoundMem(70, DecisionSE);
+	ChangeVolumeSoundMem(140, SelectSE);
+	ChangeVolumeSoundMem(140, DecisionSE);
 }
 
 InputRankingScene::~InputRankingScene()
@@ -167,18 +167,41 @@ void InputRankingScene::Draw() const {
 	else
 	{
 		DrawBox(308 + 50 * cursorPoint.x, 350 + 50 * cursorPoint.y,
-			358 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
+			358 + 50 * cursorPoint.x, 403 + 50 * cursorPoint.y, 0x808080, TRUE);
 		//普通の文字色の”確定”を描画する
 		DrawStringToHandle(858, 555, "確定", 0xffffff, NameFont2);
 	}
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 14; j++) {
 			if (j == cursorPoint.x && i == cursorPoint.y) {
-				DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				//I、i、Lの文字の空白を調整する
+				if (i == 0 && j == 8 && keyboard[0][8] || i == 2 && j == 8 && keyboard[2][8] || i == 2 && j == 11 && keyboard[2][11]) {
+					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				}
+				//gの文字高さを調整する
+				else if (i == 2 && j == 6 && keyboard[0][8]) {
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 345, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				}
+				else
+				{
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 358, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				}
 			}
 			else
 			{
-				DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				//I、i、Lの文字の空白を調整する
+				if (i == 0 && j == 8 && keyboard[0][8]||i == 2 && j == 8 && keyboard[2][8]||i == 2 && j == 11 && keyboard[2][11]) {
+					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				}
+				//gの文字高さを調整する
+				else if (i == 2 && j == 6 && keyboard[0][8]) {
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 348, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				}
+				else
+				{
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				}
+				
 			}
 		
 		}
