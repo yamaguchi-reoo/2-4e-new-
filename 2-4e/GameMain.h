@@ -29,7 +29,8 @@ private:
     int PauseFlashTime;        //ポーズ中の文字点滅用
     bool PauseFlashFlg;      //ポーズ中の文字点滅用
 
-    int Time;               //制限時間用
+    int Time;               //制限時間
+    int Timer;              //制限時間減少用
     int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー

@@ -7,7 +7,7 @@
 
 enum class PLAYER_STATE {
 	IDOL = 0,
-	WALK_RIGTH,
+	WALK_RIGHT,
 	WALK_LEFT,
 
 };

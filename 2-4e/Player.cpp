@@ -43,7 +43,7 @@ Player::~Player()
 void Player::UpDate()
 {
 	//ˆÚ“®
-	if (PAD_INPUT::GetLStick().ThumbX < -10000)
+	if (PAD_INPUT::GetLStick().ThumbX < -10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		PlayerState = PLAYER_STATE::WALK_LEFT;
 		Speed = WALK_SPEED;
@@ -60,9 +60,9 @@ void Player::UpDate()
 		location.x = location.x - Speed - (AccelerationLeft / 10);
 	}
 
-	else if (PAD_INPUT::GetLStick().ThumbX > 10000)
+	else if (PAD_INPUT::GetLStick().ThumbX > 10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_RIGHT))
 	{
-		PlayerState = PLAYER_STATE::WALK_RIGTH;
+		PlayerState = PLAYER_STATE::WALK_RIGHT;
 		Speed = WALK_SPEED;
 		if (AccelerationRight <= 30)	//‰EˆÚ“®Žž‚Ì¨‚¢
 		{
@@ -84,7 +84,7 @@ void Player::UpDate()
 		{
 			location.x += (AccelerationRight / 5);
 			AccelerationRight -= 1;
-			PlayerState = PLAYER_STATE::WALK_RIGTH;
+			PlayerState = PLAYER_STATE::WALK_RIGHT;
 		}
 		else if (AccelerationLeft > 0)
 		{
@@ -137,12 +137,14 @@ void Player::UpDate()
 
 void Player::Draw() const
 {
-	//DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 
-	if (vector ==0) {
+	if (PlayerState == PLAYER_STATE::WALK_LEFT) {
 		DrawGraph(location.x, location.y, gh[cnt], TRUE);
 	}
-	else if(vector==1) {
+	else if(PlayerState == PLAYER_STATE::WALK_RIGHT) {
+		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+	}
+	else if (PlayerState == PLAYER_STATE::IDOL) {
 		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 	}
 	
