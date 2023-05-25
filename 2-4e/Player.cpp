@@ -5,9 +5,6 @@
 
 Player::Player()
 {
-
-	//ここでプレイヤー画像とSE読込
-
 	//初期化
 	location.x = 100;
 	location.y = 550;
@@ -19,24 +16,23 @@ Player::Player()
 	AccelerationRight = 0;
 	AccelerationLeft = 0;
 
-	cnt = 0;
-	cnt_wait = 0;
+	Cnt = 0;
+	CntWait = 0;
 
-	vector = 1;
+	Vector = 1;
 	
-
 	PlayerState = PLAYER_STATE::IDOL;
 
-	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, gh)) == -1)
+	//プレイヤー画像読込
+	if ((LoadDivGraph("Resource/Images/147431.png", 9, 5, 2, 102, 148, PlayerWalkImg)) == -1)
 	{
 		throw "Resource/Images/147431.png";
 	}
-	if ((frontImg = LoadGraph("Resource/Images/front.png")) == -1)
+
+	if ((FrontImg = LoadGraph("Resource/Images/front.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
-
-	
 }
 
 Player::~Player()
@@ -46,7 +42,7 @@ Player::~Player()
 
 void Player::UpDate()
 {
-	//移動
+	//左移動
 	if (PAD_INPUT::GetLStick().ThumbX < -10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		PlayerState = PLAYER_STATE::WALK_LEFT;
@@ -54,7 +50,7 @@ void Player::UpDate()
 		if (AccelerationLeft <= 30) //左移動時の勢い
 		{
 			AccelerationLeft++;
-			vector = 0;
+			Vector = 0;
 		}
 		if (AccelerationRight > 0)  //右に動いていた時の勢いを殺す処理
 		{
@@ -64,6 +60,7 @@ void Player::UpDate()
 		location.x = location.x - Speed - (AccelerationLeft / 10);
 	}
 
+	//右移動
 	else if (PAD_INPUT::GetLStick().ThumbX > 10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		PlayerState = PLAYER_STATE::WALK_RIGHT;
@@ -71,7 +68,7 @@ void Player::UpDate()
 		if (AccelerationRight <= 30)	//右移動時の勢い
 		{
 			AccelerationRight++;
-			vector = 1;
+			Vector = 1;
 		}
 		if (AccelerationLeft > 0)		//左に動いていた時の勢いを殺す処理
 		{
@@ -101,7 +98,8 @@ void Player::UpDate()
 			PlayerState = PLAYER_STATE::IDOL;
 		}
 	}
-	//壁にぶつかる
+
+	//右の壁にぶつかった時止まる
 	if (location.x > 895)
 	{
 		location.x = 895;
@@ -110,6 +108,7 @@ void Player::UpDate()
 		AccelerationLeft = 0;
 	}
 
+	//左の壁にぶつかった時止まる
 	if (location.x < 0)
 	{
 		location.x = 0;
@@ -119,21 +118,12 @@ void Player::UpDate()
 	}
 
 	//移動する際に画像のcntを増やす
-	if (AccelerationLeft >= 5) {
-		if (++cnt_wait >= 6) {
-			cnt++;
-			cnt_wait = 0;
-			if (cnt >= 9) {
-				cnt = 0;
-			}
-		}
-	}
-	else if (AccelerationRight >= 5) {
-		if (++cnt_wait >= 6) {
-			cnt++;
-			cnt_wait = 0;
-			if (cnt >= 9) {
-				cnt = 0;
+	if (AccelerationLeft >= 5 || AccelerationRight >= 5) {
+		if (++CntWait >= 6) {
+			Cnt++;
+			CntWait = 0;
+			if (Cnt >= 9) {
+				Cnt = 0;
 			}
 		}
 	}
@@ -144,13 +134,13 @@ void Player::Draw() const
 	switch (PlayerState)
 	{
 	case PLAYER_STATE::WALK_LEFT:
-		DrawGraph(location.x, location.y, gh[cnt], TRUE);
+		DrawGraph(location.x, location.y, PlayerWalkImg[Cnt], TRUE);
 		break;
 	case PLAYER_STATE::WALK_RIGHT:
-		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
+		DrawTurnGraph(location.x, location.y, PlayerWalkImg[Cnt], TRUE);
 		break;
 	case PLAYER_STATE::IDOL:
-		DrawRotaGraph(location.x+50, location.y+50, 1.2, 0, frontImg, TRUE);
+		DrawRotaGraph(location.x+50, location.y+50, 1.2, 0, FrontImg, TRUE);
 		break;
 	}
 }
