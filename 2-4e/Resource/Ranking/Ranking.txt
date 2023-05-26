@@ -1,5 +1,5 @@
-1     10000    MATUDA
-2      7550      HINA
-3      7500        TO
-4      5650 nnnnnnnnn
-5      5000        MO
+1     12000     AMABC
+1     12000 yyyyyyyyy
+1     12000  MMMMMMMM
+1     12000         M
+5      4500 MMMMMMMMM

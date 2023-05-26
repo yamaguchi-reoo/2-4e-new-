@@ -25,11 +25,11 @@ private:
 
 private:
 
-	int gh[9];
-	int cnt;
-	int cnt_wait;
-	int vector;
-	int frontImg;
+	int PlayerWalkImg[9];		//プレイヤー歩行画像格納用
+	int Cnt;		//アニメーション切り替え用
+	int CntWait;	//アニメーション切り替え待ち時間測定用
+	int Vector;
+	int FrontImg;
 
 public:
 	//コンストラクタ

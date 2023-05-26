@@ -100,9 +100,11 @@ void DrawRanking::Draw() const
 		default:
 			break;
 		}
+		int GetDrawStringWidthToHandle(char* String, int StrLen, int FontHandle);
 		DrawFormatStringToHandle(270, 220 + (70 * i), color, HeadLineFont, "%dˆÊ", Ranking::GetData(i).no);
 		DrawFormatStringToHandle(400, 220 + (70 * i), color, HeadLineFont, "%.10s", Ranking::GetData(i).name);
-		DrawFormatStringToHandle(800, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
+		DrawFormatStringToHandle(950 - GetDrawFormatStringWidthToHandle(HeadLineFont,"%d", Ranking::GetData(i).score)/2, 220 + (70 * i), color, HeadLineFont, "%6dpt", Ranking::GetData(i).score);
 	}
+
 	DrawStringToHandle(425, 650, "A ‚Åƒ^ƒCƒgƒ‹", 0xff0000, HeadLineFont);
 }

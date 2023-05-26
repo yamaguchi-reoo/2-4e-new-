@@ -5,8 +5,10 @@
 
 InputRankingScene::InputRankingScene(int _score)
 {
-	score = _score;
-	cursorPoint = { 0, 0 };
+	Score = _score;
+	XOnce = TRUE;
+	YOnce = TRUE;
+	CursorPoint = { 0, 0 };
 	ranking.ReadRanking();
 
 	//フォント追加
@@ -16,7 +18,7 @@ InputRankingScene::InputRankingScene(int _score)
 
 
 	//画像読込
-	if ((img = LoadGraph("Resource/Images/mori.png")) == -1)
+	if ((Img = LoadGraph("Resource/Images/mori.png")) == -1)
 	{
 		throw "Resource/Images/mori.png";
 	}
@@ -49,157 +51,197 @@ InputRankingScene::~InputRankingScene()
 AbstractScene* InputRankingScene::Update()
 {
 	//カーソルを上移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_UP) || (PAD_INPUT::GetLStick().ThumbY > 10000 && YOnce == TRUE)) {
+
+		//連続入力しないようにする
+		YOnce = FALSE;
+
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
-		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
-		if (--cursorPoint.y < 0) {
-			if (cursorPoint.x == 10) {
-				cursorPoint.y = 3;
+		if (--CursorPoint.y < 0) {
+			if (CursorPoint.x == 10) {
+				CursorPoint.y = 3;
 			}
 			else {
-				cursorPoint.y = 4;
+				CursorPoint.y = 4;
 			}
-			if (cursorPoint.x == 12) {
-				cursorPoint.x = 11;
+			if (CursorPoint.x == 12) {
+				CursorPoint.x = 11;
 			}
 		}
 	}
+
 	//カーソルを下移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_DOWN) || (PAD_INPUT::GetLStick().ThumbY < -10000 && YOnce == TRUE)) {
+
+		//連続入力しないようにする
+		YOnce = FALSE;
+
+		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
-		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
-		if (++cursorPoint.y > 3 && cursorPoint.x == 10 || cursorPoint.y > 4) {
-			cursorPoint.y = 0;
+		if (++CursorPoint.y > 3 && CursorPoint.x == 10 || CursorPoint.y > 4) {
+			CursorPoint.y = 0;
 		}
-		if (cursorPoint.y > 3 && cursorPoint.x == 12){
-			cursorPoint.x = 11;
+		if (CursorPoint.y > 3 && CursorPoint.x == 12){
+			CursorPoint.x = 11;
 		}
 	
 	}
+
 	//カーソルを右移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_RIGHT)|| (PAD_INPUT::GetLStick().ThumbX > 10000 && XOnce == TRUE)) {
+
+		//連続入力しないようにする
+		XOnce = FALSE;
+
 		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
 
 		//カーソルがはみ出ないように調整する
-		if (++cursorPoint.x == 10 && cursorPoint.y > 3)
+		if (++CursorPoint.x == 10 && CursorPoint.y > 3)
 		{
-			cursorPoint.x = 11;
+			CursorPoint.x = 11;
 		}
-		if (cursorPoint.x > 11 && cursorPoint.y == 4) {
-			cursorPoint.x = 0;
+		if (CursorPoint.x > 11 && CursorPoint.y == 4) {
+			CursorPoint.x = 0;
 		}
-		if (cursorPoint.x > 12) {
-			cursorPoint.x = 0;
+		if (CursorPoint.x > 12) {
+			CursorPoint.x = 0;
 		}
 	}
+
 	//カーソルを左移動させる
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_DPAD_LEFT)|| (PAD_INPUT::GetLStick().ThumbX < -10000 && XOnce == TRUE)) {
+
+		//連続入力しないようにする
+		XOnce = FALSE;
 
 		//カーソルがはみ出ないように調整する
 		PlaySoundMem(SelectSE, DX_PLAYTYPE_BACK);
-		if (--cursorPoint.x < 0) {
-			if (cursorPoint.y > 3) {
-				cursorPoint.x = 11;
+		if (--CursorPoint.x < 0) {
+			if (CursorPoint.y > 3) {
+				CursorPoint.x = 11;
 			}
 			else {
-				cursorPoint.x = 12;
+				CursorPoint.x = 12;
 			}
 		}
-		if (cursorPoint.x == 10 && cursorPoint.y == 4)
+		if (CursorPoint.x == 10 && CursorPoint.y == 4)
 		{
-			cursorPoint.x = 9;
+			CursorPoint.x = 9;
 		}
 	}
-	//Aボタンが押されて名前が9文字以上入力されていないなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A) && name.size() < NAME_MAX - 1) {
-		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
-		if (cursorPoint.x != 11 || cursorPoint.y != 4)
-		{
-			name += keyboard[cursorPoint.y][cursorPoint.x];
-		}
-		else if (name.size() > 0)
-		{
-			//ランキングを更新する
-			Ranking::Insert(score, const_cast<char*>(name.c_str()));
 
-			//ランキングを描画する
-			PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
-			return new DrawRanking;
+	//Aボタンが押されたら
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_A)) {
+
+		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+
+		//確定ボタンが押された時
+		if (CursorPoint.x == 11 && CursorPoint.y == 4)
+		{
+			//名前が1文字でも入力されていたら
+			if (Name.size() > 0)
+			{
+				//ランキングを更新する
+				Ranking::Insert(Score, const_cast<char*>(Name.c_str()));
+
+				//ランキングを描画する
+				PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
+				return new DrawRanking;
+			}
+		}
+		//名前が9文字以上入力されていないなら
+		else if(Name.size() < NAME_MAX - 1)
+		{
+			//名前を入力する
+			Name += KeyBoard[CursorPoint.y][CursorPoint.x];
 		}
 	}
+
 	//Bボタンが押されて名前が1文字以上入力されているなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && name.size() > 0) {
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_B) && Name.size() > 0) {
 		//名前を1文字消す
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
-		name.erase(name.begin() + (name.size() - 1));
+		Name.erase(Name.begin() + (Name.size() - 1));
 	}
+
 	//1文字以上入力されていてStartボタンが押されたなら
-	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START)&& name.size() > 0) 
+	if (PAD_INPUT::OnButton(XINPUT_BUTTON_START)&& Name.size() > 0) 
 	{
 		//ランキングを更新する
-		Ranking::Insert(score, const_cast<char*>(name.c_str()));
+		Ranking::Insert(Score, const_cast<char*>(Name.c_str()));
 
 		//ランキングを描画する
 		PlaySoundMem(DecisionSE, DX_PLAYTYPE_BACK);
 		return new DrawRanking;
 	}
+
+	//LスティックのX座標が元の位置に戻ったらフラグをリセットする
+	if (PAD_INPUT::GetLStick().ThumbX < 10000 && PAD_INPUT::GetLStick().ThumbX > -10000 && XOnce == FALSE) {
+		XOnce = TRUE;
+	}	
+	//LスティックのY座標が元の位置に戻ったらフラグをリセットする
+	if (PAD_INPUT::GetLStick().ThumbY < 10000 && PAD_INPUT::GetLStick().ThumbY > -10000 && YOnce == FALSE) {
+		YOnce = TRUE;
+	}
 	return this;
 }
 
 void InputRankingScene::Draw() const {
-	DrawGraph(0, 0, img, TRUE);
+
+	DrawGraph(0, 0, Img, TRUE);
 
 	DrawStringToHandle(120, 100, "名前入力", 0xffffff, NameFont1);
 
 	DrawBox(470, 240, 820, 300, 0xffffff, TRUE);
-	DrawFormatStringToHandle(480, 250, 0x000000, NameFont2, "%s", name.c_str());
+	DrawFormatStringToHandle(480, 250, 0x000000, NameFont2, "%s", Name.c_str());
 
 	//確定のカーソルだけ大きくする
-	if (cursorPoint.x == 11 && cursorPoint.y == 4)
+	if (CursorPoint.x == 11 && CursorPoint.y == 4)
 	{
-		DrawBox(308 + 50 * cursorPoint.x, 355 + 50 * cursorPoint.y,
-			408 + 50 * cursorPoint.x, 407 + 50 * cursorPoint.y, 0x808080, TRUE);
+		DrawBox(308 + 50 * CursorPoint.x, 355 + 50 * CursorPoint.y,
+			408 + 50 * CursorPoint.x, 407 + 50 * CursorPoint.y, 0x808080, TRUE);
 		//”確定”の文字色を変える
 		DrawStringToHandle(858, 555, "確定", 0x000000,NameFont2);
 	}
 	else
 	{
-		DrawBox(308 + 50 * cursorPoint.x, 350 + 50 * cursorPoint.y,
-			358 + 50 * cursorPoint.x, 403 + 50 * cursorPoint.y, 0x808080, TRUE);
+		DrawBox(308 + 50 * CursorPoint.x, 350 + 50 * CursorPoint.y,
+			358 + 50 * CursorPoint.x, 403 + 50 * CursorPoint.y, 0x808080, TRUE);
 		//普通の文字色の”確定”を描画する
 		DrawStringToHandle(858, 555, "確定", 0xffffff, NameFont2);
 	}
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 14; j++) {
-			if (j == cursorPoint.x && i == cursorPoint.y) {
+			if (j == CursorPoint.x && i == CursorPoint.y) {
 				//I、i、Lの文字の空白を調整する
-				if (i == 0 && j == 8 && keyboard[0][8] || i == 2 && j == 8 && keyboard[2][8] || i == 2 && j == 11 && keyboard[2][11]) {
-					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				if (i == 0 && j == 8 && KeyBoard[0][8] || i == 2 && j == 8 && KeyBoard[2][8] || i == 2 && j == 11 && KeyBoard[2][11]) {
+					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0x000000, NameFont2, "%c", KeyBoard[i][j]);
 				}
 				//gの文字高さを調整する
-				else if (i == 2 && j == 6 && keyboard[0][8]) {
-					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 345, 0x000000, NameFont2, "%c", keyboard[i][j]);
+				else if (i == 2 && j == 6 && KeyBoard[0][8]) {
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 345, 0x000000, NameFont2, "%c", KeyBoard[i][j]);
 				}
 				else
 				{
-					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 358, 0x000000, NameFont2, "%c", keyboard[i][j]);
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 358, 0x000000, NameFont2, "%c", KeyBoard[i][j]);
 				}
 			}
 			else
 			{
 				//I、i、Lの文字の空白を調整する
-				if (i == 0 && j == 8 && keyboard[0][8]||i == 2 && j == 8 && keyboard[2][8]||i == 2 && j == 11 && keyboard[2][11]) {
-					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				if (i == 0 && j == 8 && KeyBoard[0][8]||i == 2 && j == 8 && KeyBoard[2][8]||i == 2 && j == 11 && KeyBoard[2][11]) {
+					DrawFormatStringToHandle(j * 50 + 328, i * 50 + 355, 0xffffff, NameFont2, "%c", KeyBoard[i][j]);
 				}
 				//gの文字高さを調整する
-				else if (i == 2 && j == 6 && keyboard[0][8]) {
-					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 348, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+				else if (i == 2 && j == 6 && KeyBoard[0][8]) {
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 348, 0xffffff, NameFont2, "%c", KeyBoard[i][j]);
 				}
 				else
 				{
-					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", keyboard[i][j]);
+					DrawFormatStringToHandle(j * 50 + 318, i * 50 + 355, 0xffffff, NameFont2, "%c", KeyBoard[i][j]);
 				}
 				
 			}

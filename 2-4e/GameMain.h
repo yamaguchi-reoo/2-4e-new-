@@ -52,8 +52,7 @@ private:
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
-    static int R_Apple[4];
-    static int getScore;
+
     //コンストラクタ
     GameMain();
 
