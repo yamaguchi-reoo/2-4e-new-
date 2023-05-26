@@ -4,7 +4,7 @@
 #include"End.h"
 
 #define TIME_LIMIT 300
-#define MOVE_SPEED 7
+#define MOVE_SPEED 7.5
 
 End::End() {
 	//èâä˙âª
@@ -84,6 +84,7 @@ void End::Draw()const {
 	DrawStringToHandle(545, 1210 - MoveString * MOVE_SPEED, "illustAC", 0x000000, EndFont2);
 	DrawStringToHandle(560, 1270 - MoveString * MOVE_SPEED, "illust8", 0x000000, EndFont2);
 	DrawStringToHandle(545, 1330 - MoveString * MOVE_SPEED, "SVG Silh", 0x000000, EndFont2);
+	DrawStringToHandle(525, 1390 - MoveString * MOVE_SPEED, "Ç ÇÍÇÊÇÒ", 0x000000, EndFont2);
 
 	DrawStringToHandle(340, 2000 - MoveString * (MOVE_SPEED+1.5), "Thank You For ", 0x000000, EndFont3);
 	DrawStringToHandle(310, 2100 - MoveString * (MOVE_SPEED+1.5), "Playing Game !!", 0x000000, EndFont3);
