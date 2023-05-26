@@ -29,7 +29,8 @@ private:
     int PauseFlashTime;        //ポーズ中の文字点滅用
     bool PauseFlashFlg;      //ポーズ中の文字点滅用
 
-    int Time;               //制限時間用
+    int Time;               //制限時間
+    int Timer;              //制限時間減少用
     int TimerColor;         //文字色変更用
 
     Player* player; //プレイヤー
@@ -51,8 +52,7 @@ private:
     bool PlayerDispFlg; //点滅用フラグ
 
 public:
-    static int R_Apple[4];
-    static int getScore;
+
     //コンストラクタ
     GameMain();
 

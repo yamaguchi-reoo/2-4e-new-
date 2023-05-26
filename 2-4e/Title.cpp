@@ -87,7 +87,7 @@ AbstractScene* Title::Update()
 	}
 
 	//Lスティック上入力
-	if (PAD_INPUT::GetLStick().ThumbY > 20923 && Once == TRUE)
+	if (PAD_INPUT::GetLStick().ThumbY > 10000 && Once == TRUE)
 	{
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select--;
@@ -96,7 +96,7 @@ AbstractScene* Title::Update()
 	}
 
 	//Lスティック下入力
-	if (PAD_INPUT::GetLStick().ThumbY < -20923 && Once == TRUE)
+	if (PAD_INPUT::GetLStick().ThumbY < -10000 && Once == TRUE)
 	{
 		PlaySoundMem(MenuSE, DX_PLAYTYPE_BACK);
 		Select++;
@@ -105,7 +105,7 @@ AbstractScene* Title::Update()
 	}
 
 	//Lスティックが元に戻されたらOnceをリセット
-	if (Once == FALSE && PAD_INPUT::GetLStick().ThumbY < 20923 && PAD_INPUT::GetLStick().ThumbY > -20923)
+	if (Once == FALSE && PAD_INPUT::GetLStick().ThumbY < 10000 && PAD_INPUT::GetLStick().ThumbY > -10000)
 	{
 		Once = TRUE;
 	}

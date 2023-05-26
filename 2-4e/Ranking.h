@@ -13,7 +13,7 @@ class Ranking
 {
 private:
 
-	static RankingData data[RANK];
+	static RankingData Data[RANK];
 
 	//ランキングの並べ替え
 	static void SortRanking();
@@ -30,7 +30,7 @@ public:
 	static void ReadRanking();
 
 	//ランキングの取得の取得
-	static RankingData GetData(int n) { return data[n]; }
+	static RankingData GetData(int n) { return Data[n]; }
 };
 
 

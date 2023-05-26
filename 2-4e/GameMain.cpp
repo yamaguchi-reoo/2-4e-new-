@@ -9,8 +9,9 @@ GameMain::GameMain()
 {
 	//‰Šú‰»
 	frame = 0;
-	Time = 3599;
-	TotalScore = 0;
+	Time =  1;
+	Timer = 0;
+	TotalScore = 12000;
 
 	for (int i = 0; i < 4; i++) {
 		gGetApple[i] = 0;
@@ -198,7 +199,11 @@ AbstractScene* GameMain::Update()
 			}
 		}
 		//§ŒÀŠÔŒ¸­
-		Time--;
+		if (++Timer >= 28)
+		{
+			--Time;
+			Timer = 0;
+		}
 	}
 
 	//ˆê’â~’†
@@ -217,8 +222,8 @@ AbstractScene* GameMain::Update()
 	}
 
 	//§ŒÀŠÔ‚ª‚P‚O•b‚ğØ‚Á‚½‚çc‚èŠÔ‚É‰‚¶‚Ä•¶šF‚ğ•Ï‚¦‚Ä‚¢‚­
-	if (Time <= 600) {
-		TimerColor = GetColor(255-Time/3,0,0);
+	if (Time <= 10) {
+		TimerColor = GetColor(255,0,0);
 	}
 
 	return this;
@@ -249,11 +254,11 @@ void GameMain::Draw()const
 	DrawStringToHandle(1075, 150, "§ŒÀŠÔ", 0x000000,MainFont1);
 
 	//5•b‚ğØ‚é‚Æ•¶š‚ª—h‚ê‚é
-	if (Time <= 300) {
-		DrawFormatStringToHandle(1120+GetRand(10-Time/30), 200+GetRand(10-Time/30), TimerColor,MainFont2, "%2.2d", Time / 60 + 1);
+	if (Time <= 10) {
+		DrawFormatStringToHandle(1120+GetRand(10-Time), 200+GetRand(10-Time), TimerColor,MainFont2, "%2.2d", Time);
 	}
 	else {
-		DrawFormatStringToHandle(1120, 200, TimerColor, MainFont2, "%.2d", Time / 60 + 1);
+		DrawFormatStringToHandle(1120, 200, TimerColor, MainFont2, "%.2d", Time);
 	}
 
 	//ƒvƒŒƒCƒ„[‚Ì•`‰æ
