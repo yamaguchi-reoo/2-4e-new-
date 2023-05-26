@@ -23,9 +23,12 @@ GameMain::GameMain()
 	gGetAppleType = 0;
 	PauseFlashTime = 0;
 	GetPsAppleTime = 0;
+	SpawnPos = 0;
 	a_Count = 0;
 	SpawnCount = 0;
+	SpawnApple = 0;
 
+	SpawnFlg = FALSE;
 	PauseFlashFlg = FALSE;
 	GetPsAppleFlg = FALSE;
 	PlayerDispFlg = TRUE;
@@ -154,7 +157,7 @@ AbstractScene* GameMain::Update()
 			}
 
 			//りんごとプレイヤーが接触して、プレイヤーが点滅状態でないならりんご取得処理へ
-			if (apple[i]->HitBox(player) == true && GetPsAppleTime == 0)
+			if (apple[i]->HitBox(player) == TRUE && GetPsAppleTime == 0)
 			{
 				AppleGet(i);
 				//画面にあるりんごの個数を減少

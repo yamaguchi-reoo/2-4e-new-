@@ -8,6 +8,7 @@ Player::Player()
 	//èâä˙âª
 	location.x = 100;
 	location.y = 550;
+	Speed = WALK_SPEED;
 
 	erea.width = PLAYER_WIDTH;
 	erea.height = PLAYER_HEIGHT;
@@ -46,7 +47,6 @@ void Player::UpDate()
 	if (PAD_INPUT::GetLStick().ThumbX < -10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		PlayerState = PLAYER_STATE::WALK_LEFT;
-		Speed = WALK_SPEED;
 		if (AccelerationLeft <= 30) //ç∂à⁄ìÆéûÇÃê®Ç¢
 		{
 			AccelerationLeft++;
@@ -64,7 +64,6 @@ void Player::UpDate()
 	else if (PAD_INPUT::GetLStick().ThumbX > 10000 || PAD_INPUT::OnPressed(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		PlayerState = PLAYER_STATE::WALK_RIGHT;
-		Speed = WALK_SPEED;
 		if (AccelerationRight <= 30)	//âEà⁄ìÆéûÇÃê®Ç¢
 		{
 			AccelerationRight++;
@@ -78,6 +77,7 @@ void Player::UpDate()
 		}
 		location.x = location.x + Speed + (AccelerationRight / 10);
 	}
+
 	//â¡ë¨ìxÇ…âûÇ∂Çƒäµê´Ç™ì≠Ç≠
 	else
 	{

@@ -18,7 +18,7 @@ private:
 
 	PLAYER_STATE PlayerState;	// プレイヤーの現在の状態を制御
 
-	float Speed;			//移動速度
+	int Speed;			//移動速度
 	int AccelerationRight;	//加速度（右）
 	int AccelerationLeft;	//加速度（左）
 

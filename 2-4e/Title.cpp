@@ -20,7 +20,9 @@ Title::Title()
 	//‰Šú‰»
 	Select = 0;
 	Once = TRUE;
-
+	OldKey = 0;
+	NowKey = 0;
+	KeyFlg = 0;
 	//ƒtƒHƒ“ƒg‚Ì’Ç‰Á
 	MenuFont = CreateFontToHandle("HG‘n‰pŠpÎß¯Ìß‘Ì", 64, 8, DX_FONTTYPE_ANTIALIASING);
 

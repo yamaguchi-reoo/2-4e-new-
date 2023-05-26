@@ -25,7 +25,7 @@ private:
 	bool eFlg;			//エフェクト表示フラグ
 	int eType;			//りんご種類
 	int eX;			//りんご座標
-	int eY;			//りんご種類
+	float eY;			//りんご種類
 	int eColor;		//文字色
 	float eSpeed;		//移動速度
 	int ePoint;		//得点数
@@ -65,7 +65,7 @@ public:
 	int GetAppleLocationX();
 
 	//りんごのY座標取得
-	int GetAppleLocationY();
+	float GetAppleLocationY();
 
 	//りんごの点数取得
 	int GetApplePoint();

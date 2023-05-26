@@ -4,7 +4,7 @@
 //中心座標
 struct Location
 {
-	float x;	//中心座標(x)
+	int x;	//中心座標(x)
 	float y;	//中心座標(y)
 };
 
@@ -24,7 +24,7 @@ protected:
 public:
 
 	//当たり判定
-	int HitBox(BoxCollider* bCollider);
+	bool HitBox(BoxCollider* bCollider);
 
 	//中心座標の取得
 	Location GetLocation()const;

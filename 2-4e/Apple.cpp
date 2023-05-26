@@ -87,7 +87,7 @@ void Apple::Draw() const
 	//りんごの描画
 	if (Flg == TRUE)
 	{
-		DrawGraph(location.x, location.y,Img, TRUE);
+		DrawGraph(location.x, (float)location.y,Img, TRUE);
 	}
 
 	//エフェクトの描画
@@ -102,7 +102,7 @@ void Apple::Draw() const
 		//毒りんご取得エフェクト描画（文字が震える）
 		else
 		{
-			DrawFormatString(eX + GetRand(10)-5, eY + GetRand(10)-5 , eColor, "%d", ePoint);
+			DrawFormatString(eX + GetRand(10) - 5,eY + GetRand(10) - 5 , eColor, "%d", ePoint);
 		}
 	}
 }
@@ -122,25 +122,25 @@ void Apple::Spawn()
 	switch (GetRand)
 	{
 	case 0:	
-		erea.rate = 0.1;				//大きさ（当たり判定用）
+		erea.rate = (float)0.1;				//大きさ（当たり判定用）
 		Speed = 1;						//移動速度
 		Point = 100;					//スコア加算ポイント
 		Span = 100;						//各りんごが被らないようにするための待ち時間						//一度にスポーンさせたりんごを計測する
 		break;
 	case 1:
-		erea.rate = 0.1;				//大きさ（当たり判定用）
+		erea.rate = (float)0.1;				//大きさ（当たり判定用）
 		Speed = 2;						//移動速度
 		Point = 200;					//スコア加算ポイント
 		Span = 50;						//各りんごが被らないようにするための待ち時間
 		break;
 	case 2:
-		erea.rate = 0.1;				//大きさ（当たり判定用）
+		erea.rate = (float)0.1;				//大きさ（当たり判定用）
 		Speed = 3.5;					//移動速度
 		Point = 500;					//スコア加算ポイント
 		Span = 25;						//各りんごが被らないようにするための待ち時間
 		break;
 	case 3:
-		erea.rate = -0.1;				//大きさ（当たり判定用）
+		erea.rate = (float)-0.1;				//大きさ（当たり判定用）
 		Speed = 0.5;					//移動速度
 		Point = -750;					//スコア加算ポイント
 		Span = 200;						//各りんごが被らないようにするための待ち時間
@@ -171,6 +171,7 @@ int Apple::Rand()
 	{
 		return 3;
 	}
+	return -1;
 }
 
 void Apple::SetLocation(int x)
@@ -193,9 +194,9 @@ int Apple::GetAppleLocationX()
 	return location.x;
 }
 
-int Apple::GetAppleLocationY()
+float Apple::GetAppleLocationY()
 {
-	return location.y;
+	return (float)location.y;
 }
 
 int Apple::GetApplePoint()

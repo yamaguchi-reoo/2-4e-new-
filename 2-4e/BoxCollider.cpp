@@ -1,9 +1,9 @@
 #include "BoxCollider.h"
 #include "Apple.h"
 
-int BoxCollider::HitBox(BoxCollider* bCollider)
+bool BoxCollider::HitBox(BoxCollider* bCollider)
 {
-	int ret = false; //•Ô‚è’l
+	bool ret = false; //•Ô‚è’l
 
 		//‚è‚ñ‚²‚Ì“–‚½‚è”»’è‚Ì”ÍˆÍ
 		float ax1 = location.x - (APPLE_SIZE * erea.rate);
