@@ -33,7 +33,7 @@ Player::Player()
 	}
 	if ((frontImg = LoadGraph("Resource/Images/front.png")) == -1)
 	{
-		throw "Resource/Images/mori.png";
+		throw "Resource/Images/front.png";
 	}
 
 	
@@ -149,7 +149,7 @@ void Player::Draw() const
 		DrawTurnGraph(location.x, location.y, gh[cnt], TRUE);
 	}
 	else if (PlayerState == PLAYER_STATE::IDOL) {
-		DrawRotaGraph(location.x, location.y,2.0,0,0,0,frontImg, TRUE);
+		DrawRotaGraph(location.x, location.y,1.0,0,0,frontImg, TRUE);
 	}
 	
 }
